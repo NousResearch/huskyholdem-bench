@@ -1,0 +1,180 @@
+{
+  "gameId": "1f855070-7495-4024-b41a-d3c775801316",
+  "rounds": {
+    "0": {
+      "pot": 15,
+      "bets": {
+        "1293351234": 10,
+        "3947068063": 5
+      },
+      "actions": {
+        "3947068063": "FOLD",
+        "1293351234": "RAISE"
+      },
+      "action_sequence": [
+        {
+          "player": 3947068063,
+          "action": "RAISE",
+          "amount": 5,
+          "timestamp": 1754789566256,
+          "pot_after_action": 5,
+          "side_pots_after_action": [
+            {
+              "amount": 5,
+              "eligible_players": [
+                3947068064,
+                1293351235
+              ]
+            }
+          ],
+          "total_pot_after_action": 5,
+          "total_side_pots_after_action": [
+            {
+              "id": 0,
+              "amount": 5,
+              "eligible_players": [
+                3947068064,
+                1293351235
+              ]
+            }
+          ]
+        },
+        {
+          "player": 1293351234,
+          "action": "RAISE",
+          "amount": 10,
+          "timestamp": 1754789566258,
+          "pot_after_action": 15,
+          "side_pots_after_action": [
+            {
+              "amount": 10,
+              "eligible_players": [
+                3947068064,
+                1293351235
+              ]
+            },
+            {
+              "amount": 5,
+              "eligible_players": [
+                1293351235
+              ]
+            }
+          ],
+          "total_pot_after_action": 15,
+          "total_side_pots_after_action": [
+            {
+              "id": 0,
+              "amount": 10,
+              "eligible_players": [
+                3947068064,
+                1293351235
+              ]
+            },
+            {
+              "id": 1,
+              "amount": 5,
+              "eligible_players": [
+                1293351235
+              ]
+            }
+          ]
+        },
+        {
+          "player": 3947068063,
+          "action": "FOLD",
+          "amount": 0,
+          "timestamp": 1754789566299,
+          "pot_after_action": 15,
+          "side_pots_after_action": [
+            {
+              "amount": 15,
+              "eligible_players": [
+                1293351235
+              ]
+            }
+          ],
+          "total_pot_after_action": 15,
+          "total_side_pots_after_action": [
+            {
+              "id": 0,
+              "amount": 15,
+              "eligible_players": [
+                1293351235
+              ]
+            }
+          ]
+        }
+      ],
+      "actionTimes": {
+        "3947068063": 50,
+        "1293351234": 9
+      }
+    }
+  },
+  "playerNames": {
+    "1293351234": "player1293351235",
+    "3947068063": "player3947068064"
+  },
+  "blinds": {
+    "small": 5,
+    "big": 10
+  },
+  "finalBoard": [
+    "Qc",
+    "6d",
+    "Kc"
+  ],
+  "sidePots": [
+    {
+      "amount": 0,
+      "eligible_players": [
+        1293351234
+      ]
+    }
+  ],
+  "playerMoney": {
+    "initialAmount": 10000,
+    "startingMoney": {
+      "1293351235": 9890,
+      "3947068064": 10110
+    },
+    "startingDelta": {
+      "1293351235": -110,
+      "3947068064": 110
+    },
+    "finalMoney": {
+      "1293351235": 9895,
+      "3947068064": 10105
+    },
+    "finalDelta": {
+      "1293351235": -105,
+      "3947068064": 105
+    },
+    "gameScores": {
+      "1293351235": 5,
+      "3947068064": -5
+    },
+    "thisGameDelta": {
+      "1293351235": 5,
+      "3947068064": -5
+    }
+  },
+  "playerHands": {
+    "1293351234": [
+      "5h",
+      "7d"
+    ],
+    "3947068063": [
+      "6c",
+      "3h"
+    ]
+  },
+  "usernameMapping": {
+    "default": 1293351235,
+    "client_container_5264_test_client_test_moonshotai_kimi_k2_iter_1_20250809_183239_iter1": 3947068064
+  },
+  "playerIdToUsername": {
+    "1293351235": "default",
+    "3947068064": "client_container_5264_test_client_test_moonshotai_kimi_k2_iter_1_20250809_183239_iter1"
+  }
+}

@@ -1,0 +1,5 @@
+[2025-08-09 18:24:01] Code validation failed: Python syntax error:   File "player.py", line 41
+    hand_strength = self._preflop_hand_strength(hole cards)
+                                                ^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+

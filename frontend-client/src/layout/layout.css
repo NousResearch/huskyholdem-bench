@@ -1,0 +1,26 @@
+.moving-grid {
+  top: -400px;
+  bottom: -100px;
+  left: -400px;
+  right: -400px;
+  position: absolute;
+  
+  background-color: transparent;
+  background-image: 
+    linear-gradient(#d3d3d3 1px, transparent 0px),
+    linear-gradient(90deg, #d3d3d3 1px, transparent 0px);
+  background-size: 10% 10%;
+  background-position: 0 0, 0 0;
+
+  /* transform: perspective(300px) rotateX(80deg); */
+  animation: throughSpace 4s linear infinite;
+}
+
+@keyframes throughSpace {
+  0% {
+    transform: perspective(600px) rotateX(60deg) translateY(0%);
+  }
+  100% {
+    transform: perspective(600px) rotateX(60deg) translateY(10%);
+  }
+}

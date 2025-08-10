@@ -1,0 +1,41 @@
+# Multi-stage build for smaller final image
+FROM python:3.11-slim as builder
+
+# Install only build dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    gcc \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+COPY requirements-worker.txt .
+RUN pip install --no-cache-dir --user -r requirements-worker.txt
+
+# Final lightweight image
+FROM python:3.11-slim
+
+# Copy only the installed packages from builder
+COPY --from=builder /root/.local /root/.local
+
+# Make sure scripts in .local are usable
+ENV PATH=/root/.local/bin:$PATH
+
+WORKDIR /app
+
+# Copy only the necessary application files for workers
+COPY app/__init__.py app/__init__.py
+COPY app/models app/models/
+COPY app/config app/config/
+COPY app/utils app/utils/
+
+# Copy only the service modules needed for workers
+COPY app/service/__init__.py app/service/__init__.py
+COPY app/service/rabbitmq app/service/rabbitmq/
+COPY app/service/docker app/service/docker/
+COPY app/service/db app/service/db/
+COPY app/service/cache app/service/cache/
+
+# Set Python path
+ENV PYTHONPATH=/app
+
+# Default command for workers
+CMD ["python", "-m", "app.service.rabbitmq.start_simulation_worker", "0"] 

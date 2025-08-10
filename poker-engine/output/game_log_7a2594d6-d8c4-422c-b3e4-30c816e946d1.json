@@ -1,0 +1,119 @@
+{
+  "gameId": "7a2594d6-d8c4-422c-b3e4-30c816e946d1",
+  "rounds": {
+    "0": {
+      "pot": 0,
+      "bets": {
+        "0": 0,
+        "1": 0
+      },
+      "actions": {
+        "0": "CHECK",
+        "1": "CHECK"
+      },
+      "action_sequence": [
+        {
+          "player": 0,
+          "action": "CHECK",
+          "amount": 0,
+          "timestamp": 1754615291496,
+          "pot_after_action": 0,
+          "side_pots_after_action": [
+            {
+              "amount": 0,
+              "eligible_players": [
+                1,
+                2
+              ]
+            }
+          ],
+          "total_pot_after_action": 0,
+          "total_side_pots_after_action": [
+            {
+              "id": 0,
+              "amount": 0,
+              "eligible_players": [
+                1,
+                2
+              ]
+            }
+          ]
+        },
+        {
+          "player": 1,
+          "action": "CHECK",
+          "amount": 0,
+          "timestamp": 1754615291496,
+          "pot_after_action": 0,
+          "side_pots_after_action": [
+            {
+              "amount": 0,
+              "eligible_players": [
+                1,
+                2
+              ]
+            }
+          ],
+          "total_pot_after_action": 0,
+          "total_side_pots_after_action": [
+            {
+              "id": 0,
+              "amount": 0,
+              "eligible_players": [
+                1,
+                2
+              ]
+            }
+          ]
+        }
+      ],
+      "actionTimes": {
+        "0": 0,
+        "1": 0
+      }
+    }
+  },
+  "playerNames": {
+    "0": "player1",
+    "1": "player2"
+  },
+  "blinds": {
+    "small": 5,
+    "big": 10
+  },
+  "finalBoard": [],
+  "sidePots": [
+    {
+      "amount": 0,
+      "eligible_players": [
+        0,
+        1
+      ]
+    }
+  ],
+  "playerHands": {
+    "0": [
+      "Kd",
+      "6s"
+    ],
+    "1": [
+      "6c",
+      "5d"
+    ]
+  },
+  "playerMoney": {
+    "finalDelta": {
+      "1": 0,
+      "2": 0
+    },
+    "gameScores": {
+      "1": 0,
+      "2": 0
+    },
+    "finalMoney": {},
+    "thisGameDelta": {
+      "1": 0,
+      "2": 0
+    }
+  }
+}

@@ -1,0 +1,180 @@
+{
+  "gameId": "7da72f7a-a968-46f9-8e97-77991a683351",
+  "rounds": {
+    "0": {
+      "pot": 15,
+      "bets": {
+        "4169293437": 10,
+        "1584654983": 5
+      },
+      "actions": {
+        "1584654983": "FOLD",
+        "4169293437": "RAISE"
+      },
+      "action_sequence": [
+        {
+          "player": 1584654983,
+          "action": "RAISE",
+          "amount": 5,
+          "timestamp": 1754788275392,
+          "pot_after_action": 5,
+          "side_pots_after_action": [
+            {
+              "amount": 5,
+              "eligible_players": [
+                1584654984,
+                4169293438
+              ]
+            }
+          ],
+          "total_pot_after_action": 5,
+          "total_side_pots_after_action": [
+            {
+              "id": 0,
+              "amount": 5,
+              "eligible_players": [
+                1584654984,
+                4169293438
+              ]
+            }
+          ]
+        },
+        {
+          "player": 4169293437,
+          "action": "RAISE",
+          "amount": 10,
+          "timestamp": 1754788275394,
+          "pot_after_action": 15,
+          "side_pots_after_action": [
+            {
+              "amount": 10,
+              "eligible_players": [
+                1584654984,
+                4169293438
+              ]
+            },
+            {
+              "amount": 5,
+              "eligible_players": [
+                4169293438
+              ]
+            }
+          ],
+          "total_pot_after_action": 15,
+          "total_side_pots_after_action": [
+            {
+              "id": 0,
+              "amount": 10,
+              "eligible_players": [
+                1584654984,
+                4169293438
+              ]
+            },
+            {
+              "id": 1,
+              "amount": 5,
+              "eligible_players": [
+                4169293438
+              ]
+            }
+          ]
+        },
+        {
+          "player": 1584654983,
+          "action": "FOLD",
+          "amount": 0,
+          "timestamp": 1754788275437,
+          "pot_after_action": 15,
+          "side_pots_after_action": [
+            {
+              "amount": 15,
+              "eligible_players": [
+                4169293438
+              ]
+            }
+          ],
+          "total_pot_after_action": 15,
+          "total_side_pots_after_action": [
+            {
+              "id": 0,
+              "amount": 15,
+              "eligible_players": [
+                4169293438
+              ]
+            }
+          ]
+        }
+      ],
+      "actionTimes": {
+        "1584654983": 52,
+        "4169293437": 9
+      }
+    }
+  },
+  "playerNames": {
+    "4169293437": "player4169293438",
+    "1584654983": "player1584654984"
+  },
+  "blinds": {
+    "small": 5,
+    "big": 10
+  },
+  "finalBoard": [
+    "4d",
+    "Qc",
+    "Ts"
+  ],
+  "sidePots": [
+    {
+      "amount": 0,
+      "eligible_players": [
+        4169293437
+      ]
+    }
+  ],
+  "playerMoney": {
+    "initialAmount": 10000,
+    "startingMoney": {
+      "4169293438": 10055,
+      "1584654984": 9945
+    },
+    "startingDelta": {
+      "4169293438": 55,
+      "1584654984": -55
+    },
+    "finalMoney": {
+      "4169293438": 10060,
+      "1584654984": 9940
+    },
+    "finalDelta": {
+      "4169293438": 60,
+      "1584654984": -60
+    },
+    "gameScores": {
+      "4169293438": 5,
+      "1584654984": -5
+    },
+    "thisGameDelta": {
+      "4169293438": 5,
+      "1584654984": -5
+    }
+  },
+  "playerHands": {
+    "4169293437": [
+      "6c",
+      "5d"
+    ],
+    "1584654983": [
+      "9h",
+      "Ac"
+    ]
+  },
+  "usernameMapping": {
+    "default": 4169293438,
+    "client_container_5841_test_client_test_qwen_qwen3_235b_a22b_2507_iter_2_20250809_181104_iter2": 1584654984
+  },
+  "playerIdToUsername": {
+    "4169293438": "default",
+    "1584654984": "client_container_5841_test_client_test_qwen_qwen3_235b_a22b_2507_iter_2_20250809_181104_iter2"
+  }
+}

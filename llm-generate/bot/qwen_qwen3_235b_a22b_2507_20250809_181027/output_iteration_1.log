@@ -1,0 +1,422 @@
+
+================================================================================
+TIMESTAMP: 2025-08-09 18:10:58
+MODEL: qwen/qwen3-235b-a22b-2507
+PROMPT LENGTH: 9908 characters
+RESPONSE LENGTH: 8321 characters
+USAGE: {}
+
+PROMPT:
+You are tasked with submitting a poker bot to a No-Limit Texas Hold'em poker bot competition: Husky Hold'em.
+
+**Detailed Game Rules**
+- No-Limit Texas Hold'em with 2-10 players (often 6-handed tables); bots compete in heads-up or multi-player matches hosted by a central game server.
+- Players start with $10,000 chips at the simulation start; simulations run for n games (more than 10 per run); blinds rotate and increase every n games (e.g., after certain rounds); big/small blinds are posted pre-flop.
+- Goal: Maximize delta money (ending chips minus starting chips); if a player runs out of chips, they are eliminated from that table; no rebuys.
+- Each hand has 4 betting rounds: Pre-flop (after hole cards and blinds), Flop (3 community cards), Turn (1 community card), River (1 community card).
+- Actions: Fold, Check, Call, Raise (any amount up to stack, no limit), All-in.
+- Hand rankings: Royal flush > Straight flush > Four of a kind > Full house > Flush > Straight > Three of a kind > Two pair > One pair > High card.
+- Showdown: If multiple players remain after river betting, best 5-card hand (using any combination of 2 hole cards + 5 community cards) wins the pot; side pots form for all-ins with eligible players.
+- Technical Limits: 30 seconds max per move (timeout causes automatic fold); 100MB max memory usage; any error/exception causes automatic fold; all bots are given the same compute limits.
+
+Your task: Implement winning bot in player.py by subclassing Bot as in the template below and follow the above game rules.
+
+Bot Design and Competition Rules:
+
+1. Your bot must subclass Bot as SimplePlayer, implementing all required methods exactly as in the template. Preserve the class name SimplePlayer for compatibility with the game server. The template for the class is as
+**SimplePlayer Template:**
+```python
+from typing import List, Tuple
+from bot import Bot
+from type.poker_action import PokerAction
+from type.round_state import RoundStateClient
+
+class SimplePlayer(Bot):
+    def __init__(self):
+        super().__init__()
+        # TODO implement this
+
+    def on_start(self, starting_chips: int, player_hands: List[str], blind_amount: int, big_blind_player_id: int, small_blind_player_id: int, all_players: List[int]):
+        # TODO implement this
+
+    def on_round_start(self, round_state: RoundStateClient, remaining_chips: int):
+        # TODO implement this
+
+    def get_action(self, round_state: RoundStateClient, remaining_chips: int) -> Tuple[PokerAction, int]:
+        """ Returns the action for the player. """
+        # TODO implement this
+
+    def on_end_round(self, round_state: RoundStateClient, remaining_chips: int):
+        """ Called at the end of the round. """
+        # TODO implement this
+
+    def on_end_game(self, round_state: RoundStateClient, player_score: float, all_scores: dict, active_players_hands: dict):
+        # TODO implement this
+```
+2. DO NOT rename or remove any predefined methods (on_start, on_round_start, get_action, on_end_round, on_end_game), and do not change their signatures.
+3. You may add helper functions and instance variables for strategy or tracking.
+4. Your bot should be able to abide by no limit texas hold'em rules and handle side pots, all-ins, blind increases, multi-way pots, and be error-free (no exceptions).
+5. For each action, always return valid actions:
+    - For RAISE: the amount raise combine with your current bet must be larger than the the current raise.
+    - For CALL: You don't need to specify the amount you call, it default to match exactly the amount needed to call (current_bet - your bet).
+    - For CHECK: You can't check if round's current bet is larger than 0. Resort to other action (eg CALL, RAISE, ALL_IN).
+    - For ALL_IN: You don't need to specify the amount you all in, it will default to all your current money.
+    - **INVALID ACTION WILL MAKE YOU LOSE MONEY (automatic result in fold if the condition is not match for each action), so logic must always check bounds and edge cases**.
+6. If you use any external libraries, they must be listed in requirements.txt (pure Python only).
+7. Implement your bot with SimplePlayer. See full RoundStateClient, PokerAction, and PokerRound definitions below.
+8. Your bot should maximize delta money (ending chips minus starting chips). Positive mean gaining money, the more money you gain the better.
+9. There might will be data on previous run (error and game score) if this is not the first time you implement. If there is error, fix it so your bot can run. Try to improve your bot from previous round.
+10. If there are no usage of external requirements, the text secion for requirement must be empty. DO NOT PUT ANYTHING ELSE. If you want to use any external library, you must put it in that text block
+11. Your response must consist ONLY of two files: the complete player.py (as a Python code block) implementing the bot with all template elements preserved plus your improvements, and requirements.txt (as a text block) listing any dependencies (pure Python only, e.g., numpy if needed for calculations). Do not include any other text, explanations, or outputs. See example response below:
+Example response:
+```python
+<Your python code>
+```
+
+```text
+numpy
+matplotlib
+<any external library you want to use, put it here>
+...
+```
+12. Your implementation MUST BE IN FULL not putting stub method or guideline. Everything in SimplePlayer must be ready to the detail and ready to run.
+13. When you do division, make sure to make it prone to error divide by zero by adding some small delta.
+14. The pool of submitted bots, including your bot, will be organized into 6-handed poker tables where every possible combination of 6 bots forms a separate table. Each table will play exactly 1,000 hands, with chip stacks carrying over between hands within the same table. 
+15. At the end of each table, delta money is calculated for each bot using the formula: final chip count minus 10,000 (initial chip amount). Your bot's total tournament score is determined by summing its delta money across all tables it participates in. The bot with the highest cumulative delta money across all tables wins the tournament.
+16. Your bot will undergo iterative testing across 5 rounds, where each round involves playing 10 hands of heads-up poker against a house bot. After each round, you will receive either the complete game log showing performance results or any compilation/simulation errors that occurred while attempting to run your bot. Use this feedback to refine your implementation in subsequent iterations.
+
+**References**
+
+**RoundStateClient Full Definition:**
+```python
+from dataclasses import dataclass
+from typing import Dict, List, Any
+
+@dataclass
+class RoundStateClient:
+    round_num: int # The number of the current round
+    round: str # e.g., 'Preflop', 'Flop', 'Turn', 'River'
+    community_cards: List[str] # List of community cards, e.g., ['Ah', 'Ks', '3d']
+    pot: int # The total pot
+    current_player: List[int] # The ids of the current players
+    current_bet: int # The current bet (need to match round's current bet minus your current bet if you want to call)
+    min_raise: int  # Minimum raise amount
+    max_raise: int  # Maximum raise amount (your remaining chips)
+    player_bets: Dict[str, int]  # Bets by player ID
+    player_actions: Dict[str, str]  # Actions by player ID, e.g., {'3336760419': 'Check', '3266396022': 'Check'}
+    side_pots: list[Dict[str, any]] = None  # List of dicts with 'amount' and 'eligible_players' keys
+
+    @classmethod
+    def from_message(cls, message: Dict[str, Any]) -> 'RoundStateClient':
+        """Create RoundStateClient from a message dictionary"""
+        return cls(
+            round_num=message['round_num'],
+            round=message['round'],
+            community_cards=message['community_cards'],
+            pot=message['pot'],
+            current_player=message['current_player'],
+            current_bet=message['current_bet'],
+            min_raise=message['min_raise'],
+            max_raise=message['max_raise'],
+            player_bets=message['player_bets'],
+            player_actions=message['player_actions'],
+            side_pots=message.get('side_pots', [])
+        )
+```
+
+**PokerAction and PokerRound Enums:**
+```python
+from enum import Enum
+
+class PokerAction(Enum):
+    FOLD = 1
+    CHECK = 2
+    CALL = 3
+    RAISE = 4
+    ALL_IN = 5
+
+class PokerRound(Enum):
+    PREFLOP = 0
+    FLOP = 1
+    TURN = 2
+    RIVER = 3
+```
+
+**Bot abstract class:**
+```python
+from abc import ABC, abstractmethod
+from typing import List, Tuple
+
+from type.round_state import RoundStateClient
+from type.poker_action import PokerAction
+
+class Bot(ABC):
+    def __init__(self) -> None:
+        """ Initializes the player. """
+        self.id = None
+        pass
+
+    def set_id(self, player_id: int) -> None:
+        """ Sets the player ID. """
+        self.id = player_id
+
+    @abstractmethod
+    def on_start(self, starting_chips: int, player_hands: List[str], blind_amount: int, big_blind_player_id: int, small_blind_player_id: int, all_players: List[int]) -> None:
+        """ Called when the game starts. """
+        pass
+
+    @abstractmethod
+    def on_round_start(self, round_state: RoundStateClient, remaining_chips: int) -> None:
+        """ Called at the start of each round. """
+        pass
+
+    @abstractmethod
+    def get_action(self, round_state: RoundStateClient, remaining_chips: int) -> Tuple[PokerAction, int]:
+        """ Called when it is the player's turn to act. """
+        pass
+
+    @abstractmethod
+    def on_end_round(self, round_state: RoundStateClient, remaining_chips: int) -> None:
+        """ Called at the end of each round. """
+        pass
+
+    @abstractmethod
+    def on_end_game(self, round_state: RoundStateClient, player_score: float, all_scores: dict, active_players_hands: dict) -> None:
+        """ Called at the end of the game. """
+        pass
+```
+
+RESPONSE:
+```python
+from typing import List, Tuple, Dict, Set
+from bot import Bot
+from type.poker_action import PokerAction
+from type.round_state import RoundStateClient
+import random
+import math
+
+class SimplePlayer(Bot):
+    def __init__(self):
+        super().__init__()
+        self.starting_chips = 0
+        self.blind_amount = 0
+        self.big_blind_player_id = None
+        self.small_blind_player_id = None
+        self.all_players = []
+        self.player_hands = {}
+        self.game_log = []
+        self.win_prob_cache = {}
+        self.hand_strength_observations = {}  # Track post-flop tendencies
+        self.positional_importance = {
+            'early': 0.7,
+            'middle': 1.0,
+            'late': 1.3,
+            'small_blind': 0.8,
+            'big_blind': 0.9
+        }
+        self.tight_aggressive = True  # Default strategy
+        self.hand_ranking_weights = {
+            'pair': 8.0,
+            'two_pair': 16.0,
+            'three_of_a_kind': 22.0,
+            'straight': 30.0,
+            'flush': 32.0,
+            'full_house': 40.0,
+            'four_of_a_kind': 50.0,
+            'straight_flush': 65.0,
+            'royal_flush': 80.0,
+            'high_card': 1.0,
+            'connected': 1.5,
+            'suited': 1.3,
+            'connector_gap': -0.2,
+            'ace_kicker': 2.0
+        }
+
+    def on_start(self, starting_chips: int, player_hands: List[str], blind_amount: int, big_blind_player_id: int, small_blind_player_id: int, all_players: List[int]):
+        self.starting_chips = starting_chips
+        self.blind_amount = blind_amount
+        self.big_blind_player_id = big_blind_player_id
+        self.small_blind_player_id = small_blind_player_id
+        self.all_players = all_players
+        self.player_hands = {str(pid): [] for pid in all_players}
+        self.win_prob_cache.clear()
+        self.hand_strength_observations.clear()
+
+    def on_round_start(self, round_state: RoundStateClient, remaining_chips: int):
+        # Reset observations per hand
+        self.game_log.append({
+            'round_num': round_state.round_num,
+            'hand_starting_chips': remaining_chips,
+            'hole_cards': self.player_hands.get(str(self.id), "Unknown"),
+            'actions': []
+        })
+
+    def get_action(self, round_state: RoundStateClient, remaining_chips: int) -> Tuple[PokerAction, int]:
+        try:
+            # Extract player ID and hole cards
+            player_id_str = str(self.id)
+            hole_cards = self.player_hands.get(player_id_str, [])
+            if not hole_cards:
+                return PokerAction.FOLD, 0
+
+            # Current bet state
+            current_player_bet = round_state.player_bets.get(player_id_str, 0)
+            call_amount = max(0, round_state.current_bet - current_player_bet)
+            min_raise = round_state.min_raise
+            max_raise = min(remaining_chips, round_state.max_raise)
+
+            # Determine position
+            position = self._determine_position(round_state)
+            is_preflop = round_state.round == 'Preflop'
+            community_cards = round_state.community_cards
+            pot_size = round_state.pot
+
+            # Build hand strength estimate
+            hand_strength = self._estimate_hand_strength(hole_cards, community_cards)
+            combo_reasoning = self._describe_hand_combo(hole_cards, community_cards)
+
+            # Opponent modeling: estimate aggression
+            num_active = len(round_state.current_player)
+            num_players_in_hand = sum(1 for pid in round_state.player_bets.keys() if round_state.player_bets[pid] > 0)
+            implied_aggression = num_players_in_hand > 2 and not is_preflop
+
+            # Adjust hand strength based on board texture
+            board_danger = self._assess_board_danger(community_cards)
+            if board_danger > 0.5 and implied_aggression:
+                hand_strength *= (1 - board_danger * 0.7)
+
+            # Position and stage-based decision logic
+            effective_strength = hand_strength
+            if position in ['late', 'big_blind', 'small_blind']:
+                effective_strength *= self.positional_importance.get(position, 1.0)
+            if call_amount > 0:
+                effective_strength *= 0.9  # Slight risk discount when facing bet
+
+            # Decide action
+            if is_preflop:
+                action, amount = self._preflop_strategy(hole_cards, position, call_amount, min_raise, remaining_chips, num_active, pot_size)
+            else:
+                action, amount = self._postflop_strategy(effective_strength, call_amount, min_raise, max_raise, pot_size, board_danger, implied_aggression)
+
+            # Enforce action validity
+            if action == PokerAction.RAISE:
+                if amount < min_raise:
+                    amount = min_raise
+                if amount > max_raise:
+                    amount = max_raise
+                if remaining_chips <= 0:
+                    action = PokerAction.ALL_IN
+                    amount = remaining_chips
+            elif action == PokerAction.CALL:
+                if call_amount == 0:
+                    action = PokerAction.CHECK
+                elif call_amount >= remaining_chips:
+                    action = PokerAction.ALL_IN
+            elif action == PokerAction.ALL_IN:
+                amount = remaining_chips
+            elif action == PokerAction.FOLD:
+                amount = 0
+
+            # Log action decision
+            self.game_log[-1]['actions'].append({
+                'round': round_state.round,
+                'action': action.name,
+                'amount': amount,
+                'hand_strength': hand_strength,
+                'board_danger': self._assess_board_danger(community_cards),
+                'hole_cards': hole_cards,
+                'community_cards': community_cards,
+                'combo_reasoning': combo_reasoning,
+                'position': position
+            })
+
+            return action, amount
+        except Exception as e:
+            # On any error, default to fold to avoid crashes
+            return PokerAction.FOLD, 0
+
+    def on_end_round(self, round_state: RoundStateClient, remaining_chips: int):
+        # Update observations after round ends
+        if self.game_log and 'actions' in self.game_log[-1]:
+            self.game_log[-1]['hand_ending_chips'] = remaining_chips
+            self.game_log[-1]['pot'] = round_state.pot
+
+    def on_end_game(self, round_state: RoundStateClient, player_score: float, all_scores: dict, active_players_hands: dict):
+        # Optional: Analyze game data for future tuning
+        pass
+
+    def _determine_position(self, round_state: RoundStateClient) -> str:
+        """Determine relative position at the table"""
+        if self.id is None:
+            return 'unknown'
+        current_ids = round_state.current_player
+        try:
+            pos_idx = current_ids.index(self.id)
+            total = len(current_ids)
+            if total <= 1:
+                return 'late'
+            elif pos_idx == 0:
+                return 'early'
+            elif pos_idx < total // 3:
+                return 'early'
+            elif pos_idx < 2 * total // 3:
+                return 'middle'
+            else:
+                return 'late'
+        except ValueError:
+            # Fallback to blind position check
+            if self.id == self.big_blind_player_id:
+                return 'big_blind'
+            elif self.id == self.small_blind_player_id:
+                return 'small_blind'
+            return 'late'
+
+    def _preflop_strategy(self, hole_cards: List[str], position: str, call_amount: int, min_raise: int, remaining_chips: int, num_players: int, pot_size: int) -> Tuple[PokerAction, int]:
+        hand_strength = self._evaluate_preflop_hand(hole_cards)
+        raise_amount = min(3 * min_raise + call_amount, remaining_chips // 4, remaining_chips - 1)
+        pos_factor = self.positional_importance.get(position, 1.0)
+
+        # Effective hand power adjusted by position
+        effective_power = hand_strength * pos_factor
+
+        # Ranges based on hand strength
+        if effective_power >= 80:
+            if call_amount == 0:
+                return PokerAction.RAISE, raise_amount
+            elif call_amount <= remaining_chips // 3:
+                return PokerAction
+
+RAW API RESPONSE:
+{
+  "id": "gen-1754788227-OTll0DCVuhaq4EjvuDNi",
+  "provider": "BaseTen",
+  "model": "qwen/qwen3-235b-a22b-2507",
+  "object": "chat.completion",
+  "created": 1754788228,
+  "choices": [
+    {
+      "error": {
+        "message": "Error processing stream",
+        "code": 502,
+        "metadata": {
+          "provider_name": "BaseTen",
+          "raw": {
+            "retryable": true
+          }
+        }
+      },
+      "logprobs": null,
+      "finish_reason": "error",
+      "native_finish_reason": "error",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "```python\nfrom typing import List, Tuple, Dict, Set\nfrom bot import Bot\nfrom type.poker_action import PokerAction\nfrom type.round_state import RoundStateClient\nimport random\nimport math\n\nclass SimplePlayer(Bot):\n    def __init__(self):\n        super().__init__()\n        self.starting_chips = 0\n        self.blind_amount = 0\n        self.big_blind_player_id = None\n        self.small_blind_player_id = None\n        self.all_players = []\n        self.player_hands = {}\n        self.game_log = []\n        self.win_prob_cache = {}\n        self.hand_strength_observations = {}  # Track post-flop tendencies\n        self.positional_importance = {\n            'early': 0.7,\n            'middle': 1.0,\n            'late': 1.3,\n            'small_blind': 0.8,\n            'big_blind': 0.9\n        }\n        self.tight_aggressive = True  # Default strategy\n        self.hand_ranking_weights = {\n            'pair': 8.0,\n            'two_pair': 16.0,\n            'three_of_a_kind': 22.0,\n            'straight': 30.0,\n            'flush': 32.0,\n            'full_house': 40.0,\n            'four_of_a_kind': 50.0,\n            'straight_flush': 65.0,\n            'royal_flush': 80.0,\n            'high_card': 1.0,\n            'connected': 1.5,\n            'suited': 1.3,\n            'connector_gap': -0.2,\n            'ace_kicker': 2.0\n        }\n\n    def on_start(self, starting_chips: int, player_hands: List[str], blind_amount: int, big_blind_player_id: int, small_blind_player_id: int, all_players: List[int]):\n        self.starting_chips = starting_chips\n        self.blind_amount = blind_amount\n        self.big_blind_player_id = big_blind_player_id\n        self.small_blind_player_id = small_blind_player_id\n        self.all_players = all_players\n        self.player_hands = {str(pid): [] for pid in all_players}\n        self.win_prob_cache.clear()\n        self.hand_strength_observations.clear()\n\n    def on_round_start(self, round_state: RoundStateClient, remaining_chips: int):\n        # Reset observations per hand\n        self.game_log.append({\n            'round_num': round_state.round_num,\n            'hand_starting_chips': remaining_chips,\n            'hole_cards': self.player_hands.get(str(self.id), \"Unknown\"),\n            'actions': []\n        })\n\n    def get_action(self, round_state: RoundStateClient, remaining_chips: int) -> Tuple[PokerAction, int]:\n        try:\n            # Extract player ID and hole cards\n            player_id_str = str(self.id)\n            hole_cards = self.player_hands.get(player_id_str, [])\n            if not hole_cards:\n                return PokerAction.FOLD, 0\n\n            # Current bet state\n            current_player_bet = round_state.player_bets.get(player_id_str, 0)\n            call_amount = max(0, round_state.current_bet - current_player_bet)\n            min_raise = round_state.min_raise\n            max_raise = min(remaining_chips, round_state.max_raise)\n\n            # Determine position\n            position = self._determine_position(round_state)\n            is_preflop = round_state.round == 'Preflop'\n            community_cards = round_state.community_cards\n            pot_size = round_state.pot\n\n            # Build hand strength estimate\n            hand_strength = self._estimate_hand_strength(hole_cards, community_cards)\n            combo_reasoning = self._describe_hand_combo(hole_cards, community_cards)\n\n            # Opponent modeling: estimate aggression\n            num_active = len(round_state.current_player)\n            num_players_in_hand = sum(1 for pid in round_state.player_bets.keys() if round_state.player_bets[pid] > 0)\n            implied_aggression = num_players_in_hand > 2 and not is_preflop\n\n            # Adjust hand strength based on board texture\n            board_danger = self._assess_board_danger(community_cards)\n            if board_danger > 0.5 and implied_aggression:\n                hand_strength *= (1 - board_danger * 0.7)\n\n            # Position and stage-based decision logic\n            effective_strength = hand_strength\n            if position in ['late', 'big_blind', 'small_blind']:\n                effective_strength *= self.positional_importance.get(position, 1.0)\n            if call_amount > 0:\n                effective_strength *= 0.9  # Slight risk discount when facing bet\n\n            # Decide action\n            if is_preflop:\n                action, amount = self._preflop_strategy(hole_cards, position, call_amount, min_raise, remaining_chips, num_active, pot_size)\n            else:\n                action, amount = self._postflop_strategy(effective_strength, call_amount, min_raise, max_raise, pot_size, board_danger, implied_aggression)\n\n            # Enforce action validity\n            if action == PokerAction.RAISE:\n                if amount < min_raise:\n                    amount = min_raise\n                if amount > max_raise:\n                    amount = max_raise\n                if remaining_chips <= 0:\n                    action = PokerAction.ALL_IN\n                    amount = remaining_chips\n            elif action == PokerAction.CALL:\n                if call_amount == 0:\n                    action = PokerAction.CHECK\n                elif call_amount >= remaining_chips:\n                    action = PokerAction.ALL_IN\n            elif action == PokerAction.ALL_IN:\n                amount = remaining_chips\n            elif action == PokerAction.FOLD:\n                amount = 0\n\n            # Log action decision\n            self.game_log[-1]['actions'].append({\n                'round': round_state.round,\n                'action': action.name,\n                'amount': amount,\n                'hand_strength': hand_strength,\n                'board_danger': self._assess_board_danger(community_cards),\n                'hole_cards': hole_cards,\n                'community_cards': community_cards,\n                'combo_reasoning': combo_reasoning,\n                'position': position\n            })\n\n            return action, amount\n        except Exception as e:\n            # On any error, default to fold to avoid crashes\n            return PokerAction.FOLD, 0\n\n    def on_end_round(self, round_state: RoundStateClient, remaining_chips: int):\n        # Update observations after round ends\n        if self.game_log and 'actions' in self.game_log[-1]:\n            self.game_log[-1]['hand_ending_chips'] = remaining_chips\n            self.game_log[-1]['pot'] = round_state.pot\n\n    def on_end_game(self, round_state: RoundStateClient, player_score: float, all_scores: dict, active_players_hands: dict):\n        # Optional: Analyze game data for future tuning\n        pass\n\n    def _determine_position(self, round_state: RoundStateClient) -> str:\n        \"\"\"Determine relative position at the table\"\"\"\n        if self.id is None:\n            return 'unknown'\n        current_ids = round_state.current_player\n        try:\n            pos_idx = current_ids.index(self.id)\n            total = len(current_ids)\n            if total <= 1:\n                return 'late'\n            elif pos_idx == 0:\n                return 'early'\n            elif pos_idx < total // 3:\n                return 'early'\n            elif pos_idx < 2 * total // 3:\n                return 'middle'\n            else:\n                return 'late'\n        except ValueError:\n            # Fallback to blind position check\n            if self.id == self.big_blind_player_id:\n                return 'big_blind'\n            elif self.id == self.small_blind_player_id:\n                return 'small_blind'\n            return 'late'\n\n    def _preflop_strategy(self, hole_cards: List[str], position: str, call_amount: int, min_raise: int, remaining_chips: int, num_players: int, pot_size: int) -> Tuple[PokerAction, int]:\n        hand_strength = self._evaluate_preflop_hand(hole_cards)\n        raise_amount = min(3 * min_raise + call_amount, remaining_chips // 4, remaining_chips - 1)\n        pos_factor = self.positional_importance.get(position, 1.0)\n\n        # Effective hand power adjusted by position\n        effective_power = hand_strength * pos_factor\n\n        # Ranges based on hand strength\n        if effective_power >= 80:\n            if call_amount == 0:\n                return PokerAction.RAISE, raise_amount\n            elif call_amount <= remaining_chips // 3:\n                return PokerAction",
+        "refusal": null,
+        "reasoning": null
+      }
+    }
+  ],
+  "system_fingerprint": null
+}
+================================================================================

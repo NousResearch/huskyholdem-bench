@@ -1,0 +1,13 @@
+[2025-08-09 18:24:03] Code validation failed: Validation error: Traceback (most recent call last):
+  File "/app/play_script.py", line 70, in <module>
+    main()
+  File "/app/play_script.py", line 54, in main
+    _ , _ = p.get_action(round_state, 990)
+  File "/app/player.py", line 65, in get_action
+    return self._get_postflop_action(round_state, remaining_chips, amount_to_call, can_check)
+  File "/app/player.py", line 193, in _get_postflop_action
+    hand_rank, _ = self._evaluate_7_cards(self.hole_cards, round_state.community_cards)
+  File "/app/player.py", line 151, in _evaluate_7_cards
+    all_cards_str = hole_cards + community_cards
+TypeError: can only concatenate str (not "list") to str
+

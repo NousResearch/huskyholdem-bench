@@ -1,0 +1,180 @@
+{
+  "gameId": "f49cde25-0020-491b-b65d-4b7da17cbab4",
+  "rounds": {
+    "0": {
+      "pot": 15,
+      "bets": {
+        "1130469619": 10,
+        "1697656355": 5
+      },
+      "actions": {
+        "1697656355": "FOLD",
+        "1130469619": "RAISE"
+      },
+      "action_sequence": [
+        {
+          "player": 1697656355,
+          "action": "RAISE",
+          "amount": 5,
+          "timestamp": 1754789164068,
+          "pot_after_action": 5,
+          "side_pots_after_action": [
+            {
+              "amount": 5,
+              "eligible_players": [
+                1130469620,
+                1697656356
+              ]
+            }
+          ],
+          "total_pot_after_action": 5,
+          "total_side_pots_after_action": [
+            {
+              "id": 0,
+              "amount": 5,
+              "eligible_players": [
+                1130469620,
+                1697656356
+              ]
+            }
+          ]
+        },
+        {
+          "player": 1130469619,
+          "action": "RAISE",
+          "amount": 10,
+          "timestamp": 1754789164069,
+          "pot_after_action": 15,
+          "side_pots_after_action": [
+            {
+              "amount": 10,
+              "eligible_players": [
+                1130469620,
+                1697656356
+              ]
+            },
+            {
+              "amount": 5,
+              "eligible_players": [
+                1130469620
+              ]
+            }
+          ],
+          "total_pot_after_action": 15,
+          "total_side_pots_after_action": [
+            {
+              "id": 0,
+              "amount": 10,
+              "eligible_players": [
+                1130469620,
+                1697656356
+              ]
+            },
+            {
+              "id": 1,
+              "amount": 5,
+              "eligible_players": [
+                1130469620
+              ]
+            }
+          ]
+        },
+        {
+          "player": 1697656355,
+          "action": "FOLD",
+          "amount": 0,
+          "timestamp": 1754789164114,
+          "pot_after_action": 15,
+          "side_pots_after_action": [
+            {
+              "amount": 15,
+              "eligible_players": [
+                1130469620
+              ]
+            }
+          ],
+          "total_pot_after_action": 15,
+          "total_side_pots_after_action": [
+            {
+              "id": 0,
+              "amount": 15,
+              "eligible_players": [
+                1130469620
+              ]
+            }
+          ]
+        }
+      ],
+      "actionTimes": {
+        "1697656355": 49,
+        "1130469619": 4
+      }
+    }
+  },
+  "playerNames": {
+    "1130469619": "player1130469620",
+    "1697656355": "player1697656356"
+  },
+  "blinds": {
+    "small": 5,
+    "big": 10
+  },
+  "finalBoard": [
+    "4d",
+    "Ks",
+    "Js"
+  ],
+  "sidePots": [
+    {
+      "amount": 0,
+      "eligible_players": [
+        1130469619
+      ]
+    }
+  ],
+  "playerMoney": {
+    "initialAmount": 10000,
+    "startingMoney": {
+      "1130469620": 9990,
+      "1697656356": 10010
+    },
+    "startingDelta": {
+      "1130469620": -10,
+      "1697656356": 10
+    },
+    "finalMoney": {
+      "1130469620": 9995,
+      "1697656356": 10005
+    },
+    "finalDelta": {
+      "1130469620": -5,
+      "1697656356": 5
+    },
+    "gameScores": {
+      "1130469620": 5,
+      "1697656356": -5
+    },
+    "thisGameDelta": {
+      "1130469620": 5,
+      "1697656356": -5
+    }
+  },
+  "playerHands": {
+    "1130469619": [
+      "7c",
+      "6d"
+    ],
+    "1697656355": [
+      "3c",
+      "8h"
+    ]
+  },
+  "usernameMapping": {
+    "default": 1130469620,
+    "client_container_6525_test_client_test_google_gemini_2.5_flash_iter_2_20250809_182557_iter2": 1697656356
+  },
+  "playerIdToUsername": {
+    "1130469620": "default",
+    "1697656356": "client_container_6525_test_client_test_google_gemini_2.5_flash_iter_2_20250809_182557_iter2"
+  }
+}

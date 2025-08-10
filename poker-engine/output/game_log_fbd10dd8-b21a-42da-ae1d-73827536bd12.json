@@ -1,0 +1,1114 @@
+{
+  "gameId": "fbd10dd8-b21a-42da-ae1d-73827536bd12",
+  "rounds": {
+    "0": {
+      "pot": 14586,
+      "bets": {
+        "215302036": 0,
+        "2247384580": 10,
+        "3630612292": 6152,
+        "3651530890": 5,
+        "3705131897": 6152,
+        "3950465665": 2267
+      },
+      "actions": {
+        "3651530890": "FOLD",
+        "3950465665": "FOLD",
+        "2247384580": "FOLD",
+        "3630612292": "CALL",
+        "215302036": "FOLD",
+        "3705131897": "RAISE"
+      },
+      "action_sequence": [
+        {
+          "player": 3651530890,
+          "action": "RAISE",
+          "amount": 5,
+          "timestamp": 1754615291475,
+          "pot_after_action": 5,
+          "side_pots_after_action": [
+            {
+              "amount": 5,
+              "eligible_players": [
+                3950465666,
+                2247384581,
+                3630612293,
+                3651530891,
+                215302037,
+                3705131898
+              ]
+            }
+          ],
+          "total_pot_after_action": 5,
+          "total_side_pots_after_action": [
+            {
+              "id": 0,
+              "amount": 5,
+              "eligible_players": [
+                3950465666,
+                2247384581,
+                3630612293,
+                3651530891,
+                215302037,
+                3705131898
+              ]
+            }
+          ]
+        },
+        {
+          "player": 2247384580,
+          "action": "RAISE",
+          "amount": 10,
+          "timestamp": 1754615291475,
+          "pot_after_action": 15,
+          "side_pots_after_action": [
+            {
+              "amount": 10,
+              "eligible_players": [
+                3651530891,
+                2247384581
+              ]
+            },
+            {
+              "amount": 5,
+              "eligible_players": [
+                2247384581
+              ]
+            }
+          ],
+          "total_pot_after_action": 15,
+          "total_side_pots_after_action": [
+            {
+              "id": 0,
+              "amount": 10,
+              "eligible_players": [
+                3651530891,
+                2247384581
+              ]
+            },
+            {
+              "id": 1,
+              "amount": 5,
+              "eligible_players": [
+                2247384581
+              ]
+            }
+          ]
+        },
+        {
+          "player": 3705131897,
+          "action": "RAISE",
+          "amount": 17,
+          "timestamp": 1754615291475,
+          "pot_after_action": 32,
+          "side_pots_after_action": [
+            {
+              "amount": 15,
+              "eligible_players": [
+                3705131898,
+                3651530891,
+                2247384581
+              ]
+            },
+            {
+              "amount": 10,
+              "eligible_players": [
+                3705131898,
+                2247384581
+              ]
+            },
+            {
+              "amount": 7,
+              "eligible_players": [
+                3705131898
+              ]
+            }
+          ],
+          "total_pot_after_action": 32,
+          "total_side_pots_after_action": [
+            {
+              "id": 0,
+              "amount": 15,
+              "eligible_players": [
+                3705131898,
+                3651530891,
+                2247384581
+              ]
+            },
+            {
+              "id": 1,
+              "amount": 10,
+              "eligible_players": [
+                3705131898,
+                2247384581
+              ]
+            },
+            {
+              "id": 2,
+              "amount": 7,
+              "eligible_players": [
+                3705131898
+              ]
+            }
+          ]
+        },
+        {
+          "player": 3630612292,
+          "action": "CALL",
+          "amount": 17,
+          "timestamp": 1754615291475,
+          "pot_after_action": 49,
+          "side_pots_after_action": [
+            {
+              "amount": 20,
+              "eligible_players": [
+                3705131898,
+                3651530891,
+                3630612293,
+                2247384581
+              ]
+            },
+            {
+              "amount": 15,
+              "eligible_players": [
+                3705131898,
+                3630612293,
+                2247384581
+              ]
+            },
+            {
+              "amount": 14,
+              "eligible_players": [
+                3705131898,
+                3630612293
+              ]
+            }
+          ],
+          "total_pot_after_action": 49,
+          "total_side_pots_after_action": [
+            {
+              "id": 0,
+              "amount": 20,
+              "eligible_players": [
+                3705131898,
+                3651530891,
+                3630612293,
+                2247384581
+              ]
+            },
+            {
+              "id": 1,
+              "amount": 15,
+              "eligible_players": [
+                3705131898,
+                3630612293,
+                2247384581
+              ]
+            },
+            {
+              "id": 2,
+              "amount": 14,
+              "eligible_players": [
+                3705131898,
+                3630612293
+              ]
+            }
+          ]
+        },
+        {
+          "player": 3950465665,
+          "action": "RAISE",
+          "amount": 1051,
+          "timestamp": 1754615291475,
+          "pot_after_action": 1100,
+          "side_pots_after_action": [
+            {
+              "amount": 25,
+              "eligible_players": [
+                3950465666,
+                3630612293,
+                2247384581,
+                3651530891,
+                3705131898
+              ]
+            },
+            {
+              "amount": 20,
+              "eligible_players": [
+                3705131898,
+                3630612293,
+                2247384581,
+                3950465666
+              ]
+            },
+            {
+              "amount": 21,
+              "eligible_players": [
+                3705131898,
+                3630612293,
+                3950465666
+              ]
+            },
+            {
+              "amount": 1034,
+              "eligible_players": [
+                3950465666
+              ]
+            }
+          ],
+          "total_pot_after_action": 1100,
+          "total_side_pots_after_action": [
+            {
+              "id": 0,
+              "amount": 25,
+              "eligible_players": [
+                3950465666,
+                3630612293,
+                2247384581,
+                3651530891,
+                3705131898
+              ]
+            },
+            {
+              "id": 1,
+              "amount": 20,
+              "eligible_players": [
+                3705131898,
+                3630612293,
+                2247384581,
+                3950465666
+              ]
+            },
+            {
+              "id": 2,
+              "amount": 21,
+              "eligible_players": [
+                3705131898,
+                3630612293,
+                3950465666
+              ]
+            },
+            {
+              "id": 3,
+              "amount": 1034,
+              "eligible_players": [
+                3950465666
+              ]
+            }
+          ]
+        },
+        {
+          "player": 215302036,
+          "action": "FOLD",
+          "amount": 0,
+          "timestamp": 1754615291475,
+          "pot_after_action": 1100,
+          "side_pots_after_action": [
+            {
+              "amount": 25,
+              "eligible_players": [
+                3950465666,
+                3630612293,
+                2247384581,
+                3651530891,
+                3705131898
+              ]
+            },
+            {
+              "amount": 20,
+              "eligible_players": [
+                3705131898,
+                3630612293,
+                2247384581,
+                3950465666
+              ]
+            },
+            {
+              "amount": 21,
+              "eligible_players": [
+                3705131898,
+                3630612293,
+                3950465666
+              ]
+            },
+            {
+              "amount": 1034,
+              "eligible_players": [
+                3950465666
+              ]
+            }
+          ],
+          "total_pot_after_action": 1100,
+          "total_side_pots_after_action": [
+            {
+              "id": 0,
+              "amount": 25,
+              "eligible_players": [
+                3950465666,
+                3630612293,
+                2247384581,
+                3651530891,
+                3705131898
+              ]
+            },
+            {
+              "id": 1,
+              "amount": 20,
+              "eligible_players": [
+                3705131898,
+                3630612293,
+                2247384581,
+                3950465666
+              ]
+            },
+            {
+              "id": 2,
+              "amount": 21,
+              "eligible_players": [
+                3705131898,
+                3630612293,
+                3950465666
+              ]
+            },
+            {
+              "id": 3,
+              "amount": 1034,
+              "eligible_players": [
+                3950465666
+              ]
+            }
+          ]
+        },
+        {
+          "player": 3651530890,
+          "action": "FOLD",
+          "amount": 0,
+          "timestamp": 1754615291475,
+          "pot_after_action": 1100,
+          "side_pots_after_action": [
+            {
+              "amount": 25,
+              "eligible_players": [
+                3705131898,
+                3630612293,
+                2247384581,
+                3950465666
+              ]
+            },
+            {
+              "amount": 20,
+              "eligible_players": [
+                3705131898,
+                3630612293,
+                2247384581,
+                3950465666
+              ]
+            },
+            {
+              "amount": 21,
+              "eligible_players": [
+                3705131898,
+                3630612293,
+                3950465666
+              ]
+            },
+            {
+              "amount": 1034,
+              "eligible_players": [
+                3950465666
+              ]
+            }
+          ],
+          "total_pot_after_action": 1100,
+          "total_side_pots_after_action": [
+            {
+              "id": 0,
+              "amount": 25,
+              "eligible_players": [
+                3705131898,
+                3630612293,
+                2247384581,
+                3950465666
+              ]
+            },
+            {
+              "id": 1,
+              "amount": 20,
+              "eligible_players": [
+                3705131898,
+                3630612293,
+                2247384581,
+                3950465666
+              ]
+            },
+            {
+              "id": 2,
+              "amount": 21,
+              "eligible_players": [
+                3705131898,
+                3630612293,
+                3950465666
+              ]
+            },
+            {
+              "id": 3,
+              "amount": 1034,
+              "eligible_players": [
+                3950465666
+              ]
+            }
+          ]
+        },
+        {
+          "player": 2247384580,
+          "action": "FOLD",
+          "amount": 0,
+          "timestamp": 1754615291475,
+          "pot_after_action": 1100,
+          "side_pots_after_action": [
+            {
+              "amount": 25,
+              "eligible_players": [
+                3705131898,
+                3630612293,
+                3950465666
+              ]
+            },
+            {
+              "amount": 20,
+              "eligible_players": [
+                3705131898,
+                3630612293,
+                3950465666
+              ]
+            },
+            {
+              "amount": 21,
+              "eligible_players": [
+                3705131898,
+                3630612293,
+                3950465666
+              ]
+            },
+            {
+              "amount": 1034,
+              "eligible_players": [
+                3950465666
+              ]
+            }
+          ],
+          "total_pot_after_action": 1100,
+          "total_side_pots_after_action": [
+            {
+              "id": 0,
+              "amount": 25,
+              "eligible_players": [
+                3705131898,
+                3630612293,
+                3950465666
+              ]
+            },
+            {
+              "id": 1,
+              "amount": 20,
+              "eligible_players": [
+                3705131898,
+                3630612293,
+                3950465666
+              ]
+            },
+            {
+              "id": 2,
+              "amount": 21,
+              "eligible_players": [
+                3705131898,
+                3630612293,
+                3950465666
+              ]
+            },
+            {
+              "id": 3,
+              "amount": 1034,
+              "eligible_players": [
+                3950465666
+              ]
+            }
+          ]
+        },
+        {
+          "player": 3705131897,
+          "action": "RAISE",
+          "amount": 1601,
+          "timestamp": 1754615291475,
+          "pot_after_action": 2701,
+          "side_pots_after_action": [
+            {
+              "amount": 25,
+              "eligible_players": [
+                3705131898,
+                3630612293,
+                3950465666
+              ]
+            },
+            {
+              "amount": 20,
+              "eligible_players": [
+                3705131898,
+                3630612293,
+                3950465666
+              ]
+            },
+            {
+              "amount": 21,
+              "eligible_players": [
+                3705131898,
+                3630612293,
+                3950465666
+              ]
+            },
+            {
+              "amount": 2068,
+              "eligible_players": [
+                3705131898,
+                3950465666
+              ]
+            },
+            {
+              "amount": 567,
+              "eligible_players": [
+                3705131898
+              ]
+            }
+          ],
+          "total_pot_after_action": 2701,
+          "total_side_pots_after_action": [
+            {
+              "id": 0,
+              "amount": 25,
+              "eligible_players": [
+                3705131898,
+                3630612293,
+                3950465666
+              ]
+            },
+            {
+              "id": 1,
+              "amount": 20,
+              "eligible_players": [
+                3705131898,
+                3630612293,
+                3950465666
+              ]
+            },
+            {
+              "id": 2,
+              "amount": 21,
+              "eligible_players": [
+                3705131898,
+                3630612293,
+                3950465666
+              ]
+            },
+            {
+              "id": 3,
+              "amount": 2068,
+              "eligible_players": [
+                3705131898,
+                3950465666
+              ]
+            },
+            {
+              "id": 4,
+              "amount": 567,
+              "eligible_players": [
+                3705131898
+              ]
+            }
+          ]
+        },
+        {
+          "player": 3630612292,
+          "action": "CALL",
+          "amount": 1601,
+          "timestamp": 1754615291475,
+          "pot_after_action": 4302,
+          "side_pots_after_action": [
+            {
+              "amount": 25,
+              "eligible_players": [
+                3705131898,
+                3630612293,
+                3950465666
+              ]
+            },
+            {
+              "amount": 20,
+              "eligible_players": [
+                3705131898,
+                3630612293,
+                3950465666
+              ]
+            },
+            {
+              "amount": 3123,
+              "eligible_players": [
+                3705131898,
+                3630612293,
+                3950465666
+              ]
+            },
+            {
+              "amount": 1134,
+              "eligible_players": [
+                3705131898,
+                3630612293
+              ]
+            }
+          ],
+          "total_pot_after_action": 4302,
+          "total_side_pots_after_action": [
+            {
+              "id": 0,
+              "amount": 25,
+              "eligible_players": [
+                3705131898,
+                3630612293,
+                3950465666
+              ]
+            },
+            {
+              "id": 1,
+              "amount": 20,
+              "eligible_players": [
+                3705131898,
+                3630612293,
+                3950465666
+              ]
+            },
+            {
+              "id": 2,
+              "amount": 3123,
+              "eligible_players": [
+                3705131898,
+                3630612293,
+                3950465666
+              ]
+            },
+            {
+              "id": 3,
+              "amount": 1134,
+              "eligible_players": [
+                3705131898,
+                3630612293
+              ]
+            }
+          ]
+        },
+        {
+          "player": 3950465665,
+          "action": "RAISE",
+          "amount": 1216,
+          "timestamp": 1754615291475,
+          "pot_after_action": 5518,
+          "side_pots_after_action": [
+            {
+              "amount": 25,
+              "eligible_players": [
+                3705131898,
+                3630612293,
+                3950465666
+              ]
+            },
+            {
+              "amount": 20,
+              "eligible_players": [
+                3705131898,
+                3630612293,
+                3950465666
+              ]
+            },
+            {
+              "amount": 4824,
+              "eligible_players": [
+                3705131898,
+                3630612293,
+                3950465666
+              ]
+            },
+            {
+              "amount": 649,
+              "eligible_players": [
+                3950465666
+              ]
+            }
+          ],
+          "total_pot_after_action": 5518,
+          "total_side_pots_after_action": [
+            {
+              "id": 0,
+              "amount": 25,
+              "eligible_players": [
+                3705131898,
+                3630612293,
+                3950465666
+              ]
+            },
+            {
+              "id": 1,
+              "amount": 20,
+              "eligible_players": [
+                3705131898,
+                3630612293,
+                3950465666
+              ]
+            },
+            {
+              "id": 2,
+              "amount": 4824,
+              "eligible_players": [
+                3705131898,
+                3630612293,
+                3950465666
+              ]
+            },
+            {
+              "id": 3,
+              "amount": 649,
+              "eligible_players": [
+                3950465666
+              ]
+            }
+          ]
+        },
+        {
+          "player": 3705131897,
+          "action": "RAISE",
+          "amount": 4534,
+          "timestamp": 1754615291475,
+          "pot_after_action": 10052,
+          "side_pots_after_action": [
+            {
+              "amount": 25,
+              "eligible_players": [
+                3705131898,
+                3630612293,
+                3950465666
+              ]
+            },
+            {
+              "amount": 20,
+              "eligible_players": [
+                3705131898,
+                3630612293,
+                3950465666
+              ]
+            },
+            {
+              "amount": 4824,
+              "eligible_players": [
+                3705131898,
+                3630612293,
+                3950465666
+              ]
+            },
+            {
+              "amount": 1298,
+              "eligible_players": [
+                3705131898,
+                3950465666
+              ]
+            },
+            {
+              "amount": 3885,
+              "eligible_players": [
+                3705131898
+              ]
+            }
+          ],
+          "total_pot_after_action": 10052,
+          "total_side_pots_after_action": [
+            {
+              "id": 0,
+              "amount": 25,
+              "eligible_players": [
+                3705131898,
+                3630612293,
+                3950465666
+              ]
+            },
+            {
+              "id": 1,
+              "amount": 20,
+              "eligible_players": [
+                3705131898,
+                3630612293,
+                3950465666
+              ]
+            },
+            {
+              "id": 2,
+              "amount": 4824,
+              "eligible_players": [
+                3705131898,
+                3630612293,
+                3950465666
+              ]
+            },
+            {
+              "id": 3,
+              "amount": 1298,
+              "eligible_players": [
+                3705131898,
+                3950465666
+              ]
+            },
+            {
+              "id": 4,
+              "amount": 3885,
+              "eligible_players": [
+                3705131898
+              ]
+            }
+          ]
+        },
+        {
+          "player": 3630612292,
+          "action": "CALL",
+          "amount": 4534,
+          "timestamp": 1754615291475,
+          "pot_after_action": 14586,
+          "side_pots_after_action": [
+            {
+              "amount": 25,
+              "eligible_players": [
+                3705131898,
+                3630612293,
+                3950465666
+              ]
+            },
+            {
+              "amount": 20,
+              "eligible_players": [
+                3705131898,
+                3630612293,
+                3950465666
+              ]
+            },
+            {
+              "amount": 6771,
+              "eligible_players": [
+                3705131898,
+                3630612293,
+                3950465666
+              ]
+            },
+            {
+              "amount": 7770,
+              "eligible_players": [
+                3705131898,
+                3630612293
+              ]
+            }
+          ],
+          "total_pot_after_action": 14586,
+          "total_side_pots_after_action": [
+            {
+              "id": 0,
+              "amount": 25,
+              "eligible_players": [
+                3705131898,
+                3630612293,
+                3950465666
+              ]
+            },
+            {
+              "id": 1,
+              "amount": 20,
+              "eligible_players": [
+                3705131898,
+                3630612293,
+                3950465666
+              ]
+            },
+            {
+              "id": 2,
+              "amount": 6771,
+              "eligible_players": [
+                3705131898,
+                3630612293,
+                3950465666
+              ]
+            },
+            {
+              "id": 3,
+              "amount": 7770,
+              "eligible_players": [
+                3705131898,
+                3630612293
+              ]
+            }
+          ]
+        },
+        {
+          "player": 3950465665,
+          "action": "FOLD",
+          "amount": 0,
+          "timestamp": 1754615291475,
+          "pot_after_action": 14586,
+          "side_pots_after_action": [
+            {
+              "amount": 25,
+              "eligible_players": [
+                3705131898,
+                3630612293
+              ]
+            },
+            {
+              "amount": 20,
+              "eligible_players": [
+                3705131898,
+                3630612293
+              ]
+            },
+            {
+              "amount": 6771,
+              "eligible_players": [
+                3705131898,
+                3630612293
+              ]
+            },
+            {
+              "amount": 7770,
+              "eligible_players": [
+                3705131898,
+                3630612293
+              ]
+            }
+          ],
+          "total_pot_after_action": 14586,
+          "total_side_pots_after_action": [
+            {
+              "id": 0,
+              "amount": 25,
+              "eligible_players": [
+                3705131898,
+                3630612293
+              ]
+            },
+            {
+              "id": 1,
+              "amount": 20,
+              "eligible_players": [
+                3705131898,
+                3630612293
+              ]
+            },
+            {
+              "id": 2,
+              "amount": 6771,
+              "eligible_players": [
+                3705131898,
+                3630612293
+              ]
+            },
+            {
+              "id": 3,
+              "amount": 7770,
+              "eligible_players": [
+                3705131898,
+                3630612293
+              ]
+            }
+          ]
+        }
+      ],
+      "actionTimes": {
+        "3651530890": 0,
+        "2247384580": 0,
+        "3705131897": 0,
+        "3630612292": 0,
+        "3950465665": 0,
+        "215302036": 0
+      }
+    }
+  },
+  "playerNames": {
+    "215302036": "player215302037",
+    "2247384580": "player2247384581",
+    "3630612292": "player3630612293",
+    "3651530890": "player3651530891",
+    "3705131897": "player3705131898",
+    "3950465665": "player3950465666"
+  },
+  "blinds": {
+    "small": 5,
+    "big": 10
+  },
+  "finalBoard": [
+    "Th",
+    "9h",
+    "5d"
+  ],
+  "sidePots": [
+    {
+      "amount": 0,
+      "eligible_players": [
+        3705131897,
+        3630612292
+      ]
+    }
+  ],
+  "playerHands": {
+    "215302036": [
+      "Qs",
+      "7d"
+    ],
+    "2247384580": [
+      "Qc",
+      "4c"
+    ],
+    "3630612292": [
+      "6d",
+      "Tc"
+    ],
+    "3651530890": [
+      "8c",
+      "Ad"
+    ],
+    "3705131897": [
+      "4d",
+      "2d"
+    ],
+    "3950465665": [
+      "5h",
+      "3s"
+    ]
+  },
+  "playerMoney": {
+    "finalDelta": {
+      "215302037": 0,
+      "2247384581": -10,
+      "3630612293": 8434,
+      "3651530891": -5,
+      "3705131898": -6152,
+      "3950465666": -2267
+    },
+    "gameScores": {
+      "215302037": 0,
+      "2247384581": -10,
+      "3630612293": 8434,
+      "3651530891": -5,
+      "3705131898": -6152,
+      "3950465666": -2267
+    },
+    "finalMoney": {},
+    "thisGameDelta": {
+      "215302037": 0,
+      "2247384581": -10,
+      "3630612293": 8434,
+      "3651530891": -5,
+      "3705131898": -6152,
+      "3950465666": -2267
+    }
+  }
+}

@@ -1,0 +1,270 @@
+{
+  "gameId": "776a2782-c4c3-4489-87a9-c4ca2fba38dd",
+  "rounds": {
+    "0": {
+      "pot": 20,
+      "bets": {
+        "3744463724": 10,
+        "1437662278": 10
+      },
+      "actions": {
+        "3744463724": "CALL",
+        "1437662278": "RAISE"
+      },
+      "action_sequence": [
+        {
+          "player": 3744463724,
+          "action": "RAISE",
+          "amount": 5,
+          "timestamp": 1754788745057,
+          "pot_after_action": 5,
+          "side_pots_after_action": [
+            {
+              "amount": 5,
+              "eligible_players": [
+                3744463725,
+                1437662279
+              ]
+            }
+          ],
+          "total_pot_after_action": 5,
+          "total_side_pots_after_action": [
+            {
+              "id": 0,
+              "amount": 5,
+              "eligible_players": [
+                3744463725,
+                1437662279
+              ]
+            }
+          ]
+        },
+        {
+          "player": 1437662278,
+          "action": "RAISE",
+          "amount": 10,
+          "timestamp": 1754788745059,
+          "pot_after_action": 15,
+          "side_pots_after_action": [
+            {
+              "amount": 10,
+              "eligible_players": [
+                3744463725,
+                1437662279
+              ]
+            },
+            {
+              "amount": 5,
+              "eligible_players": [
+                1437662279
+              ]
+            }
+          ],
+          "total_pot_after_action": 15,
+          "total_side_pots_after_action": [
+            {
+              "id": 0,
+              "amount": 10,
+              "eligible_players": [
+                3744463725,
+                1437662279
+              ]
+            },
+            {
+              "id": 1,
+              "amount": 5,
+              "eligible_players": [
+                1437662279
+              ]
+            }
+          ]
+        },
+        {
+          "player": 3744463724,
+          "action": "CALL",
+          "amount": 5,
+          "timestamp": 1754788745103,
+          "pot_after_action": 20,
+          "side_pots_after_action": [
+            {
+              "amount": 20,
+              "eligible_players": [
+                3744463725,
+                1437662279
+              ]
+            }
+          ],
+          "total_pot_after_action": 20,
+          "total_side_pots_after_action": [
+            {
+              "id": 0,
+              "amount": 20,
+              "eligible_players": [
+                3744463725,
+                1437662279
+              ]
+            }
+          ]
+        }
+      ],
+      "actionTimes": {
+        "3744463724": 53,
+        "1437662278": 9
+      }
+    },
+    "1": {
+      "pot": 100,
+      "bets": {
+        "3744463724": 100,
+        "1437662278": 0
+      },
+      "actions": {
+        "1437662278": "FOLD",
+        "3744463724": "RAISE"
+      },
+      "action_sequence": [
+        {
+          "player": 1437662278,
+          "action": "FOLD",
+          "amount": 0,
+          "timestamp": 1754788745108,
+          "pot_after_action": 0,
+          "side_pots_after_action": [
+            {
+              "amount": 0,
+              "eligible_players": [
+                3744463725,
+                1437662279
+              ]
+            }
+          ],
+          "total_pot_after_action": 20,
+          "total_side_pots_after_action": [
+            {
+              "id": 0,
+              "amount": 20,
+              "eligible_players": [
+                3744463725,
+                1437662279
+              ]
+            },
+            {
+              "id": 1,
+              "amount": 0,
+              "eligible_players": [
+                3744463725,
+                1437662279
+              ]
+            }
+          ]
+        },
+        {
+          "player": 3744463724,
+          "action": "RAISE",
+          "amount": 100,
+          "timestamp": 1754788745151,
+          "pot_after_action": 100,
+          "side_pots_after_action": [
+            {
+              "amount": 100,
+              "eligible_players": [
+                3744463725,
+                1437662279
+              ]
+            }
+          ],
+          "total_pot_after_action": 120,
+          "total_side_pots_after_action": [
+            {
+              "id": 0,
+              "amount": 20,
+              "eligible_players": [
+                3744463725,
+                1437662279
+              ]
+            },
+            {
+              "id": 1,
+              "amount": 100,
+              "eligible_players": [
+                3744463725,
+                1437662279
+              ]
+            }
+          ]
+        }
+      ],
+      "actionTimes": {
+        "1437662278": 58,
+        "3744463724": 101
+      }
+    }
+  },
+  "playerNames": {
+    "3744463724": "player3744463725",
+    "1437662278": "player1437662279"
+  },
+  "blinds": {
+    "small": 5,
+    "big": 10
+  },
+  "finalBoard": [
+    "4c",
+    "Jd",
+    "Ah",
+    "3h"
+  ],
+  "sidePots": [
+    {
+      "amount": 0,
+      "eligible_players": [
+        3744463724
+      ]
+    }
+  ],
+  "playerMoney": {
+    "initialAmount": 10000,
+    "startingMoney": {
+      "3744463725": 10015,
+      "1437662279": 9985
+    },
+    "startingDelta": {
+      "3744463725": 15,
+      "1437662279": -15
+    },
+    "finalMoney": {
+      "3744463725": 10025,
+      "1437662279": 9975
+    },
+    "finalDelta": {
+      "3744463725": 25,
+      "1437662279": -25
+    },
+    "gameScores": {
+      "3744463725": 10,
+      "1437662279": -10
+    },
+    "thisGameDelta": {
+      "3744463725": 10,
+      "1437662279": -10
+    }
+  },
+  "playerHands": {
+    "3744463724": [
+      "Qs",
+      "Kd"
+    ],
+    "1437662278": [
+      "Ad",
+      "5d"
+    ]
+  },
+  "usernameMapping": {
+    "default": 3744463725,
+    "client_container_6208_test_client_test_anthropic_claude_sonnet_4_iter_2_20250809_181857_iter2": 1437662279
+  },
+  "playerIdToUsername": {
+    "3744463725": "default",
+    "1437662279": "client_container_6208_test_client_test_anthropic_claude_sonnet_4_iter_2_20250809_181857_iter2"
+  }
+}

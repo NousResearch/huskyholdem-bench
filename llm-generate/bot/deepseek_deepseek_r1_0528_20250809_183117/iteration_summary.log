@@ -1,0 +1,21 @@
+Iterative Generation Summary - 2025-08-09 18:50:01
+============================================================
+
+Model: deepseek/deepseek-r1-0528
+Total Iterations: 5
+Bot Directory: bot/deepseek_deepseek_r1_0528_20250809_183117
+
+ITERATION RESULTS:
+--------------------
+Iteration 1: FAILED
+  Error: Error processing prompt: Error processing prompt: Empty response received from API
+Iteration 2: FAILED
+  Error: Critical errors in game testing
+Iteration 3: SUCCESS
+Iteration 4: FAILED
+  Error: No code blocks found in response
+Iteration 5: SUCCESS
+
+SUMMARY:
+- Successful iterations: 2/5
+- Success rate: 40.0%

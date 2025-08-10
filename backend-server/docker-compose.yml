@@ -1,0 +1,97 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: mydatabase
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - backend
+
+  server:
+    tty: true
+    build: .
+    volumes:
+      - .:/app
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - "8002:8002"
+    depends_on:
+      - db
+      - redis
+      - rabbit-mq
+    networks:
+      - backend
+
+  redis:
+    image: redis:7
+    ports:
+      - "6379:6379"
+    networks:
+      - backend
+
+  rabbit-mq:
+    image: rabbitmq:3-management
+    ports:
+      - "5672:5672"   # RabbitMQ default port
+    environment:
+      # TODO change this to env variables later
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    networks:
+      - backend
+
+  worker_1:
+    build:
+      context: .
+      dockerfile: Dockerfile.worker
+    container_name: sim-worker-1
+    command: ["python", "-m", "app.service.rabbitmq.start_simulation_worker", "0"]
+    volumes:
+      - .env:/app/.env
+      - /var/run/docker.sock:/var/run/docker.sock  
+    depends_on:
+      - rabbit-mq
+    networks:
+      - backend
+
+  worker_2:
+    build:
+      context: .
+      dockerfile: Dockerfile.worker
+    container_name: sim-worker-2
+    command: ["python", "-m", "app.service.rabbitmq.start_simulation_worker", "1"]
+    volumes:
+      - .env:/app/.env
+      - /var/run/docker.sock:/var/run/docker.sock  
+    depends_on:
+      - rabbit-mq
+    networks:
+      - backend
+
+  worker_3:
+    build:
+      context: .
+      dockerfile: Dockerfile.worker
+    container_name: sim-worker-3
+    command: ["python", "-m", "app.service.rabbitmq.start_simulation_worker", "2"]
+    volumes:
+      - .env:/app/.env
+      - /var/run/docker.sock:/var/run/docker.sock  
+    depends_on:
+      - rabbit-mq
+    networks:
+      - backend
+
+volumes:
+  postgres_data:
+
+networks:
+  backend:
+    driver: bridge

@@ -1,0 +1,67 @@
+{
+  "gameId": "f49cde25-0020-491b-b65d-4b7da17cbab4",
+  "rounds": {},
+  "playerNames": {
+    "1130469619": "player1130469620",
+    "1697656355": "player1697656356"
+  },
+  "blinds": {
+    "small": 5,
+    "big": 10
+  },
+  "finalBoard": [],
+  "sidePots": [
+    {
+      "amount": 0,
+      "eligible_players": [
+        1130469619,
+        1697656355
+      ]
+    }
+  ],
+  "playerMoney": {
+    "initialAmount": 10000,
+    "startingMoney": {
+      "1130469620": 20000,
+      "1697656356": 0
+    },
+    "startingDelta": {
+      "1130469620": 10000,
+      "1697656356": -10000
+    },
+    "finalMoney": {
+      "1130469620": 20000,
+      "1697656356": 0
+    },
+    "finalDelta": {
+      "1130469620": 10000,
+      "1697656356": -10000
+    },
+    "gameScores": {
+      "1130469620": 0,
+      "1697656356": 0
+    },
+    "thisGameDelta": {
+      "1130469620": 0,
+      "1697656356": 0
+    }
+  },
+  "playerHands": {
+    "1130469619": [
+      "Qc",
+      "9c"
+    ],
+    "1697656355": [
+      "8s",
+      "8h"
+    ]
+  },
+  "usernameMapping": {
+    "default": 1130469620,
+    "client_container_6525_test_client_test_google_gemini_2.5_flash_iter_2_20250809_182557_iter2": 1697656356
+  },
+  "playerIdToUsername": {
+    "1130469620": "default",
+    "1697656356": "client_container_6525_test_client_test_google_gemini_2.5_flash_iter_2_20250809_182557_iter2"
+  }
+}

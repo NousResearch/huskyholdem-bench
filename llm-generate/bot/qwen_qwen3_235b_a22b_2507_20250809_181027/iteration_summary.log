@@ -1,0 +1,21 @@
+Iterative Generation Summary - 2025-08-09 18:16:18
+============================================================
+
+Model: qwen/qwen3-235b-a22b-2507
+Total Iterations: 5
+Bot Directory: bot/qwen_qwen3_235b_a22b_2507_20250809_181027
+
+ITERATION RESULTS:
+--------------------
+Iteration 1: FAILED
+  Error: No code blocks found in response
+Iteration 2: SUCCESS
+Iteration 3: FAILED
+  Error: Critical errors in game testing
+Iteration 4: SUCCESS
+Iteration 5: FAILED
+  Error: Error processing prompt: Error processing prompt: Empty response received from API
+
+SUMMARY:
+- Successful iterations: 2/5
+- Success rate: 40.0%

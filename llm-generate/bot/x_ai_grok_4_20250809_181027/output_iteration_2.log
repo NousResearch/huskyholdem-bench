@@ -1,0 +1,1011 @@
+
+================================================================================
+TIMESTAMP: 2025-08-09 18:20:33
+MODEL: x-ai/grok-4
+PROMPT LENGTH: 22189 characters
+RESPONSE LENGTH: 7998 characters
+USAGE: {
+  "prompt_tokens": 6377,
+  "completion_tokens": 13650,
+  "total_tokens": 20027,
+  "prompt_tokens_details": {
+    "cached_tokens": 2
+  },
+  "completion_tokens_details": {
+    "reasoning_tokens": 11584
+  }
+}
+
+PROMPT:
+
+You are tasked with submitting a poker bot to a No-Limit Texas Hold'em poker bot competition: Husky Hold'em.
+
+**Detailed Game Rules**
+- No-Limit Texas Hold'em with 2-10 players (often 6-handed tables); bots compete in heads-up or multi-player matches hosted by a central game server.
+- Players start with $10,000 chips at the simulation start; simulations run for n games (more than 10 per run); blinds rotate and increase every n games (e.g., after certain rounds); big/small blinds are posted pre-flop.
+- Goal: Maximize delta money (ending chips minus starting chips); if a player runs out of chips, they are eliminated from that table; no rebuys.
+- Each hand has 4 betting rounds: Pre-flop (after hole cards and blinds), Flop (3 community cards), Turn (1 community card), River (1 community card).
+- Actions: Fold, Check, Call, Raise (any amount up to stack, no limit), All-in.
+- Hand rankings: Royal flush > Straight flush > Four of a kind > Full house > Flush > Straight > Three of a kind > Two pair > One pair > High card.
+- Showdown: If multiple players remain after river betting, best 5-card hand (using any combination of 2 hole cards + 5 community cards) wins the pot; side pots form for all-ins with eligible players.
+- Technical Limits: 30 seconds max per move (timeout causes automatic fold); 100MB max memory usage; any error/exception causes automatic fold; all bots are given the same compute limits.
+
+Your task: Implement winning bot in player.py by subclassing Bot as in the template below and follow the above game rules.
+
+Bot Design and Competition Rules:
+
+1. Your bot must subclass Bot as SimplePlayer, implementing all required methods exactly as in the template. Preserve the class name SimplePlayer for compatibility with the game server. The template for the class is as
+**SimplePlayer Template:**
+```python
+from typing import List, Tuple
+from bot import Bot
+from type.poker_action import PokerAction
+from type.round_state import RoundStateClient
+
+class SimplePlayer(Bot):
+    def __init__(self):
+        super().__init__()
+        # TODO implement this
+
+    def on_start(self, starting_chips: int, player_hands: List[str], blind_amount: int, big_blind_player_id: int, small_blind_player_id: int, all_players: List[int]):
+        # TODO implement this
+
+    def on_round_start(self, round_state: RoundStateClient, remaining_chips: int):
+        # TODO implement this
+
+    def get_action(self, round_state: RoundStateClient, remaining_chips: int) -> Tuple[PokerAction, int]:
+        """ Returns the action for the player. """
+        # TODO implement this
+
+    def on_end_round(self, round_state: RoundStateClient, remaining_chips: int):
+        """ Called at the end of the round. """
+        # TODO implement this
+
+    def on_end_game(self, round_state: RoundStateClient, player_score: float, all_scores: dict, active_players_hands: dict):
+        # TODO implement this
+```
+2. DO NOT rename or remove any predefined methods (on_start, on_round_start, get_action, on_end_round, on_end_game), and do not change their signatures.
+3. You may add helper functions and instance variables for strategy or tracking.
+4. Your bot should be able to abide by no limit texas hold'em rules and handle side pots, all-ins, blind increases, multi-way pots, and be error-free (no exceptions).
+5. For each action, always return valid actions:
+    - For RAISE: the amount raise combine with your current bet must be larger than the the current raise.
+    - For CALL: You don't need to specify the amount you call, it default to match exactly the amount needed to call (current_bet - your bet).
+    - For CHECK: You can't check if round's current bet is larger than 0. Resort to other action (eg CALL, RAISE, ALL_IN).
+    - For ALL_IN: You don't need to specify the amount you all in, it will default to all your current money.
+    - **INVALID ACTION WILL MAKE YOU LOSE MONEY (automatic result in fold if the condition is not match for each action), so logic must always check bounds and edge cases**.
+6. If you use any external libraries, they must be listed in requirements.txt (pure Python only).
+7. Implement your bot with SimplePlayer. See full RoundStateClient, PokerAction, and PokerRound definitions below.
+8. Your bot should maximize delta money (ending chips minus starting chips). Positive mean gaining money, the more money you gain the better.
+9. There might will be data on previous run (error and game score) if this is not the first time you implement. If there is error, fix it so your bot can run. Try to improve your bot from previous round.
+10. If there are no usage of external requirements, the text secion for requirement must be empty. DO NOT PUT ANYTHING ELSE. If you want to use any external library, you must put it in that text block
+11. Your response must consist ONLY of two files: the complete player.py (as a Python code block) implementing the bot with all template elements preserved plus your improvements, and requirements.txt (as a text block) listing any dependencies (pure Python only, e.g., numpy if needed for calculations). Do not include any other text, explanations, or outputs. See example response below:
+Example response:
+```python
+<Your python code>
+```
+
+```text
+numpy
+matplotlib
+<any external library you want to use, put it here>
+...
+```
+12. Your implementation MUST BE IN FULL not putting stub method or guideline. Everything in SimplePlayer must be ready to the detail and ready to run.
+13. When you do division, make sure to make it prone to error divide by zero by adding some small delta.
+14. The pool of submitted bots, including your bot, will be organized into 6-handed poker tables where every possible combination of 6 bots forms a separate table. Each table will play exactly 1,000 hands, with chip stacks carrying over between hands within the same table. 
+15. At the end of each table, delta money is calculated for each bot using the formula: final chip count minus 10,000 (initial chip amount). Your bot's total tournament score is determined by summing its delta money across all tables it participates in. The bot with the highest cumulative delta money across all tables wins the tournament.
+16. Your bot will undergo iterative testing across 5 rounds, where each round involves playing 10 hands of heads-up poker against a house bot. After each round, you will receive either the complete game log showing performance results or any compilation/simulation errors that occurred while attempting to run your bot. Use this feedback to refine your implementation in subsequent iterations.
+
+**References**
+
+**RoundStateClient Full Definition:**
+```python
+from dataclasses import dataclass
+from typing import Dict, List, Any
+
+@dataclass
+class RoundStateClient:
+    round_num: int # The number of the current round
+    round: str # e.g., 'Preflop', 'Flop', 'Turn', 'River'
+    community_cards: List[str] # List of community cards, e.g., ['Ah', 'Ks', '3d']
+    pot: int # The total pot
+    current_player: List[int] # The ids of the current players
+    current_bet: int # The current bet (need to match round's current bet minus your current bet if you want to call)
+    min_raise: int  # Minimum raise amount
+    max_raise: int  # Maximum raise amount (your remaining chips)
+    player_bets: Dict[str, int]  # Bets by player ID
+    player_actions: Dict[str, str]  # Actions by player ID, e.g., {'3336760419': 'Check', '3266396022': 'Check'}
+    side_pots: list[Dict[str, any]] = None  # List of dicts with 'amount' and 'eligible_players' keys
+
+    @classmethod
+    def from_message(cls, message: Dict[str, Any]) -> 'RoundStateClient':
+        """Create RoundStateClient from a message dictionary"""
+        return cls(
+            round_num=message['round_num'],
+            round=message['round'],
+            community_cards=message['community_cards'],
+            pot=message['pot'],
+            current_player=message['current_player'],
+            current_bet=message['current_bet'],
+            min_raise=message['min_raise'],
+            max_raise=message['max_raise'],
+            player_bets=message['player_bets'],
+            player_actions=message['player_actions'],
+            side_pots=message.get('side_pots', [])
+        )
+```
+
+**PokerAction and PokerRound Enums:**
+```python
+from enum import Enum
+
+class PokerAction(Enum):
+    FOLD = 1
+    CHECK = 2
+    CALL = 3
+    RAISE = 4
+    ALL_IN = 5
+
+class PokerRound(Enum):
+    PREFLOP = 0
+    FLOP = 1
+    TURN = 2
+    RIVER = 3
+```
+
+**Bot abstract class:**
+```python
+from abc import ABC, abstractmethod
+from typing import List, Tuple
+
+from type.round_state import RoundStateClient
+from type.poker_action import PokerAction
+
+class Bot(ABC):
+    def __init__(self) -> None:
+        """ Initializes the player. """
+        self.id = None
+        pass
+
+    def set_id(self, player_id: int) -> None:
+        """ Sets the player ID. """
+        self.id = player_id
+
+    @abstractmethod
+    def on_start(self, starting_chips: int, player_hands: List[str], blind_amount: int, big_blind_player_id: int, small_blind_player_id: int, all_players: List[int]) -> None:
+        """ Called when the game starts. """
+        pass
+
+    @abstractmethod
+    def on_round_start(self, round_state: RoundStateClient, remaining_chips: int) -> None:
+        """ Called at the start of each round. """
+        pass
+
+    @abstractmethod
+    def get_action(self, round_state: RoundStateClient, remaining_chips: int) -> Tuple[PokerAction, int]:
+        """ Called when it is the player's turn to act. """
+        pass
+
+    @abstractmethod
+    def on_end_round(self, round_state: RoundStateClient, remaining_chips: int) -> None:
+        """ Called at the end of each round. """
+        pass
+
+    @abstractmethod
+    def on_end_game(self, round_state: RoundStateClient, player_score: float, all_scores: dict, active_players_hands: dict) -> None:
+        """ Called at the end of the game. """
+        pass
+```
+
+ITERATION 2 FEEDBACK AND IMPROVEMENT REQUEST:
+You are now working on iteration 2. Based on the previous iteration results and code, please improve the implementation.
+
+PREVIOUS RESULTS:
+- Success: True
+- Error Message: 
+
+ERRORS ENCOUNTERED:
+Game Test Results for Iteration 1 - 2025-08-09 18:14:54
+============================================================
+
+No errors detected during game test.
+
+CONTAINER LOGS:
+--------------------
+Test Client Logs:
+
+
+
+POKER CLIENT LOGS:
+--------------------
+Poker Client Log: No critical errors detected in poker client logs
+
+
+
+Please fix these specific errors in your implementation.
+
+GAME PERFORMANCE DATA:
+
+YOUR BOT PLAYER IDS: [1205798513]
+When analyzing the game data below, focus on these player IDs as they represent YOUR bot's performance.
+
+
+YOUR BOT PERFORMANCE SUMMARY (across 10 games):
+- Average Game Score (Delta per Game): -11.50
+- Total Game Score: -115.00
+- Total Games Played: 10
+
+Performance Analysis:
+- Positive scores indicate profit per game
+- Negative scores indicate losses per game
+- Focus on improving average game score for better performance
+
+[
+  {
+    "gameId": "e2b18b4e-8ebd-4a68-a725-0ecbad5fec8a",
+    "players": {
+      "default": 3913483333,
+      "client_container_6924_test_client_test_x_ai_grok_4_iter_1_20250809_181437_iter1": 1205798513
+    },
+    "playerNames": {
+      "3913483332": "player3913483333",
+      "1205798512": "player1205798513"
+    },
+    "finalMoney": {
+      "3913483333": 10010,
+      "1205798513": 9990
+    },
+    "finalDelta": {
+      "3913483333": 10,
+      "1205798513": -10
+    },
+    "gameScores": {
+      "3913483333": 10,
+      "1205798513": -10
+    },
+    "rounds": 2,
+    "finalBoard": [
+      "Qs",
+      "2s",
+      "7s",
+      "Td"
+    ],
+    "playerHands": {
+      "3913483332": [
+        "7h",
+        "6h"
+      ],
+      "1205798512": [
+        "4c",
+        "Jh"
+      ]
+    },
+    "blinds": {
+      "small": 5,
+      "big": 10
+    },
+    "botPlayerId": 1205798513,
+    "botPerformance": {
+      "finalMoney": 9990,
+      "finalDelta": -10,
+      "gameScore": -10
+    }
+  },
+  {
+    "gameId": "e2b18b4e-8ebd-4a68-a725-0ecbad5fec8a",
+    "players": {
+      "default": 3913483333,
+      "client_container_6924_test_client_test_x_ai_grok_4_iter_1_20250809_181437_iter1": 1205798513
+    },
+    "playerNames": {
+      "3913483332": "player3913483333",
+      "1205798512": "player1205798513"
+    },
+    "finalMoney": {
+      "3913483333": 10115,
+      "1205798513": 9885
+    },
+    "finalDelta": {
+      "3913483333": 115,
+      "1205798513": -115
+    },
+    "gameScores": {
+      "3913483333": 25,
+      "1205798513": -25
+    },
+    "rounds": 2,
+    "finalBoard": [
+      "Qd",
+      "9d",
+      "Kc",
+      "As"
+    ],
+    "playerHands": {
+      "3913483332": [
+        "3d",
+        "6c"
+      ],
+      "1205798512": [
+        "Ac",
+        "Jc"
+      ]
+    },
+    "blinds": {
+      "small": 5,
+      "big": 10
+    },
+    "botPlayerId": 1205798513,
+    "botPerformance": {
+      "finalMoney": 9885,
+      "finalDelta": -115,
+      "gameScore": -25
+    }
+  },
+  {
+    "gameId": "e2b18b4e-8ebd-4a68-a725-0ecbad5fec8a",
+    "players": {
+      "default": 3913483333,
+      "client_container_6924_test_client_test_x_ai_grok_4_iter_1_20250809_181437_iter1": 1205798513
+    },
+    "playerNames": {
+      "3913483332": "player3913483333",
+      "1205798512": "player1205798513"
+    },
+    "finalMoney": {
+      "3913483333": 10020,
+      "1205798513": 9980
+    },
+    "finalDelta": {
+      "3913483333": 20,
+      "1205798513": -20
+    },
+    "gameScores": {
+      "3913483333": 10,
+      "1205798513": -10
+    },
+    "rounds": 2,
+    "finalBoard": [
+      "2s",
+      "Ks",
+      "Ac",
+      "As"
+    ],
+    "playerHands": {
+      "3913483332": [
+        "5c",
+        "Qh"
+      ],
+      "1205798512": [
+        "9d",
+        "8h"
+      ]
+    },
+    "blinds": {
+      "small": 5,
+      "big": 10
+    },
+    "botPlayerId": 1205798513,
+    "botPerformance": {
+      "finalMoney": 9980,
+      "finalDelta": -20,
+      "gameScore": -10
+    }
+  },
+  {
+    "gameId": "e2b18b4e-8ebd-4a68-a725-0ecbad5fec8a",
+    "players": {
+      "default": 3913483333,
+      "client_container_6924_test_client_test_x_ai_grok_4_iter_1_20250809_181437_iter1": 1205798513
+    },
+    "playerNames": {
+      "3913483332": "player3913483333",
+      "1205798512": "player1205798513"
+    },
+    "finalMoney": {
+      "3913483333": 10030,
+      "1205798513": 9970
+    },
+    "finalDelta": {
+      "3913483333": 30,
+      "1205798513": -30
+    },
+    "gameScores": {
+      "3913483333": 10,
+      "1205798513": -10
+    },
+    "rounds": 2,
+    "finalBoard": [
+      "Qs",
+      "Qh",
+      "6h",
+      "9c"
+    ],
+    "playerHands": {
+      "3913483332": [
+        "Qd",
+        "5s"
+      ],
+      "1205798512": [
+        "Ks",
+        "3h"
+      ]
+    },
+    "blinds": {
+      "small": 5,
+      "big": 10
+    },
+    "botPlayerId": 1205798513,
+    "botPerformance": {
+      "finalMoney": 9970,
+      "finalDelta": -30,
+      "gameScore": -10
+    }
+  },
+  {
+    "gameId": "e2b18b4e-8ebd-4a68-a725-0ecbad5fec8a",
+    "players": {
+      "default": 3913483333,
+      "client_container_6924_test_client_test_x_ai_grok_4_iter_1_20250809_181437_iter1": 1205798513
+    },
+    "playerNames": {
+      "3913483332": "player3913483333",
+      "1205798512": "player1205798513"
+    },
+    "finalMoney": {
+      "3913483333": 10040,
+      "1205798513": 9960
+    },
+    "finalDelta": {
+      "3913483333": 40,
+      "1205798513": -40
+    },
+    "gameScores": {
+      "3913483333": 10,
+      "1205798513": -10
+    },
+    "rounds": 2,
+    "finalBoard": [
+      "Ts",
+      "9s",
+      "Td",
+      "9d"
+    ],
+    "playerHands": {
+      "3913483332": [
+        "Js",
+        "9c"
+      ],
+      "1205798512": [
+        "6c",
+        "2c"
+      ]
+    },
+    "blinds": {
+      "small": 5,
+      "big": 10
+    },
+    "botPlayerId": 1205798513,
+    "botPerformance": {
+      "finalMoney": 9960,
+      "finalDelta": -40,
+      "gameScore": -10
+    }
+  },
+  {
+    "gameId": "e2b18b4e-8ebd-4a68-a725-0ecbad5fec8a",
+    "players": {
+      "default": 3913483333,
+      "client_container_6924_test_client_test_x_ai_grok_4_iter_1_20250809_181437_iter1": 1205798513
+    },
+    "playerNames": {
+      "3913483332": "player3913483333",
+      "1205798512": "player1205798513"
+    },
+    "finalMoney": {
+      "3913483333": 10050,
+      "1205798513": 9950
+    },
+    "finalDelta": {
+      "3913483333": 50,
+      "1205798513": -50
+    },
+    "gameScores": {
+      "3913483333": 10,
+      "1205798513": -10
+    },
+    "rounds": 2,
+    "finalBoard": [
+      "Kc",
+      "Kh",
+      "Tc",
+      "4c"
+    ],
+    "playerHands": {
+      "3913483332": [
+        "Js",
+        "Th"
+      ],
+      "1205798512": [
+        "7s",
+        "5s"
+      ]
+    },
+    "blinds": {
+      "small": 5,
+      "big": 10
+    },
+    "botPlayerId": 1205798513,
+    "botPerformance": {
+      "finalMoney": 9950,
+      "finalDelta": -50,
+      "gameScore": -10
+    }
+  },
+  {
+    "gameId": "e2b18b4e-8ebd-4a68-a725-0ecbad5fec8a",
+    "players": {
+      "default": 3913483333,
+      "client_container_6924_test_client_test_x_ai_grok_4_iter_1_20250809_181437_iter1": 1205798513
+    },
+    "playerNames": {
+      "3913483332": "player3913483333",
+      "1205798512": "player1205798513"
+    },
+    "finalMoney": {
+      "3913483333": 10060,
+      "1205798513": 9940
+    },
+    "finalDelta": {
+      "3913483333": 60,
+      "1205798513": -60
+    },
+    "gameScores": {
+      "3913483333": 10,
+      "1205798513": -10
+    },
+    "rounds": 2,
+    "finalBoard": [
+      "9h",
+      "3h",
+      "6c",
+      "Js"
+    ],
+    "playerHands": {
+      "3913483332": [
+        "8h",
+        "9d"
+      ],
+      "1205798512": [
+        "6s",
+        "Kh"
+      ]
+    },
+    "blinds": {
+      "small": 5,
+      "big": 10
+    },
+    "botPlayerId": 1205798513,
+    "botPerformance": {
+      "finalMoney": 9940,
+      "finalDelta": -60,
+      "gameScore": -10
+    }
+  },
+  {
+    "gameId": "e2b18b4e-8ebd-4a68-a725-0ecbad5fec8a",
+    "players": {
+      "default": 3913483333,
+      "client_container_6924_test_client_test_x_ai_grok_4_iter_1_20250809_181437_iter1": 1205798513
+    },
+    "playerNames": {
+      "3913483332": "player3913483333",
+      "1205798512": "player1205798513"
+    },
+    "finalMoney": {
+      "3913483333": 10070,
+      "1205798513": 9930
+    },
+    "finalDelta": {
+      "3913483333": 70,
+      "1205798513": -70
+    },
+    "gameScores": {
+      "3913483333": 10,
+      "1205798513": -10
+    },
+    "rounds": 2,
+    "finalBoard": [
+      "3s",
+      "4h",
+      "2s",
+      "8c"
+    ],
+    "playerHands": {
+      "3913483332": [
+        "2h",
+        "3h"
+      ],
+      "1205798512": [
+        "7h",
+        "Ad"
+      ]
+    },
+    "blinds": {
+      "small": 5,
+      "big": 10
+    },
+    "botPlayerId": 1205798513,
+    "botPerformance": {
+      "finalMoney": 9930,
+      "finalDelta": -70,
+      "gameScore": -10
+    }
+  },
+  {
+    "gameId": "e2b18b4e-8ebd-4a68-a725-0ecbad5fec8a",
+    "players": {
+      "default": 3913483333,
+      "client_container_6924_test_client_test_x_ai_grok_4_iter_1_20250809_181437_iter1": 1205798513
+    },
+    "playerNames": {
+      "3913483332": "player3913483333",
+      "1205798512": "player1205798513"
+    },
+    "finalMoney": {
+      "3913483333": 10080,
+      "1205798513": 9920
+    },
+    "finalDelta": {
+      "3913483333": 80,
+      "1205798513": -80
+    },
+    "gameScores": {
+      "3913483333": 10,
+      "1205798513": -10
+    },
+    "rounds": 2,
+    "finalBoard": [
+      "4h",
+      "3s",
+      "Jd",
+      "Tc"
+    ],
+    "playerHands": {
+      "3913483332": [
+        "6s",
+        "7c"
+      ],
+      "1205798512": [
+        "Js",
+        "4c"
+      ]
+    },
+    "blinds": {
+      "small": 5,
+      "big": 10
+    },
+    "botPlayerId": 1205798513,
+    "botPerformance": {
+      "finalMoney": 9920,
+      "finalDelta": -80,
+      "gameScore": -10
+    }
+  },
+  {
+    "gameId": "e2b18b4e-8ebd-4a68-a725-0ecbad5fec8a",
+    "players": {
+      "default": 3913483333,
+      "client_container_6924_test_client_test_x_ai_grok_4_iter_1_20250809_181437_iter1": 1205798513
+    },
+    "playerNames": {
+      "3913483332": "player3913483333",
+      "1205798512": "player1205798513"
+    },
+    "finalMoney": {
+      "3913483333": 10090,
+      "1205798513": 9910
+    },
+    "finalDelta": {
+      "3913483333": 90,
+      "1205798513": -90
+    },
+    "gameScores": {
+      "3913483333": 10,
+      "1205798513": -10
+    },
+    "rounds": 2,
+    "finalBoard": [
+      "4c",
+      "9h",
+      "3h",
+      "Tc"
+    ],
+    "playerHands": {
+      "3913483332": [
+        "Qh",
+        "6s"
+      ],
+      "1205798512": [
+        "Td",
+        "2h"
+      ]
+    },
+    "blinds": {
+      "small": 5,
+      "big": 10
+    },
+    "botPlayerId": 1205798513,
+    "botPerformance": {
+      "finalMoney": 9910,
+      "finalDelta": -90,
+      "gameScore": -10
+    }
+  }
+]
+
+IMPORTANT: When analyzing the game performance data above, focus on the player ID that corresponds to YOUR bot implementation.
+Look for your bot's performance in the 'gameScores' field, which shows the delta gain/loss for each individual game.
+
+PERFORMANCE METRICS EXPLANATION:
+- 'gameScores': Shows the profit/loss for each individual game (this is what matters most)
+- Positive gameScore = Profit in that game
+- Negative gameScore = Loss in that game
+- Focus on improving your strategy to achieve positive gameScores consistently
+
+Please analyze YOUR bot's gameScore performance and improve the strategy based on these results.
+
+POKER CLIENT ERRORS:
+No critical errors detected in poker client logs
+
+Please investigate these errors in your poker client logs and fix any issues in your implementation.
+
+IMPROVEMENT INSTRUCTIONS:
+1. You are on iteration 2 - build upon the previous code
+2. Analyze the errors and game performance data above
+3. Fix any syntax, import, or runtime errors from the previous iteration
+4. Improve the poker strategy based on game results
+5. Ensure the code follows the exact template requirements
+6. Return the improved implementation in the same format (Python code block + requirements.txt block)
+
+Focus on making the bot more competitive and error-free. You can see exactly what was wrong with the previous version and should fix those specific issues.
+
+
+RESPONSE:
+```python
+from typing import List, Tuple
+from bot import Bot
+from type.poker_action import PokerAction
+from type.round_state import RoundStateClient
+from collections import Counter
+from itertools import combinations
+
+class SimplePlayer(Bot):
+    def __init__(self):
+        super().__init__()
+        self.hole_cards = None
+        self.small_blind = 0
+        self.big_blind = 0
+        self.all_players = []
+
+    def on_start(self, starting_chips: int, player_hands: List[str], blind_amount: int, big_blind_player_id: int, small_blind_player_id: int, all_players: List[int]):
+        self.hole_cards = player_hands
+        self.small_blind = blind_amount
+        self.big_blind = 2 * blind_amount
+        self.all_players = all_players
+
+    def on_round_start(self, round_state: RoundStateClient, remaining_chips: int):
+        pass
+
+    def parse_card(self, card: str) -> Tuple[int, str]:
+        rank_str = card[0]
+        suit = card[1]
+        ranks = {'2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7, '8': 8, '9': 9, 'T': 10, 'J': 11, 'Q': 12, 'K': 13, 'A': 14}
+        return ranks[rank_str], suit
+
+    def chen_score(self, card1: str, card2: str) -> int:
+        r1, s1 = self.parse_card(card1)
+        r2, s2 = self.parse_card(card2)
+        if r1 < r2:
+            r1, r2 = r2, r1
+        if r1 == 14:
+            high_score = 10
+        elif r1 == 13:
+            high_score = 8
+        elif r1 == 12:
+            high_score = 7
+        elif r1 == 11:
+            high_score = 6
+        else:
+            high_score = r1 / 2.0
+        pair = r1 == r2
+        if pair:
+            score = high_score * 2
+            if score < 5:
+                score = 5
+        else:
+            score = high_score
+        suited = s1 == s2
+        if suited:
+            score += 2
+        gap = r1 - r2
+        if gap <= 1:
+            score += 1
+        elif gap == 3:
+            score -= 1
+        elif gap >= 4:
+            score -= 2
+        if gap <= 2 and r1 < 12 and r2 < 12:
+            score += 1
+        return round(score)
+
+    def evaluate_hand(self, cards: List[Tuple[int, str]]) -> Tuple[int, List[int]]:
+        ranks = sorted([c[0] for c in cards], reverse=True)
+        suits = [c[1] for c in cards]
+        flush = len(set(suits)) == 1
+        unique_ranks = sorted(set(ranks), reverse=True)
+        straight = False
+        if len(unique_ranks) == 5:
+            if unique_ranks[0] - unique_ranks[4] == 4:
+                straight = True
+            elif set(unique_ranks) == {14, 5, 4, 3, 2}:
+                straight = True
+        if flush and straight:
+            if unique_ranks == [14, 5, 4, 3, 2]:
+                return 8, [5, 4, 3, 2, 1]
+            return 8, unique_ranks
+        rank_count = Counter(ranks)
+        counts = sorted(rank_count.values(), reverse=True)
+        if counts[0] == 4:
+            quad_rank = [r for r, c in rank_count.items() if c == 4][0]
+            kicker = sorted([r for r in ranks if r != quad_rank], reverse=True)[0]
+            return 7, [quad_rank, kicker]
+        if counts == [3, 2]:
+            trip_rank = [r for r, c in rank_count.items() if c == 3][0]
+            pair_rank = [r for r, c in rank_count.items() if c == 2][0]
+            return 6, [trip_rank, pair_rank]
+        if flush:
+            return 5, ranks
+        if straight:
+            if set(unique_ranks) == {14, 5, 4, 3, 2}:
+                return 4, [5, 4, 3, 2, 1]
+            return 4, unique_ranks
+        if counts[0] == 3:
+            trip_rank = [r for r, c in rank_count.items() if c == 3][0]
+            kickers = sorted([r for r in ranks if r != trip_rank], reverse=True)
+            return 3, [trip_rank] + kickers
+        if counts[:2] == [2, 2]:
+            pair_ranks = sorted([r for r, c in rank_count.items() if c == 2], reverse=True)
+            kicker = [r for r in ranks if r not in pair_ranks][0]
+            return 2, pair_ranks + [kicker]
+        if counts[0] == 2:
+            pair_rank = [r for r, c in rank_count.items() if c == 2][0]
+            kickers = sorted([r for r in ranks if r != pair_rank], reverse=True)
+            return 1, [pair_rank] + kickers
+        return 0, ranks
+
+    def get_best_hand(self, available: List[str]) -> Tuple[int, List[int]]:
+        parsed = [self.parse_card(c) for c in available]
+        if len(parsed) < 5:
+            return (0, [])
+        hands = []
+        for combo in combinations(parsed, 5):
+            hands.append(self.evaluate_hand(list(combo)))
+        return max(hands, key=lambda h: (h[0], tuple(h[1])))
+
+    def get_action(self, round_state: RoundStateClient, remaining_chips: int) -> Tuple[PokerAction, int]:
+        my_id_str = str(self.id)
+        my_bet = round_state.player_bets.get(my_id_str, 0)
+        to_call = round_state.current_bet - my_bet
+        min_r = round_state.min_raise
+        max_r = round_state.max_raise
+        pot = round_state.pot + 0.0001  # avoid divide by zero
+        score = self.chen_score(self.hole_cards[0], self.hole_cards[1])
+
+        if round_state.round == 'Preflop':
+            if to_call == 0:
+                if score >= 10:
+                    amount = min(max(min_r, self.big_blind * 2), max_r)
+                    if amount >= min_r and amount <= max_r:
+                        return PokerAction.RAISE, amount
+                return PokerAction.CHECK, 0
+            else:
+                if to_call > remaining_chips:
+                    if score >= 12:
+                        return PokerAction.ALL_IN, 0
+                    return PokerAction.FOLD, 0
+                if score >= 8:
+                    if score >= 14:
+                        raise_by = self.big_blind * 3
+                        amount = to_call + raise_by
+                        if amount > max_r:
+                            return PokerAction.ALL_IN, 0
+                        if amount - to_call < min_r:
+                            amount = to_call + min_r
+                        if amount <= max_r:
+                            return PokerAction.RAISE, amount
+                    return PokerAction.CALL, 0
+                return PokerAction.FOLD, 0
+        else:
+            best_type, _ = self.get_best_hand(self.hole_cards + round_state.community_cards)
+            if best_type >= 4:
+                if to_call == 0:
+                    amount = int(pot)
+                    amount = max(min_r, amount)
+                    amount = min(amount, max_r)
+                    if amount >= min_r and amount <= max_r:
+                        return PokerAction.RAISE, amount
+                    return PokerAction.CHECK, 0
+                else:
+                    if best_type >= 6:
+                        raise_by = int(pot)
+                        amount = to_call + raise_by
+                        if amount > max_r:
+                            return PokerAction.ALL_IN, 0
+                        if amount - to_call < min_r:
+                            amount = to_call + min_r
+                        if amount <= max_r:
+                            return PokerAction.RAISE, amount
+                    return PokerAction.CALL, 0
+            elif best_type >= 1:
+                if to_call == 0:
+                    amount = int(pot / 2)
+                    amount = max(min_r, amount)
+                    amount = min(amount, max_r)
+                    if amount >= min_r and amount <= max_r:
+                        return PokerAction.RAISE, amount
+                    return PokerAction.CHECK, 0
+                else:
+                    if to_call < pot / 2:
+                        return PokerAction.CALL, 0
+                    return PokerAction.FOLD, 0
+            else:
+                if to_call == 0:
+                    return PokerAction.CHECK, 0
+                return PokerAction.FOLD, 0
+
+    def on_end_round(self, round_state: RoundStateClient, remaining_chips: int):
+        pass
+
+    def on_end_game(self, round_state: RoundStateClient, player_score: float, all_scores: dict, active_players_hands: dict):
+        pass
+```
+
+```text
+
+```
+
+RAW API RESPONSE:
+{
+  "id": "gen-1754788526-FrXAzntI6sCB62p9iJqn",
+  "provider": "xAI",
+  "model": "x-ai/grok-4",
+  "object": "chat.completion",
+  "created": 1754788526,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "stop",
+      "native_finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "```python\nfrom typing import List, Tuple\nfrom bot import Bot\nfrom type.poker_action import PokerAction\nfrom type.round_state import RoundStateClient\nfrom collections import Counter\nfrom itertools import combinations\n\nclass SimplePlayer(Bot):\n    def __init__(self):\n        super().__init__()\n        self.hole_cards = None\n        self.small_blind = 0\n        self.big_blind = 0\n        self.all_players = []\n\n    def on_start(self, starting_chips: int, player_hands: List[str], blind_amount: int, big_blind_player_id: int, small_blind_player_id: int, all_players: List[int]):\n        self.hole_cards = player_hands\n        self.small_blind = blind_amount\n        self.big_blind = 2 * blind_amount\n        self.all_players = all_players\n\n    def on_round_start(self, round_state: RoundStateClient, remaining_chips: int):\n        pass\n\n    def parse_card(self, card: str) -> Tuple[int, str]:\n        rank_str = card[0]\n        suit = card[1]\n        ranks = {'2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7, '8': 8, '9': 9, 'T': 10, 'J': 11, 'Q': 12, 'K': 13, 'A': 14}\n        return ranks[rank_str], suit\n\n    def chen_score(self, card1: str, card2: str) -> int:\n        r1, s1 = self.parse_card(card1)\n        r2, s2 = self.parse_card(card2)\n        if r1 < r2:\n            r1, r2 = r2, r1\n        if r1 == 14:\n            high_score = 10\n        elif r1 == 13:\n            high_score = 8\n        elif r1 == 12:\n            high_score = 7\n        elif r1 == 11:\n            high_score = 6\n        else:\n            high_score = r1 / 2.0\n        pair = r1 == r2\n        if pair:\n            score = high_score * 2\n            if score < 5:\n                score = 5\n        else:\n            score = high_score\n        suited = s1 == s2\n        if suited:\n            score += 2\n        gap = r1 - r2\n        if gap <= 1:\n            score += 1\n        elif gap == 3:\n            score -= 1\n        elif gap >= 4:\n            score -= 2\n        if gap <= 2 and r1 < 12 and r2 < 12:\n            score += 1\n        return round(score)\n\n    def evaluate_hand(self, cards: List[Tuple[int, str]]) -> Tuple[int, List[int]]:\n        ranks = sorted([c[0] for c in cards], reverse=True)\n        suits = [c[1] for c in cards]\n        flush = len(set(suits)) == 1\n        unique_ranks = sorted(set(ranks), reverse=True)\n        straight = False\n        if len(unique_ranks) == 5:\n            if unique_ranks[0] - unique_ranks[4] == 4:\n                straight = True\n            elif set(unique_ranks) == {14, 5, 4, 3, 2}:\n                straight = True\n        if flush and straight:\n            if unique_ranks == [14, 5, 4, 3, 2]:\n                return 8, [5, 4, 3, 2, 1]\n            return 8, unique_ranks\n        rank_count = Counter(ranks)\n        counts = sorted(rank_count.values(), reverse=True)\n        if counts[0] == 4:\n            quad_rank = [r for r, c in rank_count.items() if c == 4][0]\n            kicker = sorted([r for r in ranks if r != quad_rank], reverse=True)[0]\n            return 7, [quad_rank, kicker]\n        if counts == [3, 2]:\n            trip_rank = [r for r, c in rank_count.items() if c == 3][0]\n            pair_rank = [r for r, c in rank_count.items() if c == 2][0]\n            return 6, [trip_rank, pair_rank]\n        if flush:\n            return 5, ranks\n        if straight:\n            if set(unique_ranks) == {14, 5, 4, 3, 2}:\n                return 4, [5, 4, 3, 2, 1]\n            return 4, unique_ranks\n        if counts[0] == 3:\n            trip_rank = [r for r, c in rank_count.items() if c == 3][0]\n            kickers = sorted([r for r in ranks if r != trip_rank], reverse=True)\n            return 3, [trip_rank] + kickers\n        if counts[:2] == [2, 2]:\n            pair_ranks = sorted([r for r, c in rank_count.items() if c == 2], reverse=True)\n            kicker = [r for r in ranks if r not in pair_ranks][0]\n            return 2, pair_ranks + [kicker]\n        if counts[0] == 2:\n            pair_rank = [r for r, c in rank_count.items() if c == 2][0]\n            kickers = sorted([r for r in ranks if r != pair_rank], reverse=True)\n            return 1, [pair_rank] + kickers\n        return 0, ranks\n\n    def get_best_hand(self, available: List[str]) -> Tuple[int, List[int]]:\n        parsed = [self.parse_card(c) for c in available]\n        if len(parsed) < 5:\n            return (0, [])\n        hands = []\n        for combo in combinations(parsed, 5):\n            hands.append(self.evaluate_hand(list(combo)))\n        return max(hands, key=lambda h: (h[0], tuple(h[1])))\n\n    def get_action(self, round_state: RoundStateClient, remaining_chips: int) -> Tuple[PokerAction, int]:\n        my_id_str = str(self.id)\n        my_bet = round_state.player_bets.get(my_id_str, 0)\n        to_call = round_state.current_bet - my_bet\n        min_r = round_state.min_raise\n        max_r = round_state.max_raise\n        pot = round_state.pot + 0.0001  # avoid divide by zero\n        score = self.chen_score(self.hole_cards[0], self.hole_cards[1])\n\n        if round_state.round == 'Preflop':\n            if to_call == 0:\n                if score >= 10:\n                    amount = min(max(min_r, self.big_blind * 2), max_r)\n                    if amount >= min_r and amount <= max_r:\n                        return PokerAction.RAISE, amount\n                return PokerAction.CHECK, 0\n            else:\n                if to_call > remaining_chips:\n                    if score >= 12:\n                        return PokerAction.ALL_IN, 0\n                    return PokerAction.FOLD, 0\n                if score >= 8:\n                    if score >= 14:\n                        raise_by = self.big_blind * 3\n                        amount = to_call + raise_by\n                        if amount > max_r:\n                            return PokerAction.ALL_IN, 0\n                        if amount - to_call < min_r:\n                            amount = to_call + min_r\n                        if amount <= max_r:\n                            return PokerAction.RAISE, amount\n                    return PokerAction.CALL, 0\n                return PokerAction.FOLD, 0\n        else:\n            best_type, _ = self.get_best_hand(self.hole_cards + round_state.community_cards)\n            if best_type >= 4:\n                if to_call == 0:\n                    amount = int(pot)\n                    amount = max(min_r, amount)\n                    amount = min(amount, max_r)\n                    if amount >= min_r and amount <= max_r:\n                        return PokerAction.RAISE, amount\n                    return PokerAction.CHECK, 0\n                else:\n                    if best_type >= 6:\n                        raise_by = int(pot)\n                        amount = to_call + raise_by\n                        if amount > max_r:\n                            return PokerAction.ALL_IN, 0\n                        if amount - to_call < min_r:\n                            amount = to_call + min_r\n                        if amount <= max_r:\n                            return PokerAction.RAISE, amount\n                    return PokerAction.CALL, 0\n            elif best_type >= 1:\n                if to_call == 0:\n                    amount = int(pot / 2)\n                    amount = max(min_r, amount)\n                    amount = min(amount, max_r)\n                    if amount >= min_r and amount <= max_r:\n                        return PokerAction.RAISE, amount\n                    return PokerAction.CHECK, 0\n                else:\n                    if to_call < pot / 2:\n                        return PokerAction.CALL, 0\n                    return PokerAction.FOLD, 0\n            else:\n                if to_call == 0:\n                    return PokerAction.CHECK, 0\n                return PokerAction.FOLD, 0\n\n    def on_end_round(self, round_state: RoundStateClient, remaining_chips: int):\n        pass\n\n    def on_end_game(self, round_state: RoundStateClient, player_score: float, all_scores: dict, active_players_hands: dict):\n        pass\n```\n\n```text\n\n```",
+        "refusal": null,
+        "reasoning": null
+      }
+    }
+  ],
+  "system_fingerprint": "fp_893a7d47fd",
+  "usage": {
+    "prompt_tokens": 6377,
+    "completion_tokens": 13650,
+    "total_tokens": 20027,
+    "prompt_tokens_details": {
+      "cached_tokens": 2
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 11584
+    }
+  }
+}
+================================================================================

@@ -1,0 +1,180 @@
+{
+  "gameId": "1f760878-19d9-4b54-8c80-7ea746e6ce7f",
+  "rounds": {
+    "0": {
+      "pot": 15,
+      "bets": {
+        "2049081829": 10,
+        "2826151437": 5
+      },
+      "actions": {
+        "2826151437": "FOLD",
+        "2049081829": "RAISE"
+      },
+      "action_sequence": [
+        {
+          "player": 2826151437,
+          "action": "RAISE",
+          "amount": 5,
+          "timestamp": 1754789274995,
+          "pot_after_action": 5,
+          "side_pots_after_action": [
+            {
+              "amount": 5,
+              "eligible_players": [
+                2049081830,
+                2826151438
+              ]
+            }
+          ],
+          "total_pot_after_action": 5,
+          "total_side_pots_after_action": [
+            {
+              "id": 0,
+              "amount": 5,
+              "eligible_players": [
+                2049081830,
+                2826151438
+              ]
+            }
+          ]
+        },
+        {
+          "player": 2049081829,
+          "action": "RAISE",
+          "amount": 10,
+          "timestamp": 1754789274998,
+          "pot_after_action": 15,
+          "side_pots_after_action": [
+            {
+              "amount": 10,
+              "eligible_players": [
+                2049081830,
+                2826151438
+              ]
+            },
+            {
+              "amount": 5,
+              "eligible_players": [
+                2049081830
+              ]
+            }
+          ],
+          "total_pot_after_action": 15,
+          "total_side_pots_after_action": [
+            {
+              "id": 0,
+              "amount": 10,
+              "eligible_players": [
+                2049081830,
+                2826151438
+              ]
+            },
+            {
+              "id": 1,
+              "amount": 5,
+              "eligible_players": [
+                2049081830
+              ]
+            }
+          ]
+        },
+        {
+          "player": 2826151437,
+          "action": "FOLD",
+          "amount": 0,
+          "timestamp": 1754789275042,
+          "pot_after_action": 15,
+          "side_pots_after_action": [
+            {
+              "amount": 15,
+              "eligible_players": [
+                2049081830
+              ]
+            }
+          ],
+          "total_pot_after_action": 15,
+          "total_side_pots_after_action": [
+            {
+              "id": 0,
+              "amount": 15,
+              "eligible_players": [
+                2049081830
+              ]
+            }
+          ]
+        }
+      ],
+      "actionTimes": {
+        "2826151437": 54,
+        "2049081829": 10
+      }
+    }
+  },
+  "playerNames": {
+    "2049081829": "player2049081830",
+    "2826151437": "player2826151438"
+  },
+  "blinds": {
+    "small": 5,
+    "big": 10
+  },
+  "finalBoard": [
+    "Js",
+    "5s",
+    "8h"
+  ],
+  "sidePots": [
+    {
+      "amount": 0,
+      "eligible_players": [
+        2049081829
+      ]
+    }
+  ],
+  "playerMoney": {
+    "initialAmount": 10000,
+    "startingMoney": {
+      "2049081830": 10050,
+      "2826151438": 9950
+    },
+    "startingDelta": {
+      "2049081830": 50,
+      "2826151438": -50
+    },
+    "finalMoney": {
+      "2049081830": 10055,
+      "2826151438": 9945
+    },
+    "finalDelta": {
+      "2049081830": 55,
+      "2826151438": -55
+    },
+    "gameScores": {
+      "2049081830": 5,
+      "2826151438": -5
+    },
+    "thisGameDelta": {
+      "2049081830": 5,
+      "2826151438": -5
+    }
+  },
+  "playerHands": {
+    "2049081829": [
+      "Td",
+      "Qh"
+    ],
+    "2826151437": [
+      "2h",
+      "9d"
+    ]
+  },
+  "usernameMapping": {
+    "default": 2049081830,
+    "client_container_5539_test_client_test_qwen_qwen3_coder_iter_3_20250809_182745_iter3": 2826151438
+  },
+  "playerIdToUsername": {
+    "2049081830": "default",
+    "2826151438": "client_container_5539_test_client_test_qwen_qwen3_coder_iter_3_20250809_182745_iter3"
+  }
+}

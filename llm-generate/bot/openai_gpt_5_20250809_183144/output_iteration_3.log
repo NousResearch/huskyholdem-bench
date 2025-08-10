@@ -1,0 +1,1410 @@
+
+    ================================================================================
+    TIMESTAMP: 2025-08-09 18:41:40
+    MODEL: openai/gpt-5 (OpenAI Direct API)
+    PROMPT LENGTH: 22049 characters
+    RESPONSE LENGTH: 26364 characters
+    USAGE: {
+  "input_tokens": 6290,
+  "input_tokens_details": {
+    "cached_tokens": 0
+  },
+  "output_tokens": 11727,
+  "output_tokens_details": {
+    "reasoning_tokens": 5312
+  },
+  "total_tokens": 18017
+}
+
+    PROMPT:
+    
+You are tasked with submitting a poker bot to a No-Limit Texas Hold'em poker bot competition: Husky Hold'em.
+
+**Detailed Game Rules**
+- No-Limit Texas Hold'em with 2-10 players (often 6-handed tables); bots compete in heads-up or multi-player matches hosted by a central game server.
+- Players start with $10,000 chips at the simulation start; simulations run for n games (more than 10 per run); blinds rotate and increase every n games (e.g., after certain rounds); big/small blinds are posted pre-flop.
+- Goal: Maximize delta money (ending chips minus starting chips); if a player runs out of chips, they are eliminated from that table; no rebuys.
+- Each hand has 4 betting rounds: Pre-flop (after hole cards and blinds), Flop (3 community cards), Turn (1 community card), River (1 community card).
+- Actions: Fold, Check, Call, Raise (any amount up to stack, no limit), All-in.
+- Hand rankings: Royal flush > Straight flush > Four of a kind > Full house > Flush > Straight > Three of a kind > Two pair > One pair > High card.
+- Showdown: If multiple players remain after river betting, best 5-card hand (using any combination of 2 hole cards + 5 community cards) wins the pot; side pots form for all-ins with eligible players.
+- Technical Limits: 30 seconds max per move (timeout causes automatic fold); 100MB max memory usage; any error/exception causes automatic fold; all bots are given the same compute limits.
+
+Your task: Implement winning bot in player.py by subclassing Bot as in the template below and follow the above game rules.
+
+Bot Design and Competition Rules:
+
+1. Your bot must subclass Bot as SimplePlayer, implementing all required methods exactly as in the template. Preserve the class name SimplePlayer for compatibility with the game server. The template for the class is as
+**SimplePlayer Template:**
+```python
+from typing import List, Tuple
+from bot import Bot
+from type.poker_action import PokerAction
+from type.round_state import RoundStateClient
+
+class SimplePlayer(Bot):
+    def __init__(self):
+        super().__init__()
+        # TODO implement this
+
+    def on_start(self, starting_chips: int, player_hands: List[str], blind_amount: int, big_blind_player_id: int, small_blind_player_id: int, all_players: List[int]):
+        # TODO implement this
+
+    def on_round_start(self, round_state: RoundStateClient, remaining_chips: int):
+        # TODO implement this
+
+    def get_action(self, round_state: RoundStateClient, remaining_chips: int) -> Tuple[PokerAction, int]:
+        """ Returns the action for the player. """
+        # TODO implement this
+
+    def on_end_round(self, round_state: RoundStateClient, remaining_chips: int):
+        """ Called at the end of the round. """
+        # TODO implement this
+
+    def on_end_game(self, round_state: RoundStateClient, player_score: float, all_scores: dict, active_players_hands: dict):
+        # TODO implement this
+```
+2. DO NOT rename or remove any predefined methods (on_start, on_round_start, get_action, on_end_round, on_end_game), and do not change their signatures.
+3. You may add helper functions and instance variables for strategy or tracking.
+4. Your bot should be able to abide by no limit texas hold'em rules and handle side pots, all-ins, blind increases, multi-way pots, and be error-free (no exceptions).
+5. For each action, always return valid actions:
+    - For RAISE: the amount raise combine with your current bet must be larger than the the current raise.
+    - For CALL: You don't need to specify the amount you call, it default to match exactly the amount needed to call (current_bet - your bet).
+    - For CHECK: You can't check if round's current bet is larger than 0. Resort to other action (eg CALL, RAISE, ALL_IN).
+    - For ALL_IN: You don't need to specify the amount you all in, it will default to all your current money.
+    - **INVALID ACTION WILL MAKE YOU LOSE MONEY (automatic result in fold if the condition is not match for each action), so logic must always check bounds and edge cases**.
+6. If you use any external libraries, they must be listed in requirements.txt (pure Python only).
+7. Implement your bot with SimplePlayer. See full RoundStateClient, PokerAction, and PokerRound definitions below.
+8. Your bot should maximize delta money (ending chips minus starting chips). Positive mean gaining money, the more money you gain the better.
+9. There might will be data on previous run (error and game score) if this is not the first time you implement. If there is error, fix it so your bot can run. Try to improve your bot from previous round.
+10. If there are no usage of external requirements, the text secion for requirement must be empty. DO NOT PUT ANYTHING ELSE. If you want to use any external library, you must put it in that text block
+11. Your response must consist ONLY of two files: the complete player.py (as a Python code block) implementing the bot with all template elements preserved plus your improvements, and requirements.txt (as a text block) listing any dependencies (pure Python only, e.g., numpy if needed for calculations). Do not include any other text, explanations, or outputs. See example response below:
+Example response:
+```python
+<Your python code>
+```
+
+```text
+numpy
+matplotlib
+<any external library you want to use, put it here>
+...
+```
+12. Your implementation MUST BE IN FULL not putting stub method or guideline. Everything in SimplePlayer must be ready to the detail and ready to run.
+13. When you do division, make sure to make it prone to error divide by zero by adding some small delta.
+14. The pool of submitted bots, including your bot, will be organized into 6-handed poker tables where every possible combination of 6 bots forms a separate table. Each table will play exactly 1,000 hands, with chip stacks carrying over between hands within the same table. 
+15. At the end of each table, delta money is calculated for each bot using the formula: final chip count minus 10,000 (initial chip amount). Your bot's total tournament score is determined by summing its delta money across all tables it participates in. The bot with the highest cumulative delta money across all tables wins the tournament.
+16. Your bot will undergo iterative testing across 5 rounds, where each round involves playing 10 hands of heads-up poker against a house bot. After each round, you will receive either the complete game log showing performance results or any compilation/simulation errors that occurred while attempting to run your bot. Use this feedback to refine your implementation in subsequent iterations.
+
+**References**
+
+**RoundStateClient Full Definition:**
+```python
+from dataclasses import dataclass
+from typing import Dict, List, Any
+
+@dataclass
+class RoundStateClient:
+    round_num: int # The number of the current round
+    round: str # e.g., 'Preflop', 'Flop', 'Turn', 'River'
+    community_cards: List[str] # List of community cards, e.g., ['Ah', 'Ks', '3d']
+    pot: int # The total pot
+    current_player: List[int] # The ids of the current players
+    current_bet: int # The current bet (need to match round's current bet minus your current bet if you want to call)
+    min_raise: int  # Minimum raise amount
+    max_raise: int  # Maximum raise amount (your remaining chips)
+    player_bets: Dict[str, int]  # Bets by player ID
+    player_actions: Dict[str, str]  # Actions by player ID, e.g., {'3336760419': 'Check', '3266396022': 'Check'}
+    side_pots: list[Dict[str, any]] = None  # List of dicts with 'amount' and 'eligible_players' keys
+
+    @classmethod
+    def from_message(cls, message: Dict[str, Any]) -> 'RoundStateClient':
+        """Create RoundStateClient from a message dictionary"""
+        return cls(
+            round_num=message['round_num'],
+            round=message['round'],
+            community_cards=message['community_cards'],
+            pot=message['pot'],
+            current_player=message['current_player'],
+            current_bet=message['current_bet'],
+            min_raise=message['min_raise'],
+            max_raise=message['max_raise'],
+            player_bets=message['player_bets'],
+            player_actions=message['player_actions'],
+            side_pots=message.get('side_pots', [])
+        )
+```
+
+**PokerAction and PokerRound Enums:**
+```python
+from enum import Enum
+
+class PokerAction(Enum):
+    FOLD = 1
+    CHECK = 2
+    CALL = 3
+    RAISE = 4
+    ALL_IN = 5
+
+class PokerRound(Enum):
+    PREFLOP = 0
+    FLOP = 1
+    TURN = 2
+    RIVER = 3
+```
+
+**Bot abstract class:**
+```python
+from abc import ABC, abstractmethod
+from typing import List, Tuple
+
+from type.round_state import RoundStateClient
+from type.poker_action import PokerAction
+
+class Bot(ABC):
+    def __init__(self) -> None:
+        """ Initializes the player. """
+        self.id = None
+        pass
+
+    def set_id(self, player_id: int) -> None:
+        """ Sets the player ID. """
+        self.id = player_id
+
+    @abstractmethod
+    def on_start(self, starting_chips: int, player_hands: List[str], blind_amount: int, big_blind_player_id: int, small_blind_player_id: int, all_players: List[int]) -> None:
+        """ Called when the game starts. """
+        pass
+
+    @abstractmethod
+    def on_round_start(self, round_state: RoundStateClient, remaining_chips: int) -> None:
+        """ Called at the start of each round. """
+        pass
+
+    @abstractmethod
+    def get_action(self, round_state: RoundStateClient, remaining_chips: int) -> Tuple[PokerAction, int]:
+        """ Called when it is the player's turn to act. """
+        pass
+
+    @abstractmethod
+    def on_end_round(self, round_state: RoundStateClient, remaining_chips: int) -> None:
+        """ Called at the end of each round. """
+        pass
+
+    @abstractmethod
+    def on_end_game(self, round_state: RoundStateClient, player_score: float, all_scores: dict, active_players_hands: dict) -> None:
+        """ Called at the end of the game. """
+        pass
+```
+
+ITERATION 3 FEEDBACK AND IMPROVEMENT REQUEST:
+You are now working on iteration 3. Based on the previous iteration results and code, please improve the implementation.
+
+PREVIOUS RESULTS:
+- Success: True
+- Error Message: 
+
+ERRORS ENCOUNTERED:
+Game Test Results for Iteration 2 - 2025-08-09 18:37:43
+============================================================
+
+No errors detected during game test.
+
+CONTAINER LOGS:
+--------------------
+Test Client Logs:
+
+
+
+POKER CLIENT LOGS:
+--------------------
+Poker Client Log: No critical errors detected in poker client logs
+
+
+
+Please fix these specific errors in your implementation.
+
+GAME PERFORMANCE DATA:
+
+YOUR BOT PLAYER IDS: [2235810010]
+When analyzing the game data below, focus on these player IDs as they represent YOUR bot's performance.
+
+
+YOUR BOT PERFORMANCE SUMMARY (across 10 games):
+- Average Game Score (Delta per Game): -7.50
+- Total Game Score: -75.00
+- Total Games Played: 10
+
+Performance Analysis:
+- Positive scores indicate profit per game
+- Negative scores indicate losses per game
+- Focus on improving average game score for better performance
+
+[
+  {
+    "gameId": "4697571a-7784-4dce-b601-4d366fbc693d",
+    "players": {
+      "default": 560153142,
+      "client_container_5039_test_client_test_openai_gpt_5_iter_2_20250809_183725_iter2": 2235810010
+    },
+    "playerNames": {
+      "560153141": "player560153142",
+      "2235810009": "player2235810010"
+    },
+    "finalMoney": {
+      "560153142": 10010,
+      "2235810010": 9990
+    },
+    "finalDelta": {
+      "560153142": 10,
+      "2235810010": -10
+    },
+    "gameScores": {
+      "560153142": 10,
+      "2235810010": -10
+    },
+    "rounds": 2,
+    "finalBoard": [
+      "Jc",
+      "5d",
+      "Th",
+      "Ks"
+    ],
+    "playerHands": {
+      "560153141": [
+        "Tc",
+        "4h"
+      ],
+      "2235810009": [
+        "Kd",
+        "2d"
+      ]
+    },
+    "blinds": {
+      "small": 5,
+      "big": 10
+    },
+    "botPlayerId": 2235810010,
+    "botPerformance": {
+      "finalMoney": 9990,
+      "finalDelta": -10,
+      "gameScore": -10
+    }
+  },
+  {
+    "gameId": "4697571a-7784-4dce-b601-4d366fbc693d",
+    "players": {
+      "default": 560153142,
+      "client_container_5039_test_client_test_openai_gpt_5_iter_2_20250809_183725_iter2": 2235810010
+    },
+    "playerNames": {
+      "560153141": "player560153142",
+      "2235810009": "player2235810010"
+    },
+    "finalMoney": {
+      "560153142": 10075,
+      "2235810010": 9925
+    },
+    "finalDelta": {
+      "560153142": 75,
+      "2235810010": -75
+    },
+    "gameScores": {
+      "560153142": 5,
+      "2235810010": -5
+    },
+    "rounds": 1,
+    "finalBoard": [
+      "8s",
+      "Qd",
+      "7h"
+    ],
+    "playerHands": {
+      "560153141": [
+        "Jc",
+        "Ks"
+      ],
+      "2235810009": [
+        "Ah",
+        "Ts"
+      ]
+    },
+    "blinds": {
+      "small": 5,
+      "big": 10
+    },
+    "botPlayerId": 2235810010,
+    "botPerformance": {
+      "finalMoney": 9925,
+      "finalDelta": -75,
+      "gameScore": -5
+    }
+  },
+  {
+    "gameId": "4697571a-7784-4dce-b601-4d366fbc693d",
+    "players": {
+      "default": 560153142,
+      "client_container_5039_test_client_test_openai_gpt_5_iter_2_20250809_183725_iter2": 2235810010
+    },
+    "playerNames": {
+      "560153141": "player560153142",
+      "2235810009": "player2235810010"
+    },
+    "finalMoney": {
+      "560153142": 10015,
+      "2235810010": 9985
+    },
+    "finalDelta": {
+      "560153142": 15,
+      "2235810010": -15
+    },
+    "gameScores": {
+      "560153142": 5,
+      "2235810010": -5
+    },
+    "rounds": 1,
+    "finalBoard": [
+      "6h",
+      "Ts",
+      "9d"
+    ],
+    "playerHands": {
+      "560153141": [
+        "Qs",
+        "6c"
+      ],
+      "2235810009": [
+        "7s",
+        "5c"
+      ]
+    },
+    "blinds": {
+      "small": 5,
+      "big": 10
+    },
+    "botPlayerId": 2235810010,
+    "botPerformance": {
+      "finalMoney": 9985,
+      "finalDelta": -15,
+      "gameScore": -5
+    }
+  },
+  {
+    "gameId": "4697571a-7784-4dce-b601-4d366fbc693d",
+    "players": {
+      "default": 560153142,
+      "client_container_5039_test_client_test_openai_gpt_5_iter_2_20250809_183725_iter2": 2235810010
+    },
+    "playerNames": {
+      "560153141": "player560153142",
+      "2235810009": "player2235810010"
+    },
+    "finalMoney": {
+      "560153142": 10025,
+      "2235810010": 9975
+    },
+    "finalDelta": {
+      "560153142": 25,
+      "2235810010": -25
+    },
+    "gameScores": {
+      "560153142": 10,
+      "2235810010": -10
+    },
+    "rounds": 2,
+    "finalBoard": [
+      "9d",
+      "3h",
+      "Jc",
+      "2h"
+    ],
+    "playerHands": {
+      "560153141": [
+        "3s",
+        "4h"
+      ],
+      "2235810009": [
+        "Qs",
+        "8s"
+      ]
+    },
+    "blinds": {
+      "small": 5,
+      "big": 10
+    },
+    "botPlayerId": 2235810010,
+    "botPerformance": {
+      "finalMoney": 9975,
+      "finalDelta": -25,
+      "gameScore": -10
+    }
+  },
+  {
+    "gameId": "4697571a-7784-4dce-b601-4d366fbc693d",
+    "players": {
+      "default": 560153142,
+      "client_container_5039_test_client_test_openai_gpt_5_iter_2_20250809_183725_iter2": 2235810010
+    },
+    "playerNames": {
+      "560153141": "player560153142",
+      "2235810009": "player2235810010"
+    },
+    "finalMoney": {
+      "560153142": 10030,
+      "2235810010": 9970
+    },
+    "finalDelta": {
+      "560153142": 30,
+      "2235810010": -30
+    },
+    "gameScores": {
+      "560153142": 5,
+      "2235810010": -5
+    },
+    "rounds": 1,
+    "finalBoard": [
+      "9h",
+      "4h",
+      "5d"
+    ],
+    "playerHands": {
+      "560153141": [
+        "9c",
+        "Qc"
+      ],
+      "2235810009": [
+        "Qh",
+        "2d"
+      ]
+    },
+    "blinds": {
+      "small": 5,
+      "big": 10
+    },
+    "botPlayerId": 2235810010,
+    "botPerformance": {
+      "finalMoney": 9970,
+      "finalDelta": -30,
+      "gameScore": -5
+    }
+  },
+  {
+    "gameId": "4697571a-7784-4dce-b601-4d366fbc693d",
+    "players": {
+      "default": 560153142,
+      "client_container_5039_test_client_test_openai_gpt_5_iter_2_20250809_183725_iter2": 2235810010
+    },
+    "playerNames": {
+      "560153141": "player560153142",
+      "2235810009": "player2235810010"
+    },
+    "finalMoney": {
+      "560153142": 10040,
+      "2235810010": 9960
+    },
+    "finalDelta": {
+      "560153142": 40,
+      "2235810010": -40
+    },
+    "gameScores": {
+      "560153142": 10,
+      "2235810010": -10
+    },
+    "rounds": 2,
+    "finalBoard": [
+      "3s",
+      "2c",
+      "4d",
+      "As"
+    ],
+    "playerHands": {
+      "560153141": [
+        "Kd",
+        "Ts"
+      ],
+      "2235810009": [
+        "Ac",
+        "Td"
+      ]
+    },
+    "blinds": {
+      "small": 5,
+      "big": 10
+    },
+    "botPlayerId": 2235810010,
+    "botPerformance": {
+      "finalMoney": 9960,
+      "finalDelta": -40,
+      "gameScore": -10
+    }
+  },
+  {
+    "gameId": "4697571a-7784-4dce-b601-4d366fbc693d",
+    "players": {
+      "default": 560153142,
+      "client_container_5039_test_client_test_openai_gpt_5_iter_2_20250809_183725_iter2": 2235810010
+    },
+    "playerNames": {
+      "560153141": "player560153142",
+      "2235810009": "player2235810010"
+    },
+    "finalMoney": {
+      "560153142": 10045,
+      "2235810010": 9955
+    },
+    "finalDelta": {
+      "560153142": 45,
+      "2235810010": -45
+    },
+    "gameScores": {
+      "560153142": 5,
+      "2235810010": -5
+    },
+    "rounds": 1,
+    "finalBoard": [
+      "7d",
+      "Js",
+      "6d"
+    ],
+    "playerHands": {
+      "560153141": [
+        "7c",
+        "4h"
+      ],
+      "2235810009": [
+        "4d",
+        "7h"
+      ]
+    },
+    "blinds": {
+      "small": 5,
+      "big": 10
+    },
+    "botPlayerId": 2235810010,
+    "botPerformance": {
+      "finalMoney": 9955,
+      "finalDelta": -45,
+      "gameScore": -5
+    }
+  },
+  {
+    "gameId": "4697571a-7784-4dce-b601-4d366fbc693d",
+    "players": {
+      "default": 560153142,
+      "client_container_5039_test_client_test_openai_gpt_5_iter_2_20250809_183725_iter2": 2235810010
+    },
+    "playerNames": {
+      "560153141": "player560153142",
+      "2235810009": "player2235810010"
+    },
+    "finalMoney": {
+      "560153142": 10055,
+      "2235810010": 9945
+    },
+    "finalDelta": {
+      "560153142": 55,
+      "2235810010": -55
+    },
+    "gameScores": {
+      "560153142": 10,
+      "2235810010": -10
+    },
+    "rounds": 2,
+    "finalBoard": [
+      "9h",
+      "4d",
+      "Tc",
+      "2c"
+    ],
+    "playerHands": {
+      "560153141": [
+        "Ks",
+        "9d"
+      ],
+      "2235810009": [
+        "Qc",
+        "Kc"
+      ]
+    },
+    "blinds": {
+      "small": 5,
+      "big": 10
+    },
+    "botPlayerId": 2235810010,
+    "botPerformance": {
+      "finalMoney": 9945,
+      "finalDelta": -55,
+      "gameScore": -10
+    }
+  },
+  {
+    "gameId": "4697571a-7784-4dce-b601-4d366fbc693d",
+    "players": {
+      "default": 560153142,
+      "client_container_5039_test_client_test_openai_gpt_5_iter_2_20250809_183725_iter2": 2235810010
+    },
+    "playerNames": {
+      "560153141": "player560153142",
+      "2235810009": "player2235810010"
+    },
+    "finalMoney": {
+      "560153142": 10060,
+      "2235810010": 9940
+    },
+    "finalDelta": {
+      "560153142": 60,
+      "2235810010": -60
+    },
+    "gameScores": {
+      "560153142": 5,
+      "2235810010": -5
+    },
+    "rounds": 1,
+    "finalBoard": [
+      "2h",
+      "2d",
+      "Jc"
+    ],
+    "playerHands": {
+      "560153141": [
+        "5s",
+        "4h"
+      ],
+      "2235810009": [
+        "Ad",
+        "9c"
+      ]
+    },
+    "blinds": {
+      "small": 5,
+      "big": 10
+    },
+    "botPlayerId": 2235810010,
+    "botPerformance": {
+      "finalMoney": 9940,
+      "finalDelta": -60,
+      "gameScore": -5
+    }
+  },
+  {
+    "gameId": "4697571a-7784-4dce-b601-4d366fbc693d",
+    "players": {
+      "default": 560153142,
+      "client_container_5039_test_client_test_openai_gpt_5_iter_2_20250809_183725_iter2": 2235810010
+    },
+    "playerNames": {
+      "560153141": "player560153142",
+      "2235810009": "player2235810010"
+    },
+    "finalMoney": {
+      "560153142": 10070,
+      "2235810010": 9930
+    },
+    "finalDelta": {
+      "560153142": 70,
+      "2235810010": -70
+    },
+    "gameScores": {
+      "560153142": 10,
+      "2235810010": -10
+    },
+    "rounds": 2,
+    "finalBoard": [
+      "2s",
+      "3h",
+      "7c",
+      "5s"
+    ],
+    "playerHands": {
+      "560153141": [
+        "5d",
+        "6s"
+      ],
+      "2235810009": [
+        "4d",
+        "Ac"
+      ]
+    },
+    "blinds": {
+      "small": 5,
+      "big": 10
+    },
+    "botPlayerId": 2235810010,
+    "botPerformance": {
+      "finalMoney": 9930,
+      "finalDelta": -70,
+      "gameScore": -10
+    }
+  }
+]
+
+IMPORTANT: When analyzing the game performance data above, focus on the player ID that corresponds to YOUR bot implementation.
+Look for your bot's performance in the 'gameScores' field, which shows the delta gain/loss for each individual game.
+
+PERFORMANCE METRICS EXPLANATION:
+- 'gameScores': Shows the profit/loss for each individual game (this is what matters most)
+- Positive gameScore = Profit in that game
+- Negative gameScore = Loss in that game
+- Focus on improving your strategy to achieve positive gameScores consistently
+
+Please analyze YOUR bot's gameScore performance and improve the strategy based on these results.
+
+POKER CLIENT ERRORS:
+No critical errors detected in poker client logs
+
+Please investigate these errors in your poker client logs and fix any issues in your implementation.
+
+IMPROVEMENT INSTRUCTIONS:
+1. You are on iteration 3 - build upon the previous code
+2. Analyze the errors and game performance data above
+3. Fix any syntax, import, or runtime errors from the previous iteration
+4. Improve the poker strategy based on game results
+5. Ensure the code follows the exact template requirements
+6. Return the improved implementation in the same format (Python code block + requirements.txt block)
+
+Focus on making the bot more competitive and error-free. You can see exactly what was wrong with the previous version and should fix those specific issues.
+
+
+    RESPONSE:
+    ```python
+from typing import List, Tuple, Optional, Dict
+import random
+
+from bot import Bot
+from type.poker_action import PokerAction
+from type.round_state import RoundStateClient
+
+
+RANK_ORDER = {'2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7,
+              '8': 8, '9': 9, 'T': 10, 'J': 11, 'Q': 12, 'K': 13, 'A': 14}
+
+
+def card_rank(card: str) -> int:
+    # card like 'Ah' or 'Td'
+    if not card or len(card) < 2:
+        return 0
+    return RANK_ORDER.get(card[0].upper(), 0)
+
+
+def card_suit(card: str) -> str:
+    if not card or len(card) < 2:
+        return ''
+    return card[1].lower()
+
+
+def sort_ranks_desc(ranks: List[int]) -> List[int]:
+    return sorted(ranks, reverse=True)
+
+
+def has_straight(ranks: List[int]) -> bool:
+    # ranks may contain duplicates; treat Ace as both high and low
+    if not ranks:
+        return False
+    unique = sorted(set(ranks))
+    if 14 in unique:
+        unique.append(1)  # Ace low
+    # scan sequences
+    streak = 1
+    for i in range(1, len(unique)):
+        if unique[i] == unique[i - 1] + 1:
+            streak += 1
+            if streak >= 5:
+                return True
+        else:
+            streak = 1
+    return False
+
+
+def straight_draw_strength(ranks: List[int]) -> float:
+    # Naive draw detection: open-ender ~0.17, gutshot ~0.1 (approximate equities)
+    # We'll look for sequences of 4 within unique ranks (+ ace-low)
+    if not ranks:
+        return 0.0
+    unique = sorted(set(ranks))
+    if 14 in unique:
+        unique.append(1)
+    # Find longest streak lengths and gaps of 1 in 5-window
+    best = 0.0
+    for start_idx in range(len(unique)):
+        count = 1
+        last = unique[start_idx]
+        gaps = 0
+        for j in range(start_idx + 1, len(unique)):
+            if unique[j] == last:
+                continue
+            if unique[j] == last + 1:
+                count += 1
+            else:
+                gaps += (unique[j] - last - 1)
+                count += 1
+            last = unique[j]
+            if count >= 4:
+                # Approximate: if gaps==0 within 4-length -> open-ender
+                if gaps == 0:
+                    best = max(best, 0.17)
+                elif gaps == 1:
+                    best = max(best, 0.10)
+                # we don't break to see if a better draw appears
+            if count >= 5:
+                break
+    return best
+
+
+class SimplePlayer(Bot):
+    def __init__(self):
+        super().__init__()
+        self.starting_chips: int = 0
+        self.blind_amount: int = 0  # assume small blind by default
+        self.big_blind_player_id: Optional[int] = None
+        self.small_blind_player_id: Optional[int] = None
+        self.all_players: List[int] = []
+        self.hand_round_num: Optional[int] = None
+        self.hole_cards: Optional[List[str]] = None
+        self.preflop_raiser: bool = False
+        self.last_action: Optional[PokerAction] = None
+        self.rng = random.Random(42)
+        self.big_blind_amount: int = 0
+
+    def on_start(self, starting_chips: int, player_hands: List[str], blind_amount: int,
+                 big_blind_player_id: int, small_blind_player_id: int, all_players: List[int]):
+        # Initialize match info
+        self.starting_chips = starting_chips
+        self.blind_amount = blind_amount if blind_amount is not None else 0
+        self.big_blind_amount = self.blind_amount * 2 if self.blind_amount else 0
+        self.big_blind_player_id = big_blind_player_id
+        self.small_blind_player_id = small_blind_player_id
+        self.all_players = list(all_players) if all_players else []
+        # Try to capture initial hand if provided (may vary per framework; guard for safety)
+        self.hole_cards = list(player_hands)[:2] if player_hands and len(player_hands) >= 2 else None
+        self.hand_round_num = None
+        self.preflop_raiser = False
+        self.last_action = None
+
+    def on_round_start(self, round_state: RoundStateClient, remaining_chips: int):
+        # New hand starting preflop; reset state
+        self.hand_round_num = round_state.round_num
+        # Attempt to extract hole cards from round_state if framework provides them
+        self.hole_cards = self._extract_hole_cards(round_state)
+        self.preflop_raiser = False
+        self.last_action = None
+        # Blind amounts may change with blinds increase; infer from min_raise if possible
+        try:
+            if round_state.min_raise and round_state.min_raise > 0:
+                # Many engines set min_raise equal to big blind preflop when no bet has been made
+                # Do not override if already set; just update heuristic big blind amount conservatively
+                self.big_blind_amount = max(self.big_blind_amount, round_state.min_raise)
+        except Exception:
+            pass
+
+    def get_action(self, round_state: RoundStateClient, remaining_chips: int) -> Tuple[PokerAction, int]:
+        """ Returns the action for the player. """
+        try:
+            # Keep hole cards updated if provided later
+            if self.hand_round_num != round_state.round_num:
+                # New hand started without on_round_start? Reset
+                self.on_round_start(round_state, remaining_chips)
+
+            my_id_str = str(self.id)
+            my_bet = int(round_state.player_bets.get(my_id_str, 0)) if round_state.player_bets else 0
+            current_bet = int(round_state.current_bet) if round_state.current_bet is not None else 0
+            to_call = max(0, current_bet - my_bet)
+            can_check = (to_call == 0)
+            min_raise = int(round_state.min_raise) if round_state.min_raise is not None else 0
+            max_raise = max(0, int(round_state.max_raise) if round_state.max_raise is not None else 0)
+            pot = int(round_state.pot) if round_state.pot is not None else 0
+            community = list(round_state.community_cards) if round_state.community_cards else []
+            stage = (round_state.round or '').lower()  # 'Preflop','Flop','Turn','River'
+
+            # Active players estimation
+            active_players_count = self._estimate_active_players(round_state)
+
+            # Attempt to extract hole cards if not known
+            if self.hole_cards is None:
+                self.hole_cards = self._extract_hole_cards(round_state)
+
+            # Preflop strategy
+            if stage.startswith('pre'):
+                strength = self._preflop_strength(self.hole_cards) if self.hole_cards else 0.5
+                # Adjust strength a bit for table size (stronger HU, weaker multiway)
+                if active_players_count <= 2:
+                    strength += 0.02
+                else:
+                    strength -= min(0.04, (active_players_count - 2) * 0.01)
+                strength = max(0.0, min(1.0, strength))
+
+                # Preflop raise sizing heuristic
+                open_size = int(max(min_raise, self.big_blind_amount * 2.5)) if self.big_blind_amount > 0 else min_raise
+                three_bet_size = int(max(min_raise, to_call * 3))
+
+                if can_check:
+                    # Opportunity to open the pot
+                    if self._can_raise(min_raise, max_raise) and strength >= 0.62:
+                        amount = self._clamp_raise(open_size, min_raise, max_raise)
+                        self.preflop_raiser = True
+                        self.last_action = PokerAction.RAISE
+                        return PokerAction.RAISE, amount
+                    else:
+                        self.last_action = PokerAction.CHECK
+                        return PokerAction.CHECK, 0
+                else:
+                    # Facing a bet
+                    # Pot odds
+                    pot_odds = to_call / (pot + to_call + 1e-9)
+                    # Decide actions based on strength and cost
+                    # Strong hands can 3-bet
+                    if strength >= 0.75 and self._can_raise(min_raise, max_raise):
+                        amount = self._clamp_raise(three_bet_size, min_raise, max_raise)
+                        # If our desired raise equals max, consider all-in only if it equals our stack
+                        if amount >= max_raise and remaining_chips <= max_raise + 1:
+                            self.last_action = PokerAction.ALL_IN
+                            return PokerAction.ALL_IN, 0
+                        self.preflop_raiser = True
+                        self.last_action = PokerAction.RAISE
+                        return PokerAction.RAISE, amount
+                    # Medium strength: call if affordable
+                    call_threshold = 0.50 if to_call <= self.big_blind_amount * 2 else 0.57
+                    if strength >= call_threshold and pot_odds <= 0.45:
+                        self.last_action = PokerAction.CALL
+                        return PokerAction.CALL, 0
+                    # Cheap defend in big blind
+                    if to_call <= max(self.big_blind_amount, min_raise) and strength >= 0.48:
+                        self.last_action = PokerAction.CALL
+                        return PokerAction.CALL, 0
+                    # Otherwise fold
+                    self.last_action = PokerAction.FOLD
+                    return PokerAction.FOLD, 0
+
+            # Postflop strategy
+            # Estimate hand strength and draw strength
+            strength, draw_eq = self._postflop_strength(self.hole_cards, community)
+            # Adjust for heads-up slightly
+            if active_players_count <= 2:
+                strength += 0.01
+            else:
+                strength -= min(0.03, (active_players_count - 2) * 0.005)
+            strength = max(0.0, min(1.0, strength))
+
+            # Determine if we want to bet/raise
+            # Value thresholds
+            very_strong = strength >= 0.82
+            strong = strength >= 0.68
+            medium = strength >= 0.58
+            weak = strength < 0.45
+
+            # Compute pot odds when facing a bet
+            if not can_check:
+                pot_odds = to_call / (pot + to_call + 1e-9)
+                # If very strong: raise for value
+                if very_strong and self._can_raise(min_raise, max_raise):
+                    # Typical raise: 3x the bet or ~60% pot
+                    desired = max(int(to_call * 3), int(pot * 0.6))
+                    amount = self._clamp_raise(desired, min_raise, max_raise)
+                    # Consider jamming if short or amount equals max
+                    if amount >= max_raise and remaining_chips <= max_raise + 1:
+                        self.last_action = PokerAction.ALL_IN
+                        return PokerAction.ALL_IN, 0
+                    self.last_action = PokerAction.RAISE
+                    return PokerAction.RAISE, amount
+                # Strong hands: mostly call, sometimes raise small
+                if strong:
+                    # If bet is small relative to pot, call; otherwise call if pot odds ok
+                    if pot_odds <= 0.45 or to_call <= max(min_raise, self.big_blind_amount * 2):
+                        self.last_action = PokerAction.CALL
+                        return PokerAction.CALL, 0
+                    else:
+                        # Too expensive without nutted strength
+                        self.last_action = PokerAction.FOLD
+                        return PokerAction.FOLD, 0
+                # Draw-based decisions
+                if draw_eq > 0.0:
+                    # Effective equity is draw_eq; call if pot odds justify
+                    # Add a small bluff equity buffer
+                    if draw_eq + 0.03 >= pot_odds:
+                        self.last_action = PokerAction.CALL
+                        return PokerAction.CALL, 0
+                    else:
+                        self.last_action = PokerAction.FOLD
+                        return PokerAction.FOLD, 0
+                # Medium marginal hands: call cheap, fold expensive
+                if medium and pot_odds <= 0.35:
+                    self.last_action = PokerAction.CALL
+                    return PokerAction.CALL, 0
+                # Otherwise fold
+                self.last_action = PokerAction.FOLD
+                return PokerAction.FOLD, 0
+            else:
+                # We can check or bet
+                # Choose bet sizing as a fraction of pot; translate to raise amount
+                if very_strong and self._can_raise(min_raise, max_raise):
+                    desired = int(max(min_raise, pot * 0.65))
+                    amount = self._clamp_raise(desired, min_raise, max_raise)
+                    if amount >= max_raise and remaining_chips <= max_raise + 1:
+                        self.last_action = PokerAction.ALL_IN
+                        return PokerAction.ALL_IN, 0
+                    self.last_action = PokerAction.RAISE
+                    return PokerAction.RAISE, amount
+                # If we were preflop aggressor, consider c-bet with some frequency
+                if self.preflop_raiser and self._can_raise(min_raise, max_raise):
+                    # Semi-bluff or value bet with medium/strong or draws
+                    if strong or (medium and self.rng.random() < 0.5) or (draw_eq >= 0.10 and self.rng.random() < 0.6):
+                        desired = int(max(min_raise, pot * 0.5))
+                        amount = self._clamp_raise(desired, min_raise, max_raise)
+                        self.last_action = PokerAction.RAISE
+                        return PokerAction.RAISE, amount
+                # Otherwise check
+                self.last_action = PokerAction.CHECK
+                return PokerAction.CHECK, 0
+
+        except Exception:
+            # Fail-safe: never crash; choose a safe action
+            try:
+                # Try to determine if we can check
+                my_id_str = str(self.id)
+                my_bet = int(round_state.player_bets.get(my_id_str, 0)) if round_state.player_bets else 0
+                current_bet = int(round_state.current_bet) if round_state.current_bet is not None else 0
+                to_call = max(0, current_bet - my_bet)
+                if to_call == 0:
+                    return PokerAction.CHECK, 0
+                else:
+                    return PokerAction.FOLD, 0
+            except Exception:
+                return PokerAction.FOLD, 0
+
+    def on_end_round(self, round_state: RoundStateClient, remaining_chips: int):
+        """ Called at the end of the round. """
+        # Reset per-hand states
+        self.hole_cards = None
+        self.hand_round_num = None
+        self.preflop_raiser = False
+        self.last_action = None
+
+    def on_end_game(self, round_state: RoundStateClient, player_score: float, all_scores: dict, active_players_hands: dict):
+        # Nothing special; keep stable and lightweight
+        pass
+
+    # ---------------- Helper methods ----------------
+
+    def _extract_hole_cards(self, round_state: RoundStateClient) -> Optional[List[str]]:
+        # Try various possible fields that may exist in different frameworks
+        try_fields = [
+            'hole_cards', 'hand', 'cards', 'private_cards', 'player_hands', 'my_cards'
+        ]
+        for field in try_fields:
+            if hasattr(round_state, field):
+                val = getattr(round_state, field)
+                if isinstance(val, list) and len(val) >= 2 and isinstance(val[0], str):
+                    return val[:2]
+                if isinstance(val, dict):
+                    # Maybe a dict of player_id -> hand
+                    my_key = str(self.id)
+                    if my_key in val and isinstance(val[my_key], list) and len(val[my_key]) >= 2:
+                        return val[my_key][:2]
+        return None
+
+    def _estimate_active_players(self, round_state: RoundStateClient) -> int:
+        # Estimate active players using player_actions if available; else fall back to all_players length
+        try:
+            if round_state.player_actions:
+                folded = 0
+                seen_ids = set()
+                for pid_str, act in round_state.player_actions.items():
+                    seen_ids.add(pid_str)
+                    if isinstance(act, str) and act.lower() == 'fold':
+                        folded += 1
+                if self.all_players:
+                    total = len(self.all_players)
+                else:
+                    total = len(seen_ids) if seen_ids else 2
+                active = max(2, total - folded)
+                return active
+        except Exception:
+            pass
+        return max(2, len(self.all_players)) if self.all_players else 2
+
+    def _preflop_strength(self, hole_cards: Optional[List[str]]) -> float:
+        if not hole_cards or len(hole_cards) < 2:
+            return 0.5
+        c1, c2 = hole_cards[0], hole_cards[1]
+        r1, r2 = card_rank(c1), card_rank(c2)
+        s1, s2 = card_suit(c1), card_suit(c2)
+        if r1 < r2:
+            r1, r2 = r2, r1  # r1 >= r2
+
+        suited = (s1 == s2)
+        gap = abs(r1 - r2) - 1
+        pair = (r1 == r2)
+
+        # Base strength
+        strength = 0.5
+        if pair:
+            if r1 >= 14:
+                strength = 0.99  # AA
+            elif r1 == 13:
+                strength = 0.93  # KK
+            elif r1 == 12:
+                strength = 0.90  # QQ
+            elif r1 == 11:
+                strength = 0.86  # JJ
+            elif r1 == 10:
+                strength = 0.82  # TT
+            elif r1 == 9:
+                strength = 0.76
+            elif r1 == 8:
+                strength = 0.72
+            elif r1 == 7:
+                strength = 0.66
+            elif r1 == 6:
+                strength = 0.60
+            elif r1 == 5:
+                strength = 0.56
+            else:
+                strength = 0.52
+        else:
+            high_combo = (r1 + r2) / 28.0  # normalized high card value
+            strength = 0.35 + 0.5 * high_combo
+            # Suited bonus
+            if suited:
+                strength += 0.03
+            # Connectivity bonus
+            if gap <= 0:
+                strength += 0.05
+            elif gap == 1:
+                strength += 0.03
+            elif gap == 2:
+                strength += 0.01
+            # Both T+ bonus
+            if r1 >= 10 and r2 >= 10:
+                strength += 0.08
+            # Ax suited bonus
+            if suited and r1 == 14:
+                strength += 0.04
+
+        return max(0.0, min(1.0, strength))
+
+    def _postflop_strength(self, hole_cards: Optional[List[str]], board: List[str]) -> Tuple[float, float]:
+        # Returns (strength in [0,1], draw_equity in [0, ~0.2])
+        if not board:
+            # No board given (shouldn't happen postflop), fallback to preflop
+            return (self._preflop_strength(hole_cards) if hole_cards else 0.5, 0.0)
+
+        # If we don't know our cards, be conservative: very weak baseline without hole info
+        if not hole_cards or len(hole_cards) < 2:
+            ranks = [card_rank(c) for c in board]
+            base = 0.4
+            # Board-based made hand detect
+            counts: Dict[int, int] = {}
+            suit_counts: Dict[str, int] = {}
+            for c in board:
+                r = card_rank(c)
+                s = card_suit(c)
+                counts[r] = counts.get(r, 0) + 1
+                suit_counts[s] = suit_counts.get(s, 0) + 1
+            max_count = max(counts.values()) if counts else 1
+            flush_board = max(suit_counts.values()) >= 5 if suit_counts else False
+            straight_board = has_straight(ranks)
+
+            if max_count >= 4:
+                base = 0.9
+            elif any(v >= 3 for v in counts.values()) and any(v >= 2 for v in counts.values()):
+                base = 0.88
+            elif flush_board:
+                base = 0.7
+            elif straight_board:
+                base = 0.65
+            elif any(v >= 3 for v in counts.values()):
+                base = 0.6
+            elif sum(1 for v in counts.values() if v >= 2) >= 2:
+                base = 0.55
+            elif any(v >= 2 for v in counts.values()):
+                base = 0.5
+            draw_eq = straight_draw_strength(ranks)
+            return max(0.0, min(1.0, base)), max(0.0, min(0.2, draw_eq))
+
+        # Combine hole + board
+        cards = hole_cards + board
+        ranks = [card_rank(c) for c in cards]
+        suits = [card_suit(c) for c in cards]
+        board_ranks = [card_rank(c) for c in board]
+        board_suits = [card_suit(c) for c in board]
+        my_r1, my_r2 = card_rank(hole_cards[0]), card_rank(hole_cards[1])
+        my_s1, my_s2 = card_suit(hole_cards[0]), card_suit(hole_cards[1])
+        board_max = max(board_ranks) if board_ranks else 0
+
+        counts: Dict[int, int] = {}
+        for r in ranks:
+            counts[r] = counts.get(r, 0) + 1
+        board_counts: Dict[int, int] = {}
+        for r in board_ranks:
+            board_counts[r] = board_counts.get(r, 0) + 1
+
+        suit_counts: Dict[str, int] = {}
+        for s in suits:
+            suit_counts[s] = suit_counts.get(s, 0) + 1
+        board_suit_counts: Dict[str, int] = {}
+        for s in board_suits:
+            board_suit_counts[s] = board_suit_counts.get(s, 0) + 1
+
+        max_count = max(counts.values()) if counts else 1
+        board_max_count = max(board_counts.values()) if board_counts else 1
+
+        # Flush/straight detection
+        flush_suit = None
+        for s, cnt in suit_counts.items():
+            if cnt >= 5:
+                flush_suit = s
+                break
+        board_flush_suit = None
+        for s, cnt in board_suit_counts.items():
+            if cnt >= 5:
+                board_flush_suit = s
+                break
+        have_flush = flush_suit is not None and (my_s1 == flush_suit or my_s2 == flush_suit)
+        board_only_flush = (board_flush_suit is not None) and not have_flush
+
+        straight_present = has_straight(ranks)
+        board_straight = has_straight(board_ranks) and not straight_present  # approximate
+
+        # Determine made hand category strength
+        strength = 0.4
+
+        # Quads
+        if max_count >= 4:
+            strength = 0.99
+        # Full house
+        elif any(v >= 3 for v in counts.values()) and sum(1 for v in counts.values() if v >= 2) >= 2:
+            strength = 0.95
+        # Flush
+        elif have_flush:
+            strength = 0.90
+        elif board_only_flush:
+            strength = 0.70
+        # Straight
+        elif straight_present:
+            strength = 0.85
+        elif board_straight:
+            strength = 0.65
+        # Trips
+        elif any(v >= 3 for v in counts.values()):
+            # If trips come from board only without our card contributing, it's weaker
+            trips_rank = max((r for r, v in counts.items() if v >= 3), default=None)
+            board_trips = trips_rank is not None and board_counts.get(trips_rank, 0) >= 3
+            if board_trips and my_r1 != trips_rank and my_r2 != trips_rank:
+                strength = 0.55
+            else:
+                strength = 0.80
+        # Two pair
+        elif sum(1 for v in counts.values() if v >= 2) >= 2:
+            # Check if at least one pair uses our hole cards
+            uses_hole = (board_counts.get(my_r1, 0) >= 1 or board_counts.get(my_r2, 0) >= 1) or (my_r1 == my_r2)
+            if uses_hole:
+                strength = 0.75
+            else:
+                strength = 0.50
+        # One pair / overpair / top pair
+        elif any(v >= 2 for v in counts.values()):
+            # Determine if it's an overpair or top pair
+            # Overpair: we hold a pocket pair above all board ranks
+            if my_r1 == my_r2 and my_r1 > board_max:
+                strength = 0.78
+            else:
+                # If our pair equals top board rank and our kicker good
+                pair_rank = next((r for r, v in counts.items() if v >= 2 and r in (my_r1, my_r2)), None)
+                if pair_rank is not None:
+                    if pair_rank == board_max:
+                        kicker = max(my_r1, my_r2) if (my_r1 != my_r2) else pair_rank
+                        kicker_strength = (kicker - 6) / 8.0  # scale from 6..14 -> 0..1
+                        strength = 0.60 + 0.05 * max(0.0, min(1.0, kicker_strength))
+                    else:
+                        # Middle/bottom pair
+                        if pair_rank >= 10:
+                            strength = 0.56
+                        elif pair_rank >= 7:
+                            strength = 0.52
+                        else:
+                            strength = 0.48
+                else:
+                    strength = 0.45
+        else:
+            # High card; if we have two overs to board, add a bit
+            over1 = my_r1 > board_max
+            over2 = my_r2 > board_max
+            if over1 and over2:
+                strength = 0.46
+            elif over1 or over2:
+                strength = 0.44
+            else:
+                strength = 0.35
+
+        # Draw equities
+        draw_eq = 0.0
+        # Flush draw (4 to a suit) and at least one of our hole cards in that suit
+        max_suit = None
+        max_suit_count = 0
+        for s, cnt in suit_counts.items():
+            if cnt > max_suit_count:
+                max_suit_count = cnt
+                max_suit = s
+        if max_suit_count == 4 and (my_s1 == max_suit or my_s2 == max_suit):
+            # Prefer nut flush draw (one of our cards is Ace of that suit)
+            is_nut_draw = (my_s1 == max_suit and my_r1 == 14) or (my_s2 == max_suit and my_r2 == 14)
+            draw_eq += 0.12 if is_nut_draw else 0.10
+
+        # Straight draws
+        draw_eq += straight_draw_strength(ranks)
+
+        # Small bonus for two overcards to board (turn+)
+        if len(board) >= 3:
+            overcards = int(my_r1 > board_max) + int(my_r2 > board_max)
+            if overcards >= 2:
+                draw_eq += 0.04
+            elif overcards == 1:
+                draw_eq += 0.02
+
+        draw_eq = max(0.0, min(0.20, draw_eq))
+        return max(0.0, min(1.0, strength)), draw_eq
+
+    def _can_raise(self, min_raise: int, max_raise: int) -> bool:
+        return min_raise is not None and max_raise is not None and min_raise > 0 and max_raise >= min_raise
+
+    def _clamp_raise(self, desired: int, min_raise: int, max_raise: int) -> int:
+        if not self._can_raise(min_raise, max_raise):
+            return 0
+        return max(min_raise, min(desired, max_raise))
+```
+
+```text
+```
+
+    RAW API RESPONSE:
+    {
+  "choices": [
+    {
+      "message": {
+        "content": "```python\nfrom typing import List, Tuple, Optional, Dict\nimport random\n\nfrom bot import Bot\nfrom type.poker_action import PokerAction\nfrom type.round_state import RoundStateClient\n\n\nRANK_ORDER = {'2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7,\n              '8': 8, '9': 9, 'T': 10, 'J': 11, 'Q': 12, 'K': 13, 'A': 14}\n\n\ndef card_rank(card: str) -> int:\n    # card like 'Ah' or 'Td'\n    if not card or len(card) < 2:\n        return 0\n    return RANK_ORDER.get(card[0].upper(), 0)\n\n\ndef card_suit(card: str) -> str:\n    if not card or len(card) < 2:\n        return ''\n    return card[1].lower()\n\n\ndef sort_ranks_desc(ranks: List[int]) -> List[int]:\n    return sorted(ranks, reverse=True)\n\n\ndef has_straight(ranks: List[int]) -> bool:\n    # ranks may contain duplicates; treat Ace as both high and low\n    if not ranks:\n        return False\n    unique = sorted(set(ranks))\n    if 14 in unique:\n        unique.append(1)  # Ace low\n    # scan sequences\n    streak = 1\n    for i in range(1, len(unique)):\n        if unique[i] == unique[i - 1] + 1:\n            streak += 1\n            if streak >= 5:\n                return True\n        else:\n            streak = 1\n    return False\n\n\ndef straight_draw_strength(ranks: List[int]) -> float:\n    # Naive draw detection: open-ender ~0.17, gutshot ~0.1 (approximate equities)\n    # We'll look for sequences of 4 within unique ranks (+ ace-low)\n    if not ranks:\n        return 0.0\n    unique = sorted(set(ranks))\n    if 14 in unique:\n        unique.append(1)\n    # Find longest streak lengths and gaps of 1 in 5-window\n    best = 0.0\n    for start_idx in range(len(unique)):\n        count = 1\n        last = unique[start_idx]\n        gaps = 0\n        for j in range(start_idx + 1, len(unique)):\n            if unique[j] == last:\n                continue\n            if unique[j] == last + 1:\n                count += 1\n            else:\n                gaps += (unique[j] - last - 1)\n                count += 1\n            last = unique[j]\n            if count >= 4:\n                # Approximate: if gaps==0 within 4-length -> open-ender\n                if gaps == 0:\n                    best = max(best, 0.17)\n                elif gaps == 1:\n                    best = max(best, 0.10)\n                # we don't break to see if a better draw appears\n            if count >= 5:\n                break\n    return best\n\n\nclass SimplePlayer(Bot):\n    def __init__(self):\n        super().__init__()\n        self.starting_chips: int = 0\n        self.blind_amount: int = 0  # assume small blind by default\n        self.big_blind_player_id: Optional[int] = None\n        self.small_blind_player_id: Optional[int] = None\n        self.all_players: List[int] = []\n        self.hand_round_num: Optional[int] = None\n        self.hole_cards: Optional[List[str]] = None\n        self.preflop_raiser: bool = False\n        self.last_action: Optional[PokerAction] = None\n        self.rng = random.Random(42)\n        self.big_blind_amount: int = 0\n\n    def on_start(self, starting_chips: int, player_hands: List[str], blind_amount: int,\n                 big_blind_player_id: int, small_blind_player_id: int, all_players: List[int]):\n        # Initialize match info\n        self.starting_chips = starting_chips\n        self.blind_amount = blind_amount if blind_amount is not None else 0\n        self.big_blind_amount = self.blind_amount * 2 if self.blind_amount else 0\n        self.big_blind_player_id = big_blind_player_id\n        self.small_blind_player_id = small_blind_player_id\n        self.all_players = list(all_players) if all_players else []\n        # Try to capture initial hand if provided (may vary per framework; guard for safety)\n        self.hole_cards = list(player_hands)[:2] if player_hands and len(player_hands) >= 2 else None\n        self.hand_round_num = None\n        self.preflop_raiser = False\n        self.last_action = None\n\n    def on_round_start(self, round_state: RoundStateClient, remaining_chips: int):\n        # New hand starting preflop; reset state\n        self.hand_round_num = round_state.round_num\n        # Attempt to extract hole cards from round_state if framework provides them\n        self.hole_cards = self._extract_hole_cards(round_state)\n        self.preflop_raiser = False\n        self.last_action = None\n        # Blind amounts may change with blinds increase; infer from min_raise if possible\n        try:\n            if round_state.min_raise and round_state.min_raise > 0:\n                # Many engines set min_raise equal to big blind preflop when no bet has been made\n                # Do not override if already set; just update heuristic big blind amount conservatively\n                self.big_blind_amount = max(self.big_blind_amount, round_state.min_raise)\n        except Exception:\n            pass\n\n    def get_action(self, round_state: RoundStateClient, remaining_chips: int) -> Tuple[PokerAction, int]:\n        \"\"\" Returns the action for the player. \"\"\"\n        try:\n            # Keep hole cards updated if provided later\n            if self.hand_round_num != round_state.round_num:\n                # New hand started without on_round_start? Reset\n                self.on_round_start(round_state, remaining_chips)\n\n            my_id_str = str(self.id)\n            my_bet = int(round_state.player_bets.get(my_id_str, 0)) if round_state.player_bets else 0\n            current_bet = int(round_state.current_bet) if round_state.current_bet is not None else 0\n            to_call = max(0, current_bet - my_bet)\n            can_check = (to_call == 0)\n            min_raise = int(round_state.min_raise) if round_state.min_raise is not None else 0\n            max_raise = max(0, int(round_state.max_raise) if round_state.max_raise is not None else 0)\n            pot = int(round_state.pot) if round_state.pot is not None else 0\n            community = list(round_state.community_cards) if round_state.community_cards else []\n            stage = (round_state.round or '').lower()  # 'Preflop','Flop','Turn','River'\n\n            # Active players estimation\n            active_players_count = self._estimate_active_players(round_state)\n\n            # Attempt to extract hole cards if not known\n            if self.hole_cards is None:\n                self.hole_cards = self._extract_hole_cards(round_state)\n\n            # Preflop strategy\n            if stage.startswith('pre'):\n                strength = self._preflop_strength(self.hole_cards) if self.hole_cards else 0.5\n                # Adjust strength a bit for table size (stronger HU, weaker multiway)\n                if active_players_count <= 2:\n                    strength += 0.02\n                else:\n                    strength -= min(0.04, (active_players_count - 2) * 0.01)\n                strength = max(0.0, min(1.0, strength))\n\n                # Preflop raise sizing heuristic\n                open_size = int(max(min_raise, self.big_blind_amount * 2.5)) if self.big_blind_amount > 0 else min_raise\n                three_bet_size = int(max(min_raise, to_call * 3))\n\n                if can_check:\n                    # Opportunity to open the pot\n                    if self._can_raise(min_raise, max_raise) and strength >= 0.62:\n                        amount = self._clamp_raise(open_size, min_raise, max_raise)\n                        self.preflop_raiser = True\n                        self.last_action = PokerAction.RAISE\n                        return PokerAction.RAISE, amount\n                    else:\n                        self.last_action = PokerAction.CHECK\n                        return PokerAction.CHECK, 0\n                else:\n                    # Facing a bet\n                    # Pot odds\n                    pot_odds = to_call / (pot + to_call + 1e-9)\n                    # Decide actions based on strength and cost\n                    # Strong hands can 3-bet\n                    if strength >= 0.75 and self._can_raise(min_raise, max_raise):\n                        amount = self._clamp_raise(three_bet_size, min_raise, max_raise)\n                        # If our desired raise equals max, consider all-in only if it equals our stack\n                        if amount >= max_raise and remaining_chips <= max_raise + 1:\n                            self.last_action = PokerAction.ALL_IN\n                            return PokerAction.ALL_IN, 0\n                        self.preflop_raiser = True\n                        self.last_action = PokerAction.RAISE\n                        return PokerAction.RAISE, amount\n                    # Medium strength: call if affordable\n                    call_threshold = 0.50 if to_call <= self.big_blind_amount * 2 else 0.57\n                    if strength >= call_threshold and pot_odds <= 0.45:\n                        self.last_action = PokerAction.CALL\n                        return PokerAction.CALL, 0\n                    # Cheap defend in big blind\n                    if to_call <= max(self.big_blind_amount, min_raise) and strength >= 0.48:\n                        self.last_action = PokerAction.CALL\n                        return PokerAction.CALL, 0\n                    # Otherwise fold\n                    self.last_action = PokerAction.FOLD\n                    return PokerAction.FOLD, 0\n\n            # Postflop strategy\n            # Estimate hand strength and draw strength\n            strength, draw_eq = self._postflop_strength(self.hole_cards, community)\n            # Adjust for heads-up slightly\n            if active_players_count <= 2:\n                strength += 0.01\n            else:\n                strength -= min(0.03, (active_players_count - 2) * 0.005)\n            strength = max(0.0, min(1.0, strength))\n\n            # Determine if we want to bet/raise\n            # Value thresholds\n            very_strong = strength >= 0.82\n            strong = strength >= 0.68\n            medium = strength >= 0.58\n            weak = strength < 0.45\n\n            # Compute pot odds when facing a bet\n            if not can_check:\n                pot_odds = to_call / (pot + to_call + 1e-9)\n                # If very strong: raise for value\n                if very_strong and self._can_raise(min_raise, max_raise):\n                    # Typical raise: 3x the bet or ~60% pot\n                    desired = max(int(to_call * 3), int(pot * 0.6))\n                    amount = self._clamp_raise(desired, min_raise, max_raise)\n                    # Consider jamming if short or amount equals max\n                    if amount >= max_raise and remaining_chips <= max_raise + 1:\n                        self.last_action = PokerAction.ALL_IN\n                        return PokerAction.ALL_IN, 0\n                    self.last_action = PokerAction.RAISE\n                    return PokerAction.RAISE, amount\n                # Strong hands: mostly call, sometimes raise small\n                if strong:\n                    # If bet is small relative to pot, call; otherwise call if pot odds ok\n                    if pot_odds <= 0.45 or to_call <= max(min_raise, self.big_blind_amount * 2):\n                        self.last_action = PokerAction.CALL\n                        return PokerAction.CALL, 0\n                    else:\n                        # Too expensive without nutted strength\n                        self.last_action = PokerAction.FOLD\n                        return PokerAction.FOLD, 0\n                # Draw-based decisions\n                if draw_eq > 0.0:\n                    # Effective equity is draw_eq; call if pot odds justify\n                    # Add a small bluff equity buffer\n                    if draw_eq + 0.03 >= pot_odds:\n                        self.last_action = PokerAction.CALL\n                        return PokerAction.CALL, 0\n                    else:\n                        self.last_action = PokerAction.FOLD\n                        return PokerAction.FOLD, 0\n                # Medium marginal hands: call cheap, fold expensive\n                if medium and pot_odds <= 0.35:\n                    self.last_action = PokerAction.CALL\n                    return PokerAction.CALL, 0\n                # Otherwise fold\n                self.last_action = PokerAction.FOLD\n                return PokerAction.FOLD, 0\n            else:\n                # We can check or bet\n                # Choose bet sizing as a fraction of pot; translate to raise amount\n                if very_strong and self._can_raise(min_raise, max_raise):\n                    desired = int(max(min_raise, pot * 0.65))\n                    amount = self._clamp_raise(desired, min_raise, max_raise)\n                    if amount >= max_raise and remaining_chips <= max_raise + 1:\n                        self.last_action = PokerAction.ALL_IN\n                        return PokerAction.ALL_IN, 0\n                    self.last_action = PokerAction.RAISE\n                    return PokerAction.RAISE, amount\n                # If we were preflop aggressor, consider c-bet with some frequency\n                if self.preflop_raiser and self._can_raise(min_raise, max_raise):\n                    # Semi-bluff or value bet with medium/strong or draws\n                    if strong or (medium and self.rng.random() < 0.5) or (draw_eq >= 0.10 and self.rng.random() < 0.6):\n                        desired = int(max(min_raise, pot * 0.5))\n                        amount = self._clamp_raise(desired, min_raise, max_raise)\n                        self.last_action = PokerAction.RAISE\n                        return PokerAction.RAISE, amount\n                # Otherwise check\n                self.last_action = PokerAction.CHECK\n                return PokerAction.CHECK, 0\n\n        except Exception:\n            # Fail-safe: never crash; choose a safe action\n            try:\n                # Try to determine if we can check\n                my_id_str = str(self.id)\n                my_bet = int(round_state.player_bets.get(my_id_str, 0)) if round_state.player_bets else 0\n                current_bet = int(round_state.current_bet) if round_state.current_bet is not None else 0\n                to_call = max(0, current_bet - my_bet)\n                if to_call == 0:\n                    return PokerAction.CHECK, 0\n                else:\n                    return PokerAction.FOLD, 0\n            except Exception:\n                return PokerAction.FOLD, 0\n\n    def on_end_round(self, round_state: RoundStateClient, remaining_chips: int):\n        \"\"\" Called at the end of the round. \"\"\"\n        # Reset per-hand states\n        self.hole_cards = None\n        self.hand_round_num = None\n        self.preflop_raiser = False\n        self.last_action = None\n\n    def on_end_game(self, round_state: RoundStateClient, player_score: float, all_scores: dict, active_players_hands: dict):\n        # Nothing special; keep stable and lightweight\n        pass\n\n    # ---------------- Helper methods ----------------\n\n    def _extract_hole_cards(self, round_state: RoundStateClient) -> Optional[List[str]]:\n        # Try various possible fields that may exist in different frameworks\n        try_fields = [\n            'hole_cards', 'hand', 'cards', 'private_cards', 'player_hands', 'my_cards'\n        ]\n        for field in try_fields:\n            if hasattr(round_state, field):\n                val = getattr(round_state, field)\n                if isinstance(val, list) and len(val) >= 2 and isinstance(val[0], str):\n                    return val[:2]\n                if isinstance(val, dict):\n                    # Maybe a dict of player_id -> hand\n                    my_key = str(self.id)\n                    if my_key in val and isinstance(val[my_key], list) and len(val[my_key]) >= 2:\n                        return val[my_key][:2]\n        return None\n\n    def _estimate_active_players(self, round_state: RoundStateClient) -> int:\n        # Estimate active players using player_actions if available; else fall back to all_players length\n        try:\n            if round_state.player_actions:\n                folded = 0\n                seen_ids = set()\n                for pid_str, act in round_state.player_actions.items():\n                    seen_ids.add(pid_str)\n                    if isinstance(act, str) and act.lower() == 'fold':\n                        folded += 1\n                if self.all_players:\n                    total = len(self.all_players)\n                else:\n                    total = len(seen_ids) if seen_ids else 2\n                active = max(2, total - folded)\n                return active\n        except Exception:\n            pass\n        return max(2, len(self.all_players)) if self.all_players else 2\n\n    def _preflop_strength(self, hole_cards: Optional[List[str]]) -> float:\n        if not hole_cards or len(hole_cards) < 2:\n            return 0.5\n        c1, c2 = hole_cards[0], hole_cards[1]\n        r1, r2 = card_rank(c1), card_rank(c2)\n        s1, s2 = card_suit(c1), card_suit(c2)\n        if r1 < r2:\n            r1, r2 = r2, r1  # r1 >= r2\n\n        suited = (s1 == s2)\n        gap = abs(r1 - r2) - 1\n        pair = (r1 == r2)\n\n        # Base strength\n        strength = 0.5\n        if pair:\n            if r1 >= 14:\n                strength = 0.99  # AA\n            elif r1 == 13:\n                strength = 0.93  # KK\n            elif r1 == 12:\n                strength = 0.90  # QQ\n            elif r1 == 11:\n                strength = 0.86  # JJ\n            elif r1 == 10:\n                strength = 0.82  # TT\n            elif r1 == 9:\n                strength = 0.76\n            elif r1 == 8:\n                strength = 0.72\n            elif r1 == 7:\n                strength = 0.66\n            elif r1 == 6:\n                strength = 0.60\n            elif r1 == 5:\n                strength = 0.56\n            else:\n                strength = 0.52\n        else:\n            high_combo = (r1 + r2) / 28.0  # normalized high card value\n            strength = 0.35 + 0.5 * high_combo\n            # Suited bonus\n            if suited:\n                strength += 0.03\n            # Connectivity bonus\n            if gap <= 0:\n                strength += 0.05\n            elif gap == 1:\n                strength += 0.03\n            elif gap == 2:\n                strength += 0.01\n            # Both T+ bonus\n            if r1 >= 10 and r2 >= 10:\n                strength += 0.08\n            # Ax suited bonus\n            if suited and r1 == 14:\n                strength += 0.04\n\n        return max(0.0, min(1.0, strength))\n\n    def _postflop_strength(self, hole_cards: Optional[List[str]], board: List[str]) -> Tuple[float, float]:\n        # Returns (strength in [0,1], draw_equity in [0, ~0.2])\n        if not board:\n            # No board given (shouldn't happen postflop), fallback to preflop\n            return (self._preflop_strength(hole_cards) if hole_cards else 0.5, 0.0)\n\n        # If we don't know our cards, be conservative: very weak baseline without hole info\n        if not hole_cards or len(hole_cards) < 2:\n            ranks = [card_rank(c) for c in board]\n            base = 0.4\n            # Board-based made hand detect\n            counts: Dict[int, int] = {}\n            suit_counts: Dict[str, int] = {}\n            for c in board:\n                r = card_rank(c)\n                s = card_suit(c)\n                counts[r] = counts.get(r, 0) + 1\n                suit_counts[s] = suit_counts.get(s, 0) + 1\n            max_count = max(counts.values()) if counts else 1\n            flush_board = max(suit_counts.values()) >= 5 if suit_counts else False\n            straight_board = has_straight(ranks)\n\n            if max_count >= 4:\n                base = 0.9\n            elif any(v >= 3 for v in counts.values()) and any(v >= 2 for v in counts.values()):\n                base = 0.88\n            elif flush_board:\n                base = 0.7\n            elif straight_board:\n                base = 0.65\n            elif any(v >= 3 for v in counts.values()):\n                base = 0.6\n            elif sum(1 for v in counts.values() if v >= 2) >= 2:\n                base = 0.55\n            elif any(v >= 2 for v in counts.values()):\n                base = 0.5\n            draw_eq = straight_draw_strength(ranks)\n            return max(0.0, min(1.0, base)), max(0.0, min(0.2, draw_eq))\n\n        # Combine hole + board\n        cards = hole_cards + board\n        ranks = [card_rank(c) for c in cards]\n        suits = [card_suit(c) for c in cards]\n        board_ranks = [card_rank(c) for c in board]\n        board_suits = [card_suit(c) for c in board]\n        my_r1, my_r2 = card_rank(hole_cards[0]), card_rank(hole_cards[1])\n        my_s1, my_s2 = card_suit(hole_cards[0]), card_suit(hole_cards[1])\n        board_max = max(board_ranks) if board_ranks else 0\n\n        counts: Dict[int, int] = {}\n        for r in ranks:\n            counts[r] = counts.get(r, 0) + 1\n        board_counts: Dict[int, int] = {}\n        for r in board_ranks:\n            board_counts[r] = board_counts.get(r, 0) + 1\n\n        suit_counts: Dict[str, int] = {}\n        for s in suits:\n            suit_counts[s] = suit_counts.get(s, 0) + 1\n        board_suit_counts: Dict[str, int] = {}\n        for s in board_suits:\n            board_suit_counts[s] = board_suit_counts.get(s, 0) + 1\n\n        max_count = max(counts.values()) if counts else 1\n        board_max_count = max(board_counts.values()) if board_counts else 1\n\n        # Flush/straight detection\n        flush_suit = None\n        for s, cnt in suit_counts.items():\n            if cnt >= 5:\n                flush_suit = s\n                break\n        board_flush_suit = None\n        for s, cnt in board_suit_counts.items():\n            if cnt >= 5:\n                board_flush_suit = s\n                break\n        have_flush = flush_suit is not None and (my_s1 == flush_suit or my_s2 == flush_suit)\n        board_only_flush = (board_flush_suit is not None) and not have_flush\n\n        straight_present = has_straight(ranks)\n        board_straight = has_straight(board_ranks) and not straight_present  # approximate\n\n        # Determine made hand category strength\n        strength = 0.4\n\n        # Quads\n        if max_count >= 4:\n            strength = 0.99\n        # Full house\n        elif any(v >= 3 for v in counts.values()) and sum(1 for v in counts.values() if v >= 2) >= 2:\n            strength = 0.95\n        # Flush\n        elif have_flush:\n            strength = 0.90\n        elif board_only_flush:\n            strength = 0.70\n        # Straight\n        elif straight_present:\n            strength = 0.85\n        elif board_straight:\n            strength = 0.65\n        # Trips\n        elif any(v >= 3 for v in counts.values()):\n            # If trips come from board only without our card contributing, it's weaker\n            trips_rank = max((r for r, v in counts.items() if v >= 3), default=None)\n            board_trips = trips_rank is not None and board_counts.get(trips_rank, 0) >= 3\n            if board_trips and my_r1 != trips_rank and my_r2 != trips_rank:\n                strength = 0.55\n            else:\n                strength = 0.80\n        # Two pair\n        elif sum(1 for v in counts.values() if v >= 2) >= 2:\n            # Check if at least one pair uses our hole cards\n            uses_hole = (board_counts.get(my_r1, 0) >= 1 or board_counts.get(my_r2, 0) >= 1) or (my_r1 == my_r2)\n            if uses_hole:\n                strength = 0.75\n            else:\n                strength = 0.50\n        # One pair / overpair / top pair\n        elif any(v >= 2 for v in counts.values()):\n            # Determine if it's an overpair or top pair\n            # Overpair: we hold a pocket pair above all board ranks\n            if my_r1 == my_r2 and my_r1 > board_max:\n                strength = 0.78\n            else:\n                # If our pair equals top board rank and our kicker good\n                pair_rank = next((r for r, v in counts.items() if v >= 2 and r in (my_r1, my_r2)), None)\n                if pair_rank is not None:\n                    if pair_rank == board_max:\n                        kicker = max(my_r1, my_r2) if (my_r1 != my_r2) else pair_rank\n                        kicker_strength = (kicker - 6) / 8.0  # scale from 6..14 -> 0..1\n                        strength = 0.60 + 0.05 * max(0.0, min(1.0, kicker_strength))\n                    else:\n                        # Middle/bottom pair\n                        if pair_rank >= 10:\n                            strength = 0.56\n                        elif pair_rank >= 7:\n                            strength = 0.52\n                        else:\n                            strength = 0.48\n                else:\n                    strength = 0.45\n        else:\n            # High card; if we have two overs to board, add a bit\n            over1 = my_r1 > board_max\n            over2 = my_r2 > board_max\n            if over1 and over2:\n                strength = 0.46\n            elif over1 or over2:\n                strength = 0.44\n            else:\n                strength = 0.35\n\n        # Draw equities\n        draw_eq = 0.0\n        # Flush draw (4 to a suit) and at least one of our hole cards in that suit\n        max_suit = None\n        max_suit_count = 0\n        for s, cnt in suit_counts.items():\n            if cnt > max_suit_count:\n                max_suit_count = cnt\n                max_suit = s\n        if max_suit_count == 4 and (my_s1 == max_suit or my_s2 == max_suit):\n            # Prefer nut flush draw (one of our cards is Ace of that suit)\n            is_nut_draw = (my_s1 == max_suit and my_r1 == 14) or (my_s2 == max_suit and my_r2 == 14)\n            draw_eq += 0.12 if is_nut_draw else 0.10\n\n        # Straight draws\n        draw_eq += straight_draw_strength(ranks)\n\n        # Small bonus for two overcards to board (turn+)\n        if len(board) >= 3:\n            overcards = int(my_r1 > board_max) + int(my_r2 > board_max)\n            if overcards >= 2:\n                draw_eq += 0.04\n            elif overcards == 1:\n                draw_eq += 0.02\n\n        draw_eq = max(0.0, min(0.20, draw_eq))\n        return max(0.0, min(1.0, strength)), draw_eq\n\n    def _can_raise(self, min_raise: int, max_raise: int) -> bool:\n        return min_raise is not None and max_raise is not None and min_raise > 0 and max_raise >= min_raise\n\n    def _clamp_raise(self, desired: int, min_raise: int, max_raise: int) -> int:\n        if not self._can_raise(min_raise, max_raise):\n            return 0\n        return max(min_raise, min(desired, max_raise))\n```\n\n```text\n```",
+        "role": "assistant"
+      },
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "input_tokens": 6290,
+    "input_tokens_details": {
+      "cached_tokens": 0
+    },
+    "output_tokens": 11727,
+    "output_tokens_details": {
+      "reasoning_tokens": 5312
+    },
+    "total_tokens": 18017
+  },
+  "model": "gpt-5-2025-08-07",
+  "id": "resp_6897f806d58c8192969196be94da994902283ccf2b69483c",
+  "object": "chat.completion",
+  "reasoning": {
+    "id": "rs_6897f80818e88192b57f822070ebdef602283ccf2b69483c",
+    "type": "reasoning",
+    "summary": []
+  }
+}
+    ================================================================================
+    

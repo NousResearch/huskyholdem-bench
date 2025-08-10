@@ -1,0 +1,9 @@
+[2025-08-09 18:15:56] Code validation failed: Validation error: Traceback (most recent call last):
+  File "/app/play_script.py", line 70, in <module>
+    main()
+  File "/app/play_script.py", line 51, in main
+    p.on_round_start(round_state, 990)
+  File "/app/player.py", line 35, in on_round_start
+    my_cards_str = round_state.player_hands.get(str(self.id))
+AttributeError: 'RoundStateClient' object has no attribute 'player_hands'. Did you mean: 'player_bets'?
+

@@ -1,0 +1,1086 @@
+
+    ================================================================================
+    TIMESTAMP: 2025-08-09 18:43:58
+    MODEL: openai/gpt-5 (OpenAI Direct API)
+    PROMPT LENGTH: 22199 characters
+    RESPONSE LENGTH: 13344 characters
+    USAGE: {
+  "input_tokens": 6362,
+  "input_tokens_details": {
+    "cached_tokens": 128
+  },
+  "output_tokens": 7970,
+  "output_tokens_details": {
+    "reasoning_tokens": 5056
+  },
+  "total_tokens": 14332
+}
+
+    PROMPT:
+    
+You are tasked with submitting a poker bot to a No-Limit Texas Hold'em poker bot competition: Husky Hold'em.
+
+**Detailed Game Rules**
+- No-Limit Texas Hold'em with 2-10 players (often 6-handed tables); bots compete in heads-up or multi-player matches hosted by a central game server.
+- Players start with $10,000 chips at the simulation start; simulations run for n games (more than 10 per run); blinds rotate and increase every n games (e.g., after certain rounds); big/small blinds are posted pre-flop.
+- Goal: Maximize delta money (ending chips minus starting chips); if a player runs out of chips, they are eliminated from that table; no rebuys.
+- Each hand has 4 betting rounds: Pre-flop (after hole cards and blinds), Flop (3 community cards), Turn (1 community card), River (1 community card).
+- Actions: Fold, Check, Call, Raise (any amount up to stack, no limit), All-in.
+- Hand rankings: Royal flush > Straight flush > Four of a kind > Full house > Flush > Straight > Three of a kind > Two pair > One pair > High card.
+- Showdown: If multiple players remain after river betting, best 5-card hand (using any combination of 2 hole cards + 5 community cards) wins the pot; side pots form for all-ins with eligible players.
+- Technical Limits: 30 seconds max per move (timeout causes automatic fold); 100MB max memory usage; any error/exception causes automatic fold; all bots are given the same compute limits.
+
+Your task: Implement winning bot in player.py by subclassing Bot as in the template below and follow the above game rules.
+
+Bot Design and Competition Rules:
+
+1. Your bot must subclass Bot as SimplePlayer, implementing all required methods exactly as in the template. Preserve the class name SimplePlayer for compatibility with the game server. The template for the class is as
+**SimplePlayer Template:**
+```python
+from typing import List, Tuple
+from bot import Bot
+from type.poker_action import PokerAction
+from type.round_state import RoundStateClient
+
+class SimplePlayer(Bot):
+    def __init__(self):
+        super().__init__()
+        # TODO implement this
+
+    def on_start(self, starting_chips: int, player_hands: List[str], blind_amount: int, big_blind_player_id: int, small_blind_player_id: int, all_players: List[int]):
+        # TODO implement this
+
+    def on_round_start(self, round_state: RoundStateClient, remaining_chips: int):
+        # TODO implement this
+
+    def get_action(self, round_state: RoundStateClient, remaining_chips: int) -> Tuple[PokerAction, int]:
+        """ Returns the action for the player. """
+        # TODO implement this
+
+    def on_end_round(self, round_state: RoundStateClient, remaining_chips: int):
+        """ Called at the end of the round. """
+        # TODO implement this
+
+    def on_end_game(self, round_state: RoundStateClient, player_score: float, all_scores: dict, active_players_hands: dict):
+        # TODO implement this
+```
+2. DO NOT rename or remove any predefined methods (on_start, on_round_start, get_action, on_end_round, on_end_game), and do not change their signatures.
+3. You may add helper functions and instance variables for strategy or tracking.
+4. Your bot should be able to abide by no limit texas hold'em rules and handle side pots, all-ins, blind increases, multi-way pots, and be error-free (no exceptions).
+5. For each action, always return valid actions:
+    - For RAISE: the amount raise combine with your current bet must be larger than the the current raise.
+    - For CALL: You don't need to specify the amount you call, it default to match exactly the amount needed to call (current_bet - your bet).
+    - For CHECK: You can't check if round's current bet is larger than 0. Resort to other action (eg CALL, RAISE, ALL_IN).
+    - For ALL_IN: You don't need to specify the amount you all in, it will default to all your current money.
+    - **INVALID ACTION WILL MAKE YOU LOSE MONEY (automatic result in fold if the condition is not match for each action), so logic must always check bounds and edge cases**.
+6. If you use any external libraries, they must be listed in requirements.txt (pure Python only).
+7. Implement your bot with SimplePlayer. See full RoundStateClient, PokerAction, and PokerRound definitions below.
+8. Your bot should maximize delta money (ending chips minus starting chips). Positive mean gaining money, the more money you gain the better.
+9. There might will be data on previous run (error and game score) if this is not the first time you implement. If there is error, fix it so your bot can run. Try to improve your bot from previous round.
+10. If there are no usage of external requirements, the text secion for requirement must be empty. DO NOT PUT ANYTHING ELSE. If you want to use any external library, you must put it in that text block
+11. Your response must consist ONLY of two files: the complete player.py (as a Python code block) implementing the bot with all template elements preserved plus your improvements, and requirements.txt (as a text block) listing any dependencies (pure Python only, e.g., numpy if needed for calculations). Do not include any other text, explanations, or outputs. See example response below:
+Example response:
+```python
+<Your python code>
+```
+
+```text
+numpy
+matplotlib
+<any external library you want to use, put it here>
+...
+```
+12. Your implementation MUST BE IN FULL not putting stub method or guideline. Everything in SimplePlayer must be ready to the detail and ready to run.
+13. When you do division, make sure to make it prone to error divide by zero by adding some small delta.
+14. The pool of submitted bots, including your bot, will be organized into 6-handed poker tables where every possible combination of 6 bots forms a separate table. Each table will play exactly 1,000 hands, with chip stacks carrying over between hands within the same table. 
+15. At the end of each table, delta money is calculated for each bot using the formula: final chip count minus 10,000 (initial chip amount). Your bot's total tournament score is determined by summing its delta money across all tables it participates in. The bot with the highest cumulative delta money across all tables wins the tournament.
+16. Your bot will undergo iterative testing across 5 rounds, where each round involves playing 10 hands of heads-up poker against a house bot. After each round, you will receive either the complete game log showing performance results or any compilation/simulation errors that occurred while attempting to run your bot. Use this feedback to refine your implementation in subsequent iterations.
+
+**References**
+
+**RoundStateClient Full Definition:**
+```python
+from dataclasses import dataclass
+from typing import Dict, List, Any
+
+@dataclass
+class RoundStateClient:
+    round_num: int # The number of the current round
+    round: str # e.g., 'Preflop', 'Flop', 'Turn', 'River'
+    community_cards: List[str] # List of community cards, e.g., ['Ah', 'Ks', '3d']
+    pot: int # The total pot
+    current_player: List[int] # The ids of the current players
+    current_bet: int # The current bet (need to match round's current bet minus your current bet if you want to call)
+    min_raise: int  # Minimum raise amount
+    max_raise: int  # Maximum raise amount (your remaining chips)
+    player_bets: Dict[str, int]  # Bets by player ID
+    player_actions: Dict[str, str]  # Actions by player ID, e.g., {'3336760419': 'Check', '3266396022': 'Check'}
+    side_pots: list[Dict[str, any]] = None  # List of dicts with 'amount' and 'eligible_players' keys
+
+    @classmethod
+    def from_message(cls, message: Dict[str, Any]) -> 'RoundStateClient':
+        """Create RoundStateClient from a message dictionary"""
+        return cls(
+            round_num=message['round_num'],
+            round=message['round'],
+            community_cards=message['community_cards'],
+            pot=message['pot'],
+            current_player=message['current_player'],
+            current_bet=message['current_bet'],
+            min_raise=message['min_raise'],
+            max_raise=message['max_raise'],
+            player_bets=message['player_bets'],
+            player_actions=message['player_actions'],
+            side_pots=message.get('side_pots', [])
+        )
+```
+
+**PokerAction and PokerRound Enums:**
+```python
+from enum import Enum
+
+class PokerAction(Enum):
+    FOLD = 1
+    CHECK = 2
+    CALL = 3
+    RAISE = 4
+    ALL_IN = 5
+
+class PokerRound(Enum):
+    PREFLOP = 0
+    FLOP = 1
+    TURN = 2
+    RIVER = 3
+```
+
+**Bot abstract class:**
+```python
+from abc import ABC, abstractmethod
+from typing import List, Tuple
+
+from type.round_state import RoundStateClient
+from type.poker_action import PokerAction
+
+class Bot(ABC):
+    def __init__(self) -> None:
+        """ Initializes the player. """
+        self.id = None
+        pass
+
+    def set_id(self, player_id: int) -> None:
+        """ Sets the player ID. """
+        self.id = player_id
+
+    @abstractmethod
+    def on_start(self, starting_chips: int, player_hands: List[str], blind_amount: int, big_blind_player_id: int, small_blind_player_id: int, all_players: List[int]) -> None:
+        """ Called when the game starts. """
+        pass
+
+    @abstractmethod
+    def on_round_start(self, round_state: RoundStateClient, remaining_chips: int) -> None:
+        """ Called at the start of each round. """
+        pass
+
+    @abstractmethod
+    def get_action(self, round_state: RoundStateClient, remaining_chips: int) -> Tuple[PokerAction, int]:
+        """ Called when it is the player's turn to act. """
+        pass
+
+    @abstractmethod
+    def on_end_round(self, round_state: RoundStateClient, remaining_chips: int) -> None:
+        """ Called at the end of each round. """
+        pass
+
+    @abstractmethod
+    def on_end_game(self, round_state: RoundStateClient, player_score: float, all_scores: dict, active_players_hands: dict) -> None:
+        """ Called at the end of the game. """
+        pass
+```
+
+ITERATION 4 FEEDBACK AND IMPROVEMENT REQUEST:
+You are now working on iteration 4. Based on the previous iteration results and code, please improve the implementation.
+
+PREVIOUS RESULTS:
+- Success: True
+- Error Message: 
+
+ERRORS ENCOUNTERED:
+Game Test Results for Iteration 3 - 2025-08-09 18:41:57
+============================================================
+
+No errors detected during game test.
+
+CONTAINER LOGS:
+--------------------
+Test Client Logs:
+
+
+
+POKER CLIENT LOGS:
+--------------------
+Poker Client Log: No critical errors detected in poker client logs
+
+
+
+Please fix these specific errors in your implementation.
+
+GAME PERFORMANCE DATA:
+
+YOUR BOT PLAYER IDS: [2956929078]
+When analyzing the game data below, focus on these player IDs as they represent YOUR bot's performance.
+
+
+YOUR BOT PERFORMANCE SUMMARY (across 10 games):
+- Average Game Score (Delta per Game): -10.00
+- Total Game Score: -100.00
+- Total Games Played: 10
+
+Performance Analysis:
+- Positive scores indicate profit per game
+- Negative scores indicate losses per game
+- Focus on improving average game score for better performance
+
+[
+  {
+    "gameId": "6bfdeff8-0202-471e-aaaa-79c307079878",
+    "players": {
+      "default": 3255931163,
+      "client_container_5039_test_client_test_openai_gpt_5_iter_3_20250809_184140_iter3": 2956929078
+    },
+    "playerNames": {
+      "3255931162": "player3255931163",
+      "2956929077": "player2956929078"
+    },
+    "finalMoney": {
+      "3255931163": 10010,
+      "2956929078": 9990
+    },
+    "finalDelta": {
+      "3255931163": 10,
+      "2956929078": -10
+    },
+    "gameScores": {
+      "3255931163": 10,
+      "2956929078": -10
+    },
+    "rounds": 2,
+    "finalBoard": [
+      "Ac",
+      "2c",
+      "9h",
+      "6c"
+    ],
+    "playerHands": {
+      "3255931162": [
+        "2s",
+        "Th"
+      ],
+      "2956929077": [
+        "3d",
+        "Jd"
+      ]
+    },
+    "blinds": {
+      "small": 5,
+      "big": 10
+    },
+    "botPlayerId": 2956929078,
+    "botPerformance": {
+      "finalMoney": 9990,
+      "finalDelta": -10,
+      "gameScore": -10
+    }
+  },
+  {
+    "gameId": "6bfdeff8-0202-471e-aaaa-79c307079878",
+    "players": {
+      "default": 3255931163,
+      "client_container_5039_test_client_test_openai_gpt_5_iter_3_20250809_184140_iter3": 2956929078
+    },
+    "playerNames": {
+      "3255931162": "player3255931163",
+      "2956929077": "player2956929078"
+    },
+    "finalMoney": {
+      "3255931163": 10100,
+      "2956929078": 9900
+    },
+    "finalDelta": {
+      "3255931163": 100,
+      "2956929078": -100
+    },
+    "gameScores": {
+      "3255931163": 10,
+      "2956929078": -10
+    },
+    "rounds": 2,
+    "finalBoard": [
+      "9d",
+      "5d",
+      "Ts",
+      "2d"
+    ],
+    "playerHands": {
+      "3255931162": [
+        "4h",
+        "Qh"
+      ],
+      "2956929077": [
+        "2h",
+        "3c"
+      ]
+    },
+    "blinds": {
+      "small": 5,
+      "big": 10
+    },
+    "botPlayerId": 2956929078,
+    "botPerformance": {
+      "finalMoney": 9900,
+      "finalDelta": -100,
+      "gameScore": -10
+    }
+  },
+  {
+    "gameId": "6bfdeff8-0202-471e-aaaa-79c307079878",
+    "players": {
+      "default": 3255931163,
+      "client_container_5039_test_client_test_openai_gpt_5_iter_3_20250809_184140_iter3": 2956929078
+    },
+    "playerNames": {
+      "3255931162": "player3255931163",
+      "2956929077": "player2956929078"
+    },
+    "finalMoney": {
+      "3255931163": 10020,
+      "2956929078": 9980
+    },
+    "finalDelta": {
+      "3255931163": 20,
+      "2956929078": -20
+    },
+    "gameScores": {
+      "3255931163": 10,
+      "2956929078": -10
+    },
+    "rounds": 2,
+    "finalBoard": [
+      "3c",
+      "2s",
+      "8d",
+      "2h"
+    ],
+    "playerHands": {
+      "3255931162": [
+        "Tc",
+        "Kh"
+      ],
+      "2956929077": [
+        "4h",
+        "5h"
+      ]
+    },
+    "blinds": {
+      "small": 5,
+      "big": 10
+    },
+    "botPlayerId": 2956929078,
+    "botPerformance": {
+      "finalMoney": 9980,
+      "finalDelta": -20,
+      "gameScore": -10
+    }
+  },
+  {
+    "gameId": "6bfdeff8-0202-471e-aaaa-79c307079878",
+    "players": {
+      "default": 3255931163,
+      "client_container_5039_test_client_test_openai_gpt_5_iter_3_20250809_184140_iter3": 2956929078
+    },
+    "playerNames": {
+      "3255931162": "player3255931163",
+      "2956929077": "player2956929078"
+    },
+    "finalMoney": {
+      "3255931163": 10030,
+      "2956929078": 9970
+    },
+    "finalDelta": {
+      "3255931163": 30,
+      "2956929078": -30
+    },
+    "gameScores": {
+      "3255931163": 10,
+      "2956929078": -10
+    },
+    "rounds": 2,
+    "finalBoard": [
+      "4h",
+      "2h",
+      "9h",
+      "Jh"
+    ],
+    "playerHands": {
+      "3255931162": [
+        "Qh",
+        "Ad"
+      ],
+      "2956929077": [
+        "6c",
+        "Ks"
+      ]
+    },
+    "blinds": {
+      "small": 5,
+      "big": 10
+    },
+    "botPlayerId": 2956929078,
+    "botPerformance": {
+      "finalMoney": 9970,
+      "finalDelta": -30,
+      "gameScore": -10
+    }
+  },
+  {
+    "gameId": "6bfdeff8-0202-471e-aaaa-79c307079878",
+    "players": {
+      "default": 3255931163,
+      "client_container_5039_test_client_test_openai_gpt_5_iter_3_20250809_184140_iter3": 2956929078
+    },
+    "playerNames": {
+      "3255931162": "player3255931163",
+      "2956929077": "player2956929078"
+    },
+    "finalMoney": {
+      "3255931163": 10040,
+      "2956929078": 9960
+    },
+    "finalDelta": {
+      "3255931163": 40,
+      "2956929078": -40
+    },
+    "gameScores": {
+      "3255931163": 10,
+      "2956929078": -10
+    },
+    "rounds": 2,
+    "finalBoard": [
+      "Ac",
+      "2d",
+      "8s",
+      "4d"
+    ],
+    "playerHands": {
+      "3255931162": [
+        "Qs",
+        "Qh"
+      ],
+      "2956929077": [
+        "Jd",
+        "As"
+      ]
+    },
+    "blinds": {
+      "small": 5,
+      "big": 10
+    },
+    "botPlayerId": 2956929078,
+    "botPerformance": {
+      "finalMoney": 9960,
+      "finalDelta": -40,
+      "gameScore": -10
+    }
+  },
+  {
+    "gameId": "6bfdeff8-0202-471e-aaaa-79c307079878",
+    "players": {
+      "default": 3255931163,
+      "client_container_5039_test_client_test_openai_gpt_5_iter_3_20250809_184140_iter3": 2956929078
+    },
+    "playerNames": {
+      "3255931162": "player3255931163",
+      "2956929077": "player2956929078"
+    },
+    "finalMoney": {
+      "3255931163": 10050,
+      "2956929078": 9950
+    },
+    "finalDelta": {
+      "3255931163": 50,
+      "2956929078": -50
+    },
+    "gameScores": {
+      "3255931163": 10,
+      "2956929078": -10
+    },
+    "rounds": 2,
+    "finalBoard": [
+      "Kh",
+      "4s",
+      "Ts",
+      "Ac"
+    ],
+    "playerHands": {
+      "3255931162": [
+        "4d",
+        "Qh"
+      ],
+      "2956929077": [
+        "3c",
+        "Td"
+      ]
+    },
+    "blinds": {
+      "small": 5,
+      "big": 10
+    },
+    "botPlayerId": 2956929078,
+    "botPerformance": {
+      "finalMoney": 9950,
+      "finalDelta": -50,
+      "gameScore": -10
+    }
+  },
+  {
+    "gameId": "6bfdeff8-0202-471e-aaaa-79c307079878",
+    "players": {
+      "default": 3255931163,
+      "client_container_5039_test_client_test_openai_gpt_5_iter_3_20250809_184140_iter3": 2956929078
+    },
+    "playerNames": {
+      "3255931162": "player3255931163",
+      "2956929077": "player2956929078"
+    },
+    "finalMoney": {
+      "3255931163": 10060,
+      "2956929078": 9940
+    },
+    "finalDelta": {
+      "3255931163": 60,
+      "2956929078": -60
+    },
+    "gameScores": {
+      "3255931163": 10,
+      "2956929078": -10
+    },
+    "rounds": 2,
+    "finalBoard": [
+      "3s",
+      "Qd",
+      "3d",
+      "6s"
+    ],
+    "playerHands": {
+      "3255931162": [
+        "Kh",
+        "Qs"
+      ],
+      "2956929077": [
+        "6d",
+        "As"
+      ]
+    },
+    "blinds": {
+      "small": 5,
+      "big": 10
+    },
+    "botPlayerId": 2956929078,
+    "botPerformance": {
+      "finalMoney": 9940,
+      "finalDelta": -60,
+      "gameScore": -10
+    }
+  },
+  {
+    "gameId": "6bfdeff8-0202-471e-aaaa-79c307079878",
+    "players": {
+      "default": 3255931163,
+      "client_container_5039_test_client_test_openai_gpt_5_iter_3_20250809_184140_iter3": 2956929078
+    },
+    "playerNames": {
+      "3255931162": "player3255931163",
+      "2956929077": "player2956929078"
+    },
+    "finalMoney": {
+      "3255931163": 10070,
+      "2956929078": 9930
+    },
+    "finalDelta": {
+      "3255931163": 70,
+      "2956929078": -70
+    },
+    "gameScores": {
+      "3255931163": 10,
+      "2956929078": -10
+    },
+    "rounds": 2,
+    "finalBoard": [
+      "2s",
+      "Ad",
+      "Jh",
+      "9c"
+    ],
+    "playerHands": {
+      "3255931162": [
+        "8h",
+        "Qd"
+      ],
+      "2956929077": [
+        "7s",
+        "4s"
+      ]
+    },
+    "blinds": {
+      "small": 5,
+      "big": 10
+    },
+    "botPlayerId": 2956929078,
+    "botPerformance": {
+      "finalMoney": 9930,
+      "finalDelta": -70,
+      "gameScore": -10
+    }
+  },
+  {
+    "gameId": "6bfdeff8-0202-471e-aaaa-79c307079878",
+    "players": {
+      "default": 3255931163,
+      "client_container_5039_test_client_test_openai_gpt_5_iter_3_20250809_184140_iter3": 2956929078
+    },
+    "playerNames": {
+      "3255931162": "player3255931163",
+      "2956929077": "player2956929078"
+    },
+    "finalMoney": {
+      "3255931163": 10080,
+      "2956929078": 9920
+    },
+    "finalDelta": {
+      "3255931163": 80,
+      "2956929078": -80
+    },
+    "gameScores": {
+      "3255931163": 10,
+      "2956929078": -10
+    },
+    "rounds": 2,
+    "finalBoard": [
+      "8h",
+      "6h",
+      "4s",
+      "Kd"
+    ],
+    "playerHands": {
+      "3255931162": [
+        "As",
+        "5c"
+      ],
+      "2956929077": [
+        "2d",
+        "2s"
+      ]
+    },
+    "blinds": {
+      "small": 5,
+      "big": 10
+    },
+    "botPlayerId": 2956929078,
+    "botPerformance": {
+      "finalMoney": 9920,
+      "finalDelta": -80,
+      "gameScore": -10
+    }
+  },
+  {
+    "gameId": "6bfdeff8-0202-471e-aaaa-79c307079878",
+    "players": {
+      "default": 3255931163,
+      "client_container_5039_test_client_test_openai_gpt_5_iter_3_20250809_184140_iter3": 2956929078
+    },
+    "playerNames": {
+      "3255931162": "player3255931163",
+      "2956929077": "player2956929078"
+    },
+    "finalMoney": {
+      "3255931163": 10090,
+      "2956929078": 9910
+    },
+    "finalDelta": {
+      "3255931163": 90,
+      "2956929078": -90
+    },
+    "gameScores": {
+      "3255931163": 10,
+      "2956929078": -10
+    },
+    "rounds": 2,
+    "finalBoard": [
+      "5c",
+      "Ah",
+      "Js",
+      "6d"
+    ],
+    "playerHands": {
+      "3255931162": [
+        "9h",
+        "Qh"
+      ],
+      "2956929077": [
+        "3d",
+        "Ac"
+      ]
+    },
+    "blinds": {
+      "small": 5,
+      "big": 10
+    },
+    "botPlayerId": 2956929078,
+    "botPerformance": {
+      "finalMoney": 9910,
+      "finalDelta": -90,
+      "gameScore": -10
+    }
+  }
+]
+
+IMPORTANT: When analyzing the game performance data above, focus on the player ID that corresponds to YOUR bot implementation.
+Look for your bot's performance in the 'gameScores' field, which shows the delta gain/loss for each individual game.
+
+PERFORMANCE METRICS EXPLANATION:
+- 'gameScores': Shows the profit/loss for each individual game (this is what matters most)
+- Positive gameScore = Profit in that game
+- Negative gameScore = Loss in that game
+- Focus on improving your strategy to achieve positive gameScores consistently
+
+Please analyze YOUR bot's gameScore performance and improve the strategy based on these results.
+
+POKER CLIENT ERRORS:
+No critical errors detected in poker client logs
+
+Please investigate these errors in your poker client logs and fix any issues in your implementation.
+
+IMPROVEMENT INSTRUCTIONS:
+1. You are on iteration 4 - build upon the previous code
+2. Analyze the errors and game performance data above
+3. Fix any syntax, import, or runtime errors from the previous iteration
+4. Improve the poker strategy based on game results
+5. Ensure the code follows the exact template requirements
+6. Return the improved implementation in the same format (Python code block + requirements.txt block)
+
+Focus on making the bot more competitive and error-free. You can see exactly what was wrong with the previous version and should fix those specific issues.
+
+
+    RESPONSE:
+    ```python
+import random
+from typing import List, Tuple, Dict, Any, Optional
+
+from bot import Bot
+from type.poker_action import PokerAction
+from type.round_state import RoundStateClient
+
+
+class SimplePlayer(Bot):
+    def __init__(self):
+        super().__init__()
+        # Configuration parameters
+        self.starting_chips: int = 0
+        self.blind_amount: int = 0  # small blind (assumed)
+        self.big_blind_player_id: Optional[int] = None
+        self.small_blind_player_id: Optional[int] = None
+        self.all_players: List[int] = []
+
+        # Per-hand state
+        self.was_raiser_preflop: bool = False
+        self.hole_cards: List[str] = []  # if provided by the engine
+
+        # Session tracking
+        self.hands_played: int = 0
+        self.total_profit: int = 0
+
+        # RNG for mixed strategies
+        self.rng = random.Random(17)
+
+    def on_start(
+        self,
+        starting_chips: int,
+        player_hands: List[str],
+        blind_amount: int,
+        big_blind_player_id: int,
+        small_blind_player_id: int,
+        all_players: List[int]
+    ):
+        self.starting_chips = starting_chips
+        self.blind_amount = blind_amount or 1
+        self.big_blind_player_id = big_blind_player_id
+        self.small_blind_player_id = small_blind_player_id
+        self.all_players = list(all_players) if all_players is not None else []
+
+        # If engine provides initial hole cards, store them; otherwise keep empty safely
+        self.hole_cards = list(player_hands) if player_hands else []
+
+        # Seed RNG deterministically by player id for reproducibility
+        try:
+            if self.id is not None:
+                self.rng.seed(self.id)
+        except Exception:
+            # Fallback to default seed
+            pass
+
+    def on_round_start(self, round_state: RoundStateClient, remaining_chips: int):
+        # Reset per-round flags
+        self.was_raiser_preflop = False
+        # Try to infer blinds dynamically if possible (in case of blind increase)
+        try:
+            # If preflop and current_bet == 0, min_raise is often big blind value.
+            # Update blind if the min_raise looks reasonable.
+            if str(round_state.round).lower().startswith('pre'):
+                if round_state.min_raise and round_state.min_raise > 0:
+                    # Big blind approximated by min_raise at unopened pot
+                    # We keep small blind as max(1, big blind // 2) for sizing heuristics
+                    # but we only store small blind; big blind inferred as 2*blind_amount
+                    self.blind_amount = max(1, round_state.min_raise // 2)
+        except Exception:
+            pass
+
+        # If engine passes our cards in some form per round, we would update here.
+        # Since interface does not specify, we keep stored hole_cards as given (may be empty).
+
+    def get_action(self, round_state: RoundStateClient, remaining_chips: int) -> Tuple[PokerAction, int]:
+        # Core decision logic with robust guards against invalid actions.
+        try:
+            my_id_str = str(self.id)
+            me_bet = int(round_state.player_bets.get(my_id_str, 0)) if round_state.player_bets else 0
+            current_bet = int(round_state.current_bet or 0)
+            pot = int(round_state.pot or 0)
+            min_raise = int(round_state.min_raise or 0)
+            max_raise = int(round_state.max_raise or 0)
+            eps = 1e-9
+
+            amount_to_call = max(0, current_bet - me_bet)
+
+            # Determine phase
+            street_name = str(round_state.round or "").lower()
+            is_preflop = 'pre' in street_name
+            is_flop = 'flop' in street_name
+            is_turn = 'turn' in street_name
+            is_river = 'river' in street_name
+
+            # Count active players if possible
+            active_player_count = self._estimate_active_players(round_state)
+
+            # Pot odds for calls
+            call_pot_odds = amount_to_call / max(1.0, pot + amount_to_call + eps)
+
+            # Strategy thresholds
+            # Heads-up we open a lot, multiway we tighten
+            if active_player_count <= 2:
+                open_raise_freq = 0.70
+                cbet_freq = 0.60
+                stab_freq = 0.25
+                call_small_bet_thresh = 0.30  # fraction of pot
+            else:
+                open_raise_freq = 0.25
+                cbet_freq = 0.45
+                stab_freq = 0.15
+                call_small_bet_thresh = 0.25
+
+            # Sizing helpers
+            # Default raise_by minimal to ensure validity and reduce risk of invalid raise sizes
+            def choose_raise_by(target_fraction_of_pot: float, min_bb_multiple: float = 2.5) -> Optional[int]:
+                # Compute a target size in chips for raise_by. It must be in [min_raise, max_raise].
+                # When unopened (amount_to_call == 0), min_raise is usually big blind.
+                # We try to size either by pot faction or blind multiple; default fallback to min_raise.
+                target_by_pot = int(max(1, target_fraction_of_pot * max(pot, 1)))
+                target_by_bb = int(max(1, min_bb_multiple * max(self.blind_amount, 1)))
+                desired = max(target_by_pot, target_by_bb, min_raise)
+
+                # Ensure validity bounds
+                if max_raise < 1:
+                    return None
+                desired = min(desired, max_raise)
+                desired = max(desired, min_raise)
+                if desired < min_raise or desired > max_raise:
+                    return None
+                return desired
+
+            # Decide action
+            if amount_to_call == 0:
+                # We may CHECK or RAISE
+                if is_preflop:
+                    # Open-raise mix
+                    if self.rng.random() < open_raise_freq and min_raise > 0 and max_raise >= min_raise:
+                        # Prefer a 2.5bb-3bb open
+                        raise_by = choose_raise_by(target_fraction_of_pot=0.0, min_bb_multiple=2.5 + self.rng.random() * 0.7)
+                        if raise_by is None:
+                            return PokerAction.CHECK, 0
+                        self.was_raiser_preflop = True
+                        return PokerAction.RAISE, int(raise_by)
+                    else:
+                        return PokerAction.CHECK, 0
+                else:
+                    # Post-flop: if we were the preflop raiser, c-bet with some frequency
+                    if self.was_raiser_preflop and (is_flop or is_turn) and min_raise > 0 and max_raise >= min_raise:
+                        if self.rng.random() < cbet_freq:
+                            # C-bet about 50-70% pot as raise_by (model as raise increment)
+                            frac = 0.5 + 0.2 * self.rng.random()
+                            raise_by = choose_raise_by(target_fraction_of_pot=frac)
+                            if raise_by is not None:
+                                return PokerAction.RAISE, int(raise_by)
+                    # If checked to us and no prior raise, occasionally stab
+                    if (is_flop or is_turn) and self.rng.random() < stab_freq and min_raise > 0 and max_raise >= min_raise:
+                        frac = 0.4 + 0.2 * self.rng.random()
+                        raise_by = choose_raise_by(target_fraction_of_pot=frac)
+                        if raise_by is not None:
+                            return PokerAction.RAISE, int(raise_by)
+                    # Otherwise check back
+                    return PokerAction.CHECK, 0
+            else:
+                # We face a bet; options: CALL/RAISE/FOLD
+                # Heuristic: Small bets -> call more; large bets -> fold; occasionally bluff-raise small bets
+                bet_fraction_of_pot = amount_to_call / max(1.0, pot + eps)
+
+                # Preflop defense
+                if is_preflop:
+                    # If small raise size preflop and heads-up, call mixed; small chance to 3-bet
+                    if bet_fraction_of_pot <= 0.5:
+                        if self.rng.random() < 0.55:
+                            # Call
+                            return PokerAction.CALL, 0
+                        # 3-bet bluff occasionally
+                        if min_raise > 0 and max_raise >= min_raise and self.rng.random() < 0.15:
+                            # 3-bet: aim for 3x the amount_to_call as raise increment if possible
+                            desired = max(min_raise, int(2.0 * amount_to_call))
+                            desired = min(desired, max_raise)
+                            if desired >= min_raise:
+                                self.was_raiser_preflop = True
+                                return PokerAction.RAISE, int(desired)
+                        # Otherwise fold
+                        return PokerAction.FOLD, 0
+                    else:
+                        # Big preflop bet faced: mostly fold; rare all-in with tiny prob if short
+                        if remaining_chips <= max(self.blind_amount * 10, 20) and self.rng.random() < 0.05:
+                            return PokerAction.ALL_IN, 0
+                        return PokerAction.FOLD, 0
+                else:
+                    # Post-flop defense
+                    # Call if small bet and pot odds reasonable
+                    if bet_fraction_of_pot <= call_small_bet_thresh:
+                        # Mix of calls and small raises as bluffs
+                        roll = self.rng.random()
+                        if roll < 0.70:
+                            return PokerAction.CALL, 0
+                        elif roll < 0.80 and min_raise > 0 and max_raise >= min_raise:
+                            # Small bluff-raise with low frequency
+                            desired = max(min_raise, int(0.5 * max(1, pot)))
+                            desired = min(desired, max_raise)
+                            if desired >= min_raise:
+                                return PokerAction.RAISE, int(desired)
+                        else:
+                            return PokerAction.CALL, 0
+                    else:
+                        # For medium to large bets, compare pot odds threshold
+                        # Without hole cards, be conservative: fold more to big bets; occasionally call
+                        threshold = 0.28 if is_flop else (0.22 if is_turn else 0.18)
+                        if call_pot_odds <= threshold and self.rng.random() < 0.40:
+                            return PokerAction.CALL, 0
+                        # Rare hero-call on river if bet is tiny relative to pot
+                        if is_river and bet_fraction_of_pot <= 0.15 and self.rng.random() < 0.35:
+                            return PokerAction.CALL, 0
+                        # Rare all-in bluff if very short and multiway collapsed
+                        if remaining_chips <= max(self.blind_amount * 8, 16) and self.rng.random() < 0.03:
+                            return PokerAction.ALL_IN, 0
+                        return PokerAction.FOLD, 0
+
+        except Exception:
+            # Safe fallback to avoid invalid actions
+            try:
+                # Attempt to check if possible, else fold
+                my_id_str = str(self.id)
+                me_bet = int(round_state.player_bets.get(my_id_str, 0)) if round_state.player_bets else 0
+                current_bet = int(round_state.current_bet or 0)
+                amount_to_call = max(0, current_bet - me_bet)
+                if amount_to_call == 0:
+                    return PokerAction.CHECK, 0
+                else:
+                    return PokerAction.FOLD, 0
+            except Exception:
+                return PokerAction.FOLD, 0
+
+    def on_end_round(self, round_state: RoundStateClient, remaining_chips: int):
+        # Update session stats if possible
+        try:
+            if self.starting_chips:
+                # This relies on per-round deltas being available as remaining_chips drift
+                pass
+            self.hands_played += 1
+        except Exception:
+            pass
+
+    def on_end_game(self, round_state: RoundStateClient, player_score: float, all_scores: dict, active_players_hands: dict):
+        try:
+            # player_score is delta money across the game
+            self.total_profit += int(player_score or 0)
+        except Exception:
+            pass
+
+    # ---------------- Helper methods ----------------
+
+    def _estimate_active_players(self, round_state: RoundStateClient) -> int:
+        # Try to estimate number of active players (not folded)
+        try:
+            # If player_actions exist, count those not folded
+            if round_state.player_actions:
+                not_folded = 0
+                for k, v in round_state.player_actions.items():
+                    if str(v).lower() != 'fold':
+                        not_folded += 1
+                # If zero (no actions yet), fallback
+                if not_folded > 0:
+                    return not_folded
+            # Fallback to number of betting entries or current players list length
+            if round_state.current_player:
+                return max(2, len(round_state.current_player))
+            if round_state.player_bets:
+                return max(2, len(round_state.player_bets))
+        except Exception:
+            pass
+        return 2
+```
+
+```text
+```
+
+    RAW API RESPONSE:
+    {
+  "choices": [
+    {
+      "message": {
+        "content": "```python\nimport random\nfrom typing import List, Tuple, Dict, Any, Optional\n\nfrom bot import Bot\nfrom type.poker_action import PokerAction\nfrom type.round_state import RoundStateClient\n\n\nclass SimplePlayer(Bot):\n    def __init__(self):\n        super().__init__()\n        # Configuration parameters\n        self.starting_chips: int = 0\n        self.blind_amount: int = 0  # small blind (assumed)\n        self.big_blind_player_id: Optional[int] = None\n        self.small_blind_player_id: Optional[int] = None\n        self.all_players: List[int] = []\n\n        # Per-hand state\n        self.was_raiser_preflop: bool = False\n        self.hole_cards: List[str] = []  # if provided by the engine\n\n        # Session tracking\n        self.hands_played: int = 0\n        self.total_profit: int = 0\n\n        # RNG for mixed strategies\n        self.rng = random.Random(17)\n\n    def on_start(\n        self,\n        starting_chips: int,\n        player_hands: List[str],\n        blind_amount: int,\n        big_blind_player_id: int,\n        small_blind_player_id: int,\n        all_players: List[int]\n    ):\n        self.starting_chips = starting_chips\n        self.blind_amount = blind_amount or 1\n        self.big_blind_player_id = big_blind_player_id\n        self.small_blind_player_id = small_blind_player_id\n        self.all_players = list(all_players) if all_players is not None else []\n\n        # If engine provides initial hole cards, store them; otherwise keep empty safely\n        self.hole_cards = list(player_hands) if player_hands else []\n\n        # Seed RNG deterministically by player id for reproducibility\n        try:\n            if self.id is not None:\n                self.rng.seed(self.id)\n        except Exception:\n            # Fallback to default seed\n            pass\n\n    def on_round_start(self, round_state: RoundStateClient, remaining_chips: int):\n        # Reset per-round flags\n        self.was_raiser_preflop = False\n        # Try to infer blinds dynamically if possible (in case of blind increase)\n        try:\n            # If preflop and current_bet == 0, min_raise is often big blind value.\n            # Update blind if the min_raise looks reasonable.\n            if str(round_state.round).lower().startswith('pre'):\n                if round_state.min_raise and round_state.min_raise > 0:\n                    # Big blind approximated by min_raise at unopened pot\n                    # We keep small blind as max(1, big blind // 2) for sizing heuristics\n                    # but we only store small blind; big blind inferred as 2*blind_amount\n                    self.blind_amount = max(1, round_state.min_raise // 2)\n        except Exception:\n            pass\n\n        # If engine passes our cards in some form per round, we would update here.\n        # Since interface does not specify, we keep stored hole_cards as given (may be empty).\n\n    def get_action(self, round_state: RoundStateClient, remaining_chips: int) -> Tuple[PokerAction, int]:\n        # Core decision logic with robust guards against invalid actions.\n        try:\n            my_id_str = str(self.id)\n            me_bet = int(round_state.player_bets.get(my_id_str, 0)) if round_state.player_bets else 0\n            current_bet = int(round_state.current_bet or 0)\n            pot = int(round_state.pot or 0)\n            min_raise = int(round_state.min_raise or 0)\n            max_raise = int(round_state.max_raise or 0)\n            eps = 1e-9\n\n            amount_to_call = max(0, current_bet - me_bet)\n\n            # Determine phase\n            street_name = str(round_state.round or \"\").lower()\n            is_preflop = 'pre' in street_name\n            is_flop = 'flop' in street_name\n            is_turn = 'turn' in street_name\n            is_river = 'river' in street_name\n\n            # Count active players if possible\n            active_player_count = self._estimate_active_players(round_state)\n\n            # Pot odds for calls\n            call_pot_odds = amount_to_call / max(1.0, pot + amount_to_call + eps)\n\n            # Strategy thresholds\n            # Heads-up we open a lot, multiway we tighten\n            if active_player_count <= 2:\n                open_raise_freq = 0.70\n                cbet_freq = 0.60\n                stab_freq = 0.25\n                call_small_bet_thresh = 0.30  # fraction of pot\n            else:\n                open_raise_freq = 0.25\n                cbet_freq = 0.45\n                stab_freq = 0.15\n                call_small_bet_thresh = 0.25\n\n            # Sizing helpers\n            # Default raise_by minimal to ensure validity and reduce risk of invalid raise sizes\n            def choose_raise_by(target_fraction_of_pot: float, min_bb_multiple: float = 2.5) -> Optional[int]:\n                # Compute a target size in chips for raise_by. It must be in [min_raise, max_raise].\n                # When unopened (amount_to_call == 0), min_raise is usually big blind.\n                # We try to size either by pot faction or blind multiple; default fallback to min_raise.\n                target_by_pot = int(max(1, target_fraction_of_pot * max(pot, 1)))\n                target_by_bb = int(max(1, min_bb_multiple * max(self.blind_amount, 1)))\n                desired = max(target_by_pot, target_by_bb, min_raise)\n\n                # Ensure validity bounds\n                if max_raise < 1:\n                    return None\n                desired = min(desired, max_raise)\n                desired = max(desired, min_raise)\n                if desired < min_raise or desired > max_raise:\n                    return None\n                return desired\n\n            # Decide action\n            if amount_to_call == 0:\n                # We may CHECK or RAISE\n                if is_preflop:\n                    # Open-raise mix\n                    if self.rng.random() < open_raise_freq and min_raise > 0 and max_raise >= min_raise:\n                        # Prefer a 2.5bb-3bb open\n                        raise_by = choose_raise_by(target_fraction_of_pot=0.0, min_bb_multiple=2.5 + self.rng.random() * 0.7)\n                        if raise_by is None:\n                            return PokerAction.CHECK, 0\n                        self.was_raiser_preflop = True\n                        return PokerAction.RAISE, int(raise_by)\n                    else:\n                        return PokerAction.CHECK, 0\n                else:\n                    # Post-flop: if we were the preflop raiser, c-bet with some frequency\n                    if self.was_raiser_preflop and (is_flop or is_turn) and min_raise > 0 and max_raise >= min_raise:\n                        if self.rng.random() < cbet_freq:\n                            # C-bet about 50-70% pot as raise_by (model as raise increment)\n                            frac = 0.5 + 0.2 * self.rng.random()\n                            raise_by = choose_raise_by(target_fraction_of_pot=frac)\n                            if raise_by is not None:\n                                return PokerAction.RAISE, int(raise_by)\n                    # If checked to us and no prior raise, occasionally stab\n                    if (is_flop or is_turn) and self.rng.random() < stab_freq and min_raise > 0 and max_raise >= min_raise:\n                        frac = 0.4 + 0.2 * self.rng.random()\n                        raise_by = choose_raise_by(target_fraction_of_pot=frac)\n                        if raise_by is not None:\n                            return PokerAction.RAISE, int(raise_by)\n                    # Otherwise check back\n                    return PokerAction.CHECK, 0\n            else:\n                # We face a bet; options: CALL/RAISE/FOLD\n                # Heuristic: Small bets -> call more; large bets -> fold; occasionally bluff-raise small bets\n                bet_fraction_of_pot = amount_to_call / max(1.0, pot + eps)\n\n                # Preflop defense\n                if is_preflop:\n                    # If small raise size preflop and heads-up, call mixed; small chance to 3-bet\n                    if bet_fraction_of_pot <= 0.5:\n                        if self.rng.random() < 0.55:\n                            # Call\n                            return PokerAction.CALL, 0\n                        # 3-bet bluff occasionally\n                        if min_raise > 0 and max_raise >= min_raise and self.rng.random() < 0.15:\n                            # 3-bet: aim for 3x the amount_to_call as raise increment if possible\n                            desired = max(min_raise, int(2.0 * amount_to_call))\n                            desired = min(desired, max_raise)\n                            if desired >= min_raise:\n                                self.was_raiser_preflop = True\n                                return PokerAction.RAISE, int(desired)\n                        # Otherwise fold\n                        return PokerAction.FOLD, 0\n                    else:\n                        # Big preflop bet faced: mostly fold; rare all-in with tiny prob if short\n                        if remaining_chips <= max(self.blind_amount * 10, 20) and self.rng.random() < 0.05:\n                            return PokerAction.ALL_IN, 0\n                        return PokerAction.FOLD, 0\n                else:\n                    # Post-flop defense\n                    # Call if small bet and pot odds reasonable\n                    if bet_fraction_of_pot <= call_small_bet_thresh:\n                        # Mix of calls and small raises as bluffs\n                        roll = self.rng.random()\n                        if roll < 0.70:\n                            return PokerAction.CALL, 0\n                        elif roll < 0.80 and min_raise > 0 and max_raise >= min_raise:\n                            # Small bluff-raise with low frequency\n                            desired = max(min_raise, int(0.5 * max(1, pot)))\n                            desired = min(desired, max_raise)\n                            if desired >= min_raise:\n                                return PokerAction.RAISE, int(desired)\n                        else:\n                            return PokerAction.CALL, 0\n                    else:\n                        # For medium to large bets, compare pot odds threshold\n                        # Without hole cards, be conservative: fold more to big bets; occasionally call\n                        threshold = 0.28 if is_flop else (0.22 if is_turn else 0.18)\n                        if call_pot_odds <= threshold and self.rng.random() < 0.40:\n                            return PokerAction.CALL, 0\n                        # Rare hero-call on river if bet is tiny relative to pot\n                        if is_river and bet_fraction_of_pot <= 0.15 and self.rng.random() < 0.35:\n                            return PokerAction.CALL, 0\n                        # Rare all-in bluff if very short and multiway collapsed\n                        if remaining_chips <= max(self.blind_amount * 8, 16) and self.rng.random() < 0.03:\n                            return PokerAction.ALL_IN, 0\n                        return PokerAction.FOLD, 0\n\n        except Exception:\n            # Safe fallback to avoid invalid actions\n            try:\n                # Attempt to check if possible, else fold\n                my_id_str = str(self.id)\n                me_bet = int(round_state.player_bets.get(my_id_str, 0)) if round_state.player_bets else 0\n                current_bet = int(round_state.current_bet or 0)\n                amount_to_call = max(0, current_bet - me_bet)\n                if amount_to_call == 0:\n                    return PokerAction.CHECK, 0\n                else:\n                    return PokerAction.FOLD, 0\n            except Exception:\n                return PokerAction.FOLD, 0\n\n    def on_end_round(self, round_state: RoundStateClient, remaining_chips: int):\n        # Update session stats if possible\n        try:\n            if self.starting_chips:\n                # This relies on per-round deltas being available as remaining_chips drift\n                pass\n            self.hands_played += 1\n        except Exception:\n            pass\n\n    def on_end_game(self, round_state: RoundStateClient, player_score: float, all_scores: dict, active_players_hands: dict):\n        try:\n            # player_score is delta money across the game\n            self.total_profit += int(player_score or 0)\n        except Exception:\n            pass\n\n    # ---------------- Helper methods ----------------\n\n    def _estimate_active_players(self, round_state: RoundStateClient) -> int:\n        # Try to estimate number of active players (not folded)\n        try:\n            # If player_actions exist, count those not folded\n            if round_state.player_actions:\n                not_folded = 0\n                for k, v in round_state.player_actions.items():\n                    if str(v).lower() != 'fold':\n                        not_folded += 1\n                # If zero (no actions yet), fallback\n                if not_folded > 0:\n                    return not_folded\n            # Fallback to number of betting entries or current players list length\n            if round_state.current_player:\n                return max(2, len(round_state.current_player))\n            if round_state.player_bets:\n                return max(2, len(round_state.player_bets))\n        except Exception:\n            pass\n        return 2\n```\n\n```text\n```",
+        "role": "assistant"
+      },
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "input_tokens": 6362,
+    "input_tokens_details": {
+      "cached_tokens": 128
+    },
+    "output_tokens": 7970,
+    "output_tokens_details": {
+      "reasoning_tokens": 5056
+    },
+    "total_tokens": 14332
+  },
+  "model": "gpt-5-2025-08-07",
+  "id": "resp_6897f9056bb4819d91722b572bcd521c06aabcd74b1e680e",
+  "object": "chat.completion",
+  "reasoning": {
+    "id": "rs_6897f905cf20819d9de5f1f5d2dd102506aabcd74b1e680e",
+    "type": "reasoning",
+    "summary": []
+  }
+}
+    ================================================================================
+    

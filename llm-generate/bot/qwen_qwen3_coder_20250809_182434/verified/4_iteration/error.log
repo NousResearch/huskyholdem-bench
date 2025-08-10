@@ -1,0 +1,9 @@
+[2025-08-09 18:29:11] Code validation failed: Validation error: Traceback (most recent call last):
+  File "/app/play_script.py", line 70, in <module>
+    main()
+  File "/app/play_script.py", line 51, in main
+    p.on_round_start(round_state, 990)
+  File "/app/player.py", line 26, in on_round_start
+    self.hand = player_hands.get(self.player_id, [])
+NameError: name 'player_hands' is not defined
+

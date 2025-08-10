@@ -1,0 +1,160 @@
+{
+  "gameId": "a1dd5cae-5ec5-4f60-ae7d-24451014cee2",
+  "rounds": {
+    "0": {
+      "pot": 150,
+      "bets": {
+        "0": 50,
+        "1": 50,
+        "2": 50
+      },
+      "actions": {
+        "0": "RAISE",
+        "1": "CALL",
+        "2": "CALL"
+      },
+      "action_sequence": [
+        {
+          "player": 0,
+          "action": "RAISE",
+          "amount": 50,
+          "timestamp": 1753753573081,
+          "pot_after_action": 50,
+          "side_pots_after_action": [
+            {
+              "amount": 50,
+              "eligible_players": [
+                1,
+                2,
+                3
+              ]
+            }
+          ],
+          "total_pot_after_action": 50,
+          "total_side_pots_after_action": [
+            {
+              "id": 0,
+              "amount": 50,
+              "eligible_players": [
+                1,
+                2,
+                3
+              ]
+            }
+          ]
+        },
+        {
+          "player": 1,
+          "action": "CALL",
+          "amount": 50,
+          "timestamp": 1753753573081,
+          "pot_after_action": 100,
+          "side_pots_after_action": [
+            {
+              "amount": 100,
+              "eligible_players": [
+                1,
+                2,
+                3
+              ]
+            }
+          ],
+          "total_pot_after_action": 100,
+          "total_side_pots_after_action": [
+            {
+              "id": 0,
+              "amount": 100,
+              "eligible_players": [
+                1,
+                2,
+                3
+              ]
+            }
+          ]
+        },
+        {
+          "player": 2,
+          "action": "CALL",
+          "amount": 50,
+          "timestamp": 1753753573081,
+          "pot_after_action": 150,
+          "side_pots_after_action": [
+            {
+              "amount": 150,
+              "eligible_players": [
+                1,
+                2,
+                3
+              ]
+            }
+          ],
+          "total_pot_after_action": 150,
+          "total_side_pots_after_action": [
+            {
+              "id": 0,
+              "amount": 150,
+              "eligible_players": [
+                1,
+                2,
+                3
+              ]
+            }
+          ]
+        }
+      ],
+      "actionTimes": {
+        "0": 0,
+        "1": 0,
+        "2": 0
+      }
+    }
+  },
+  "playerNames": {
+    "0": "player1",
+    "1": "player2",
+    "2": "player3"
+  },
+  "blinds": {
+    "small": 5,
+    "big": 10
+  },
+  "finalBoard": [],
+  "sidePots": [
+    {
+      "amount": 150,
+      "eligible_players": [
+        0,
+        1,
+        2
+      ]
+    }
+  ],
+  "playerHands": {
+    "0": [
+      "Qs",
+      "8h"
+    ],
+    "1": [
+      "8d",
+      "7s"
+    ],
+    "2": [
+      "7d",
+      "9h"
+    ]
+  },
+  "playerMoney": {
+    "finalMoney": {},
+    "finalDelta": {},
+    "gameScores": {
+      "1": -50,
+      "2": 100,
+      "3": -50
+    },
+    "thisGameDelta": {
+      "1": -50,
+      "2": 100,
+      "3": -50
+    }
+  }
+}

@@ -1,0 +1,180 @@
+{
+  "gameId": "6af211fe-87da-4110-a8b6-4184ecc117fa",
+  "rounds": {
+    "0": {
+      "pot": 15,
+      "bets": {
+        "305384623": 10,
+        "4001376247": 5
+      },
+      "actions": {
+        "4001376247": "FOLD",
+        "305384623": "RAISE"
+      },
+      "action_sequence": [
+        {
+          "player": 4001376247,
+          "action": "RAISE",
+          "amount": 5,
+          "timestamp": 1754788308252,
+          "pot_after_action": 5,
+          "side_pots_after_action": [
+            {
+              "amount": 5,
+              "eligible_players": [
+                305384624,
+                4001376248
+              ]
+            }
+          ],
+          "total_pot_after_action": 5,
+          "total_side_pots_after_action": [
+            {
+              "id": 0,
+              "amount": 5,
+              "eligible_players": [
+                305384624,
+                4001376248
+              ]
+            }
+          ]
+        },
+        {
+          "player": 305384623,
+          "action": "RAISE",
+          "amount": 10,
+          "timestamp": 1754788308254,
+          "pot_after_action": 15,
+          "side_pots_after_action": [
+            {
+              "amount": 10,
+              "eligible_players": [
+                305384624,
+                4001376248
+              ]
+            },
+            {
+              "amount": 5,
+              "eligible_players": [
+                305384624
+              ]
+            }
+          ],
+          "total_pot_after_action": 15,
+          "total_side_pots_after_action": [
+            {
+              "id": 0,
+              "amount": 10,
+              "eligible_players": [
+                305384624,
+                4001376248
+              ]
+            },
+            {
+              "id": 1,
+              "amount": 5,
+              "eligible_players": [
+                305384624
+              ]
+            }
+          ]
+        },
+        {
+          "player": 4001376247,
+          "action": "FOLD",
+          "amount": 0,
+          "timestamp": 1754788308298,
+          "pot_after_action": 15,
+          "side_pots_after_action": [
+            {
+              "amount": 15,
+              "eligible_players": [
+                305384624
+              ]
+            }
+          ],
+          "total_pot_after_action": 15,
+          "total_side_pots_after_action": [
+            {
+              "id": 0,
+              "amount": 15,
+              "eligible_players": [
+                305384624
+              ]
+            }
+          ]
+        }
+      ],
+      "actionTimes": {
+        "4001376247": 51,
+        "305384623": 7
+      }
+    }
+  },
+  "playerNames": {
+    "305384623": "player305384624",
+    "4001376247": "player4001376248"
+  },
+  "blinds": {
+    "small": 5,
+    "big": 10
+  },
+  "finalBoard": [
+    "Ts",
+    "6d",
+    "6c"
+  ],
+  "sidePots": [
+    {
+      "amount": 0,
+      "eligible_players": [
+        305384623
+      ]
+    }
+  ],
+  "playerMoney": {
+    "initialAmount": 10000,
+    "startingMoney": {
+      "305384624": 10080,
+      "4001376248": 9920
+    },
+    "startingDelta": {
+      "305384624": 80,
+      "4001376248": -80
+    },
+    "finalMoney": {
+      "305384624": 10085,
+      "4001376248": 9915
+    },
+    "finalDelta": {
+      "305384624": 85,
+      "4001376248": -85
+    },
+    "gameScores": {
+      "305384624": 5,
+      "4001376248": -5
+    },
+    "thisGameDelta": {
+      "305384624": 5,
+      "4001376248": -5
+    }
+  },
+  "playerHands": {
+    "305384623": [
+      "Qs",
+      "6s"
+    ],
+    "4001376247": [
+      "Qh",
+      "4s"
+    ]
+  },
+  "usernameMapping": {
+    "default": 305384624,
+    "client_container_6412_test_client_test_anthropic_claude_opus_4.1_iter_1_20250809_181136_iter1": 4001376248
+  },
+  "playerIdToUsername": {
+    "305384624": "default",
+    "4001376248": "client_container_6412_test_client_test_anthropic_claude_opus_4.1_iter_1_20250809_181136_iter1"
+  }
+}

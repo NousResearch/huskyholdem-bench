@@ -1,0 +1,15 @@
+[2025-08-09 18:21:15] Code validation failed: Validation error: Traceback (most recent call last):
+  File "/app/play_script.py", line 70, in <module>
+    main()
+  File "/app/play_script.py", line 54, in main
+    _ , _ = p.get_action(round_state, 990)
+  File "/app/player.py", line 222, in get_action
+    hand_strength = self._calculate_hand_strength(round_state)
+  File "/app/player.py", line 103, in _calculate_hand_strength
+    my_cards = [self._parse_card(c) for c in self.hole_cards]
+  File "/app/player.py", line 103, in <listcomp>
+    my_cards = [self._parse_card(c) for c in self.hole_cards]
+  File "/app/player.py", line 38, in _parse_card
+    rank = vals.get(rank_str, int(rank_str))
+ValueError: invalid literal for int() with base 10: 'A'
+

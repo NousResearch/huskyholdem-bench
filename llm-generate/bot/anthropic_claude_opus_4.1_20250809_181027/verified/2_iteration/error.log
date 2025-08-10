@@ -1,0 +1,1610 @@
+Game Test Results for Iteration 2 - 2025-08-09 18:14:05
+============================================================
+
+ERRORS DETECTED:
+--------------------
+Poker client log:
+2025-08-10 01:13:54,067 - __main__ - INFO - Poker Client starting...
+2025-08-10 01:13:54,069 - __main__ - INFO - Running in continuous simulation mode for 10 games
+2025-08-10 01:13:54,078 - PokerRunner - INFO - Connected to server at game_server_6412:6412
+2025-08-10 01:13:54,081 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:54,081 - PokerRunner - INFO - Server: Game #1 starting!
+2025-08-10 01:13:54,081 - PokerRunner - INFO - Received message type: Connect
+2025-08-10 01:13:54,081 - PokerRunner - INFO - Connected with player ID: 3472195111
+2025-08-10 01:13:54,081 - PokerRunner - INFO - Data written to /app/output/gameid.log
+2025-08-10 01:13:54,082 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:54,082 - PokerRunner - INFO - Server: Welcome to Game #1! Your ID is 3472195111
+2025-08-10 01:13:54,082 - PokerRunner - INFO - Received message type: Game Start
+2025-08-10 01:13:54,082 - PokerRunner - INFO - Game #1 started with 2 cards, blind: 10
+2025-08-10 01:13:54,082 - PokerRunner - INFO - All players in game: [3752577440, 3472195111]
+2025-08-10 01:13:54,082 - PokerRunner - INFO - Small blind player: 3752577440, Big blind player: 3472195111
+2025-08-10 01:13:54,082 - PokerRunner - INFO - This player is the big blind
+2025-08-10 01:13:54,083 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:54,083 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:54,083 - PokerRunner - INFO -   Pot 0: 0 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:54,084 - PokerRunner - INFO - Received message type: Round Start
+2025-08-10 01:13:54,084 - PokerRunner - INFO - Round started
+2025-08-10 01:13:54,084 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:54,084 - PokerRunner - INFO - Server: New round starting!
+2025-08-10 01:13:54,084 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:54,084 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:54,084 - PokerRunner - INFO -   Pot 0: 0 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:54,085 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:54,085 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:54,085 - PokerRunner - INFO -   Pot 0: 5 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:54,085 - PokerRunner - INFO - Received message type: Request Player Action
+2025-08-10 01:13:54,085 - PokerRunner - INFO - Automatically posting big blind: 10
+2025-08-10 01:13:54,086 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:54,086 - PokerRunner - INFO - Side pots active: 2 pot(s)
+2025-08-10 01:13:54,087 - PokerRunner - INFO -   Pot 0: 10 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:54,087 - PokerRunner - INFO -   Pot 1: 5 chips, eligible players: [3472195111]
+2025-08-10 01:13:54,128 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:54,128 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:54,128 - PokerRunner - INFO -   Pot 0: 20 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:54,128 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:54,128 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:54,128 - PokerRunner - INFO -   Pot 0: 20 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:54,128 - PokerRunner - INFO - Received message type: Round End
+2025-08-10 01:13:54,128 - PokerRunner - INFO - Round ended
+2025-08-10 01:13:54,128 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:54,128 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:54,128 - PokerRunner - INFO -   Pot 0: 20 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:54,128 - PokerRunner - INFO - Received message type: Round Start
+2025-08-10 01:13:54,129 - PokerRunner - INFO - Round started
+2025-08-10 01:13:54,129 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:54,129 - PokerRunner - INFO - Server: New round starting!
+2025-08-10 01:13:54,129 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:54,129 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:54,129 - PokerRunner - INFO -   Pot 0: 0 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:54,129 - PokerRunner - INFO - Received message type: Request Player Action
+2025-08-10 01:13:54,129 - PokerRunner - INFO - Bot action: RAISE, amount: 0
+2025-08-10 01:13:54,130 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:54,130 - PokerRunner - INFO - Server: Invalid action: Raise amount + current bet must be higher than the current raise
+2025-08-10 01:13:54,171 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:54,171 - PokerRunner - INFO - Server: Invalid action. Try again. (1/1)
+2025-08-10 01:13:54,171 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:54,172 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:54,172 - PokerRunner - INFO -   Pot 0: 0 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:54,172 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:54,172 - PokerRunner - INFO - Server: Player 3472195111 was automatically folded due to invalid actions
+2025-08-10 01:13:54,172 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:54,173 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:54,173 - PokerRunner - INFO -   Pot 0: 100 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:54,173 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:54,173 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:54,173 - PokerRunner - INFO -   Pot 0: 100 chips, eligible players: [3752577440]
+2025-08-10 01:13:54,173 - PokerRunner - INFO - Received message type: Round End
+2025-08-10 01:13:54,173 - PokerRunner - INFO - Round ended
+2025-08-10 01:13:54,173 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:54,173 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:54,173 - PokerRunner - INFO -   Pot 0: 100 chips, eligible players: [3752577440]
+2025-08-10 01:13:54,173 - PokerRunner - INFO - Received message type: Round Start
+2025-08-10 01:13:54,173 - PokerRunner - INFO - Round started
+2025-08-10 01:13:54,173 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:54,173 - PokerRunner - INFO - Server: Game #1 over!
+2025-08-10 01:13:54,175 - PokerRunner - INFO - Received message type: Game End
+2025-08-10 01:13:54,176 - PokerRunner - INFO - All final scores: {'3752577440': 10, '3472195111': -10}
+2025-08-10 01:13:54,176 - PokerRunner - INFO - Active players hands: {'3752577440': ['7d', '7c']}
+2025-08-10 01:13:54,176 - PokerRunner - INFO - Data appended to /app/output/game_result.log
+2025-08-10 01:13:54,176 - PokerRunner - INFO - Delta updated: 0 + -10 = -10, money: 9990 -> 9990
+2025-08-10 01:13:54,176 - PokerRunner - INFO - Game #1 ended with score: -10
+2025-08-10 01:13:54,176 - PokerRunner - INFO - Reset for Game #1, current money: 9990, delta: -10
+2025-08-10 01:13:54,680 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:54,680 - PokerRunner - INFO - Server: Game #2 starting!
+2025-08-10 01:13:54,680 - PokerRunner - INFO - Received message type: Connect
+2025-08-10 01:13:54,680 - PokerRunner - INFO - Connected with player ID: 3472195111
+2025-08-10 01:13:54,681 - PokerRunner - INFO - Data written to /app/output/gameid.log
+2025-08-10 01:13:54,681 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:54,681 - PokerRunner - INFO - Server: Welcome to Game #2! Your ID is 3472195111
+2025-08-10 01:13:54,681 - PokerRunner - INFO - Received message type: Game Start
+2025-08-10 01:13:54,681 - PokerRunner - INFO - Game #2 started with 2 cards, blind: 10
+2025-08-10 01:13:54,681 - PokerRunner - INFO - All players in game: [3752577440, 3472195111]
+2025-08-10 01:13:54,681 - PokerRunner - INFO - Small blind player: 3472195111, Big blind player: 3752577440
+2025-08-10 01:13:54,681 - PokerRunner - INFO - This player is the small blind
+2025-08-10 01:13:54,681 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:54,681 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:54,681 - PokerRunner - INFO -   Pot 0: 0 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:54,681 - PokerRunner - INFO - Received message type: Round Start
+2025-08-10 01:13:54,681 - PokerRunner - INFO - Round started
+2025-08-10 01:13:54,681 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:54,681 - PokerRunner - INFO - Server: New round starting!
+2025-08-10 01:13:54,682 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:54,682 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:54,682 - PokerRunner - INFO -   Pot 0: 0 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:54,682 - PokerRunner - INFO - Received message type: Request Player Action
+2025-08-10 01:13:54,682 - PokerRunner - INFO - Automatically posting small blind: 5
+2025-08-10 01:13:54,682 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:54,682 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:54,682 - PokerRunner - INFO -   Pot 0: 5 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:54,724 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:54,724 - PokerRunner - INFO - Side pots active: 2 pot(s)
+2025-08-10 01:13:54,724 - PokerRunner - INFO -   Pot 0: 10 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:54,724 - PokerRunner - INFO -   Pot 1: 5 chips, eligible players: [3752577440]
+2025-08-10 01:13:54,724 - PokerRunner - INFO - Received message type: Request Player Action
+2025-08-10 01:13:54,725 - PokerRunner - INFO - Bot action: CALL, amount: 0
+2025-08-10 01:13:54,726 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:54,726 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:54,726 - PokerRunner - INFO -   Pot 0: 20 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:54,728 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:54,728 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:54,728 - PokerRunner - INFO -   Pot 0: 20 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:54,728 - PokerRunner - INFO - Received message type: Round End
+2025-08-10 01:13:54,728 - PokerRunner - INFO - Round ended
+2025-08-10 01:13:54,728 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:54,728 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:54,728 - PokerRunner - INFO -   Pot 0: 20 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:54,728 - PokerRunner - INFO - Received message type: Round Start
+2025-08-10 01:13:54,728 - PokerRunner - INFO - Round started
+2025-08-10 01:13:54,728 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:54,728 - PokerRunner - INFO - Server: New round starting!
+2025-08-10 01:13:54,728 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:54,729 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:54,729 - PokerRunner - INFO -   Pot 0: 0 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:54,729 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:54,729 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:54,729 - PokerRunner - INFO -   Pot 0: 100 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:54,771 - PokerRunner - INFO - Received message type: Request Player Action
+2025-08-10 01:13:54,773 - PokerRunner - INFO - Bot action: CALL, amount: 0
+2025-08-10 01:13:54,775 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:54,776 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:54,776 - PokerRunner - INFO -   Pot 0: 200 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:54,782 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:54,784 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:54,785 - PokerRunner - INFO -   Pot 0: 200 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:54,785 - PokerRunner - INFO - Received message type: Round End
+2025-08-10 01:13:54,785 - PokerRunner - INFO - Round ended
+2025-08-10 01:13:54,785 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:54,785 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:54,786 - PokerRunner - INFO -   Pot 0: 200 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:54,786 - PokerRunner - INFO - Received message type: Round Start
+2025-08-10 01:13:54,786 - PokerRunner - INFO - Round started
+2025-08-10 01:13:54,786 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:54,786 - PokerRunner - INFO - Server: New round starting!
+2025-08-10 01:13:54,787 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:54,787 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:54,787 - PokerRunner - INFO -   Pot 0: 0 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:54,787 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:54,788 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:54,788 - PokerRunner - INFO -   Pot 0: 0 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:54,823 - PokerRunner - INFO - Received message type: Request Player Action
+2025-08-10 01:13:54,824 - PokerRunner - INFO - Bot action: RAISE, amount: 0
+2025-08-10 01:13:54,826 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:54,827 - PokerRunner - INFO - Server: Invalid action: Raise amount + current bet must be higher than the current raise
+2025-08-10 01:13:54,831 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:54,832 - PokerRunner - INFO - Server: Invalid action. Try again. (1/1)
+2025-08-10 01:13:54,832 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:54,832 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:54,833 - PokerRunner - INFO -   Pot 0: 0 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:54,833 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:54,833 - PokerRunner - INFO - Server: Player 3472195111 was automatically folded due to invalid actions
+2025-08-10 01:13:54,834 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:54,834 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:54,834 - PokerRunner - INFO -   Pot 0: 0 chips, eligible players: [3752577440]
+2025-08-10 01:13:54,834 - PokerRunner - INFO - Received message type: Round End
+2025-08-10 01:13:54,834 - PokerRunner - INFO - Round ended
+2025-08-10 01:13:54,834 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:54,834 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:54,835 - PokerRunner - INFO -   Pot 0: 0 chips, eligible players: [3752577440]
+2025-08-10 01:13:54,835 - PokerRunner - INFO - Received message type: Round Start
+2025-08-10 01:13:54,835 - PokerRunner - INFO - Round started
+2025-08-10 01:13:54,835 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:54,835 - PokerRunner - INFO - Server: Game #2 over!
+2025-08-10 01:13:54,835 - PokerRunner - INFO - Received message type: Game End
+2025-08-10 01:13:54,835 - PokerRunner - INFO - All final scores: {'3752577440': 110, '3472195111': -110}
+2025-08-10 01:13:54,835 - PokerRunner - INFO - Active players hands: {'3752577440': ['2h', 'Qd']}
+2025-08-10 01:13:54,835 - PokerRunner - INFO - Data appended to /app/output/game_result.log
+2025-08-10 01:13:54,835 - PokerRunner - INFO - Delta updated: -10 + -110 = -120, money: 9880 -> 9880
+2025-08-10 01:13:54,835 - PokerRunner - INFO - Game #2 ended with score: -110
+2025-08-10 01:13:54,835 - PokerRunner - INFO - Reset for Game #2, current money: 9880, delta: -120
+2025-08-10 01:13:55,343 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:55,344 - PokerRunner - INFO - Server: Game #3 starting!
+2025-08-10 01:13:55,345 - PokerRunner - INFO - Received message type: Connect
+2025-08-10 01:13:55,346 - PokerRunner - INFO - Connected with player ID: 3472195111
+2025-08-10 01:13:55,346 - PokerRunner - INFO - Data written to /app/output/gameid.log
+2025-08-10 01:13:55,347 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:55,347 - PokerRunner - INFO - Server: Welcome to Game #3! Your ID is 3472195111
+2025-08-10 01:13:55,347 - PokerRunner - INFO - Received message type: Game Start
+2025-08-10 01:13:55,347 - PokerRunner - INFO - Game #3 started with 2 cards, blind: 10
+2025-08-10 01:13:55,348 - PokerRunner - INFO - All players in game: [3752577440, 3472195111]
+2025-08-10 01:13:55,348 - PokerRunner - INFO - Small blind player: 3752577440, Big blind player: 3472195111
+2025-08-10 01:13:55,348 - PokerRunner - INFO - This player is the big blind
+2025-08-10 01:13:55,348 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:55,349 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:55,349 - PokerRunner - INFO -   Pot 0: 0 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:55,349 - PokerRunner - INFO - Received message type: Round Start
+2025-08-10 01:13:55,349 - PokerRunner - INFO - Round started
+2025-08-10 01:13:55,349 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:55,350 - PokerRunner - INFO - Server: New round starting!
+2025-08-10 01:13:55,350 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:55,350 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:55,350 - PokerRunner - INFO -   Pot 0: 0 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:55,351 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:55,352 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:55,352 - PokerRunner - INFO -   Pot 0: 5 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:55,352 - PokerRunner - INFO - Received message type: Request Player Action
+2025-08-10 01:13:55,352 - PokerRunner - INFO - Automatically posting big blind: 10
+2025-08-10 01:13:55,354 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:55,354 - PokerRunner - INFO - Side pots active: 2 pot(s)
+2025-08-10 01:13:55,354 - PokerRunner - INFO -   Pot 0: 10 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:55,354 - PokerRunner - INFO -   Pot 1: 5 chips, eligible players: [3472195111]
+2025-08-10 01:13:55,396 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:55,397 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:55,397 - PokerRunner - INFO -   Pot 0: 20 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:55,398 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:55,398 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:55,398 - PokerRunner - INFO -   Pot 0: 20 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:55,398 - PokerRunner - INFO - Received message type: Round End
+2025-08-10 01:13:55,398 - PokerRunner - INFO - Round ended
+2025-08-10 01:13:55,398 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:55,398 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:55,398 - PokerRunner - INFO -   Pot 0: 20 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:55,399 - PokerRunner - INFO - Received message type: Round Start
+2025-08-10 01:13:55,399 - PokerRunner - INFO - Round started
+2025-08-10 01:13:55,399 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:55,399 - PokerRunner - INFO - Server: New round starting!
+2025-08-10 01:13:55,399 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:55,399 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:55,399 - PokerRunner - INFO -   Pot 0: 0 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:55,400 - PokerRunner - INFO - Received message type: Request Player Action
+2025-08-10 01:13:55,400 - PokerRunner - INFO - Bot action: CHECK, amount: 0
+2025-08-10 01:13:55,402 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:55,403 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:55,403 - PokerRunner - INFO -   Pot 0: 0 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:55,447 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:55,447 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:55,448 - PokerRunner - INFO -   Pot 0: 100 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:55,448 - PokerRunner - INFO - Received message type: Request Player Action
+2025-08-10 01:13:55,449 - PokerRunner - INFO - Bot action: FOLD, amount: 0
+2025-08-10 01:13:55,451 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:55,452 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:55,452 - PokerRunner - INFO -   Pot 0: 100 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:55,492 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:55,493 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:55,493 - PokerRunner - INFO -   Pot 0: 100 chips, eligible players: [3752577440]
+2025-08-10 01:13:55,494 - PokerRunner - INFO - Received message type: Round End
+2025-08-10 01:13:55,494 - PokerRunner - INFO - Round ended
+2025-08-10 01:13:55,494 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:55,494 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:55,494 - PokerRunner - INFO -   Pot 0: 100 chips, eligible players: [3752577440]
+2025-08-10 01:13:55,494 - PokerRunner - INFO - Received message type: Round Start
+2025-08-10 01:13:55,495 - PokerRunner - INFO - Round started
+2025-08-10 01:13:55,495 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:55,495 - PokerRunner - INFO - Server: Game #3 over!
+2025-08-10 01:13:55,495 - PokerRunner - INFO - Received message type: Game End
+2025-08-10 01:13:55,495 - PokerRunner - INFO - All final scores: {'3752577440': 10, '3472195111': -10}
+2025-08-10 01:13:55,495 - PokerRunner - INFO - Active players hands: {'3752577440': ['6h', '8s']}
+2025-08-10 01:13:55,496 - PokerRunner - INFO - Data appended to /app/output/game_result.log
+2025-08-10 01:13:55,496 - PokerRunner - INFO - Delta updated: -120 + -10 = -130, money: 9870 -> 9870
+2025-08-10 01:13:55,496 - PokerRunner - INFO - Game #3 ended with score: -10
+2025-08-10 01:13:55,496 - PokerRunner - INFO - Reset for Game #3, current money: 9870, delta: -130
+2025-08-10 01:13:55,964 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:55,965 - PokerRunner - INFO - Server: Game #4 starting!
+2025-08-10 01:13:55,965 - PokerRunner - INFO - Received message type: Connect
+2025-08-10 01:13:55,966 - PokerRunner - INFO - Connected with player ID: 3472195111
+2025-08-10 01:13:55,966 - PokerRunner - INFO - Data written to /app/output/gameid.log
+2025-08-10 01:13:55,967 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:55,967 - PokerRunner - INFO - Server: Welcome to Game #4! Your ID is 3472195111
+2025-08-10 01:13:55,967 - PokerRunner - INFO - Received message type: Game Start
+2025-08-10 01:13:55,967 - PokerRunner - INFO - Game #4 started with 2 cards, blind: 10
+2025-08-10 01:13:55,967 - PokerRunner - INFO - All players in game: [3752577440, 3472195111]
+2025-08-10 01:13:55,967 - PokerRunner - INFO - Small blind player: 3472195111, Big blind player: 3752577440
+2025-08-10 01:13:55,967 - PokerRunner - INFO - This player is the small blind
+2025-08-10 01:13:55,968 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:55,968 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:55,969 - PokerRunner - INFO -   Pot 0: 0 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:55,969 - PokerRunner - INFO - Received message type: Round Start
+2025-08-10 01:13:55,969 - PokerRunner - INFO - Round started
+2025-08-10 01:13:55,969 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:55,970 - PokerRunner - INFO - Server: New round starting!
+2025-08-10 01:13:55,970 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:55,970 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:55,970 - PokerRunner - INFO -   Pot 0: 0 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:55,970 - PokerRunner - INFO - Received message type: Request Player Action
+2025-08-10 01:13:55,971 - PokerRunner - INFO - Automatically posting small blind: 5
+2025-08-10 01:13:55,973 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:55,973 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:55,973 - PokerRunner - INFO -   Pot 0: 5 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:56,015 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:56,016 - PokerRunner - INFO - Side pots active: 2 pot(s)
+2025-08-10 01:13:56,016 - PokerRunner - INFO -   Pot 0: 10 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:56,016 - PokerRunner - INFO -   Pot 1: 5 chips, eligible players: [3752577440]
+2025-08-10 01:13:56,017 - PokerRunner - INFO - Received message type: Request Player Action
+2025-08-10 01:13:56,017 - PokerRunner - INFO - Bot action: FOLD, amount: 0
+2025-08-10 01:13:56,020 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:56,020 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:56,020 - PokerRunner - INFO -   Pot 0: 15 chips, eligible players: [3752577440]
+2025-08-10 01:13:56,061 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:56,062 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:56,062 - PokerRunner - INFO -   Pot 0: 15 chips, eligible players: [3752577440]
+2025-08-10 01:13:56,062 - PokerRunner - INFO - Received message type: Round End
+2025-08-10 01:13:56,062 - PokerRunner - INFO - Round ended
+2025-08-10 01:13:56,062 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:56,062 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:56,062 - PokerRunner - INFO -   Pot 0: 15 chips, eligible players: [3752577440]
+2025-08-10 01:13:56,062 - PokerRunner - INFO - Received message type: Round Start
+2025-08-10 01:13:56,063 - PokerRunner - INFO - Round started
+2025-08-10 01:13:56,063 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:56,063 - PokerRunner - INFO - Server: Game #4 over!
+2025-08-10 01:13:56,063 - PokerRunner - INFO - Received message type: Game End
+2025-08-10 01:13:56,063 - PokerRunner - INFO - All final scores: {'3752577440': 5, '3472195111': -5}
+2025-08-10 01:13:56,063 - PokerRunner - INFO - Active players hands: {'3752577440': ['2s', '4d']}
+2025-08-10 01:13:56,064 - PokerRunner - INFO - Data appended to /app/output/game_result.log
+2025-08-10 01:13:56,064 - PokerRunner - INFO - Delta updated: -130 + -5 = -135, money: 9865 -> 9865
+2025-08-10 01:13:56,064 - PokerRunner - INFO - Game #4 ended with score: -5
+2025-08-10 01:13:56,064 - PokerRunner - INFO - Reset for Game #4, current money: 9865, delta: -135
+2025-08-10 01:13:56,534 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:56,535 - PokerRunner - INFO - Server: Game #5 starting!
+2025-08-10 01:13:56,535 - PokerRunner - INFO - Received message type: Connect
+2025-08-10 01:13:56,535 - PokerRunner - INFO - Connected with player ID: 3472195111
+2025-08-10 01:13:56,536 - PokerRunner - INFO - Data written to /app/output/gameid.log
+2025-08-10 01:13:56,537 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:56,537 - PokerRunner - INFO - Server: Welcome to Game #5! Your ID is 3472195111
+2025-08-10 01:13:56,537 - PokerRunner - INFO - Received message type: Game Start
+2025-08-10 01:13:56,538 - PokerRunner - INFO - Game #5 started with 2 cards, blind: 10
+2025-08-10 01:13:56,538 - PokerRunner - INFO - All players in game: [3752577440, 3472195111]
+2025-08-10 01:13:56,538 - PokerRunner - INFO - Small blind player: 3752577440, Big blind player: 3472195111
+2025-08-10 01:13:56,538 - PokerRunner - INFO - This player is the big blind
+2025-08-10 01:13:56,538 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:56,539 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:56,539 - PokerRunner - INFO -   Pot 0: 0 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:56,539 - PokerRunner - INFO - Received message type: Round Start
+2025-08-10 01:13:56,539 - PokerRunner - INFO - Round started
+2025-08-10 01:13:56,540 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:56,540 - PokerRunner - INFO - Server: New round starting!
+2025-08-10 01:13:56,540 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:56,541 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:56,541 - PokerRunner - INFO -   Pot 0: 0 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:56,544 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:56,544 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:56,545 - PokerRunner - INFO -   Pot 0: 5 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:56,545 - PokerRunner - INFO - Received message type: Request Player Action
+2025-08-10 01:13:56,545 - PokerRunner - INFO - Automatically posting big blind: 10
+2025-08-10 01:13:56,547 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:56,547 - PokerRunner - INFO - Side pots active: 2 pot(s)
+2025-08-10 01:13:56,547 - PokerRunner - INFO -   Pot 0: 10 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:56,547 - PokerRunner - INFO -   Pot 1: 5 chips, eligible players: [3472195111]
+2025-08-10 01:13:56,588 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:56,588 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:56,589 - PokerRunner - INFO -   Pot 0: 20 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:56,589 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:56,589 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:56,590 - PokerRunner - INFO -   Pot 0: 20 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:56,590 - PokerRunner - INFO - Received message type: Round End
+2025-08-10 01:13:56,590 - PokerRunner - INFO - Round ended
+2025-08-10 01:13:56,590 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:56,590 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:56,590 - PokerRunner - INFO -   Pot 0: 20 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:56,590 - PokerRunner - INFO - Received message type: Round Start
+2025-08-10 01:13:56,590 - PokerRunner - INFO - Round started
+2025-08-10 01:13:56,590 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:56,590 - PokerRunner - INFO - Server: New round starting!
+2025-08-10 01:13:56,591 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:56,591 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:56,591 - PokerRunner - INFO -   Pot 0: 0 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:56,591 - PokerRunner - INFO - Received message type: Request Player Action
+2025-08-10 01:13:56,592 - PokerRunner - INFO - Bot action: RAISE, amount: 0
+2025-08-10 01:13:56,593 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:56,593 - PokerRunner - INFO - Server: Invalid action: Raise amount + current bet must be higher than the current raise
+2025-08-10 01:13:56,634 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:56,635 - PokerRunner - INFO - Server: Invalid action. Try again. (1/1)
+2025-08-10 01:13:56,635 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:56,635 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:56,636 - PokerRunner - INFO -   Pot 0: 0 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:56,636 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:56,636 - PokerRunner - INFO - Server: Player 3472195111 was automatically folded due to invalid actions
+2025-08-10 01:13:56,637 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:56,638 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:56,638 - PokerRunner - INFO -   Pot 0: 100 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:56,638 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:56,638 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:56,639 - PokerRunner - INFO -   Pot 0: 100 chips, eligible players: [3752577440]
+2025-08-10 01:13:56,639 - PokerRunner - INFO - Received message type: Round End
+2025-08-10 01:13:56,639 - PokerRunner - INFO - Round ended
+2025-08-10 01:13:56,639 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:56,639 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:56,639 - PokerRunner - INFO -   Pot 0: 100 chips, eligible players: [3752577440]
+2025-08-10 01:13:56,640 - PokerRunner - INFO - Received message type: Round Start
+2025-08-10 01:13:56,640 - PokerRunner - INFO - Round started
+2025-08-10 01:13:56,640 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:56,640 - PokerRunner - INFO - Server: Game #5 over!
+2025-08-10 01:13:56,643 - PokerRunner - INFO - Received message type: Game End
+2025-08-10 01:13:56,644 - PokerRunner - INFO - All final scores: {'3752577440': 10, '3472195111': -10}
+2025-08-10 01:13:56,644 - PokerRunner - INFO - Active players hands: {'3752577440': ['3c', '3d']}
+2025-08-10 01:13:56,645 - PokerRunner - INFO - Data appended to /app/output/game_result.log
+2025-08-10 01:13:56,645 - PokerRunner - INFO - Delta updated: -135 + -10 = -145, money: 9855 -> 9855
+2025-08-10 01:13:56,645 - PokerRunner - INFO - Game #5 ended with score: -10
+2025-08-10 01:13:56,645 - PokerRunner - INFO - Reset for Game #5, current money: 9855, delta: -145
+2025-08-10 01:13:57,152 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:57,153 - PokerRunner - INFO - Server: Game #6 starting!
+2025-08-10 01:13:57,153 - PokerRunner - INFO - Received message type: Connect
+2025-08-10 01:13:57,153 - PokerRunner - INFO - Connected with player ID: 3472195111
+2025-08-10 01:13:57,154 - PokerRunner - INFO - Data written to /app/output/gameid.log
+2025-08-10 01:13:57,155 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:57,155 - PokerRunner - INFO - Server: Welcome to Game #6! Your ID is 3472195111
+2025-08-10 01:13:57,155 - PokerRunner - INFO - Received message type: Game Start
+2025-08-10 01:13:57,155 - PokerRunner - INFO - Game #6 started with 2 cards, blind: 10
+2025-08-10 01:13:57,155 - PokerRunner - INFO - All players in game: [3752577440, 3472195111]
+2025-08-10 01:13:57,156 - PokerRunner - INFO - Small blind player: 3472195111, Big blind player: 3752577440
+2025-08-10 01:13:57,156 - PokerRunner - INFO - This player is the small blind
+2025-08-10 01:13:57,156 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:57,156 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:57,156 - PokerRunner - INFO -   Pot 0: 0 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:57,157 - PokerRunner - INFO - Received message type: Round Start
+2025-08-10 01:13:57,157 - PokerRunner - INFO - Round started
+2025-08-10 01:13:57,157 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:57,157 - PokerRunner - INFO - Server: New round starting!
+2025-08-10 01:13:57,158 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:57,158 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:57,158 - PokerRunner - INFO -   Pot 0: 0 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:57,159 - PokerRunner - INFO - Received message type: Request Player Action
+2025-08-10 01:13:57,159 - PokerRunner - INFO - Automatically posting small blind: 5
+2025-08-10 01:13:57,161 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:57,161 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:57,162 - PokerRunner - INFO -   Pot 0: 5 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:57,204 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:57,205 - PokerRunner - INFO - Side pots active: 2 pot(s)
+2025-08-10 01:13:57,205 - PokerRunner - INFO -   Pot 0: 10 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:57,205 - PokerRunner - INFO -   Pot 1: 5 chips, eligible players: [3752577440]
+2025-08-10 01:13:57,205 - PokerRunner - INFO - Received message type: Request Player Action
+2025-08-10 01:13:57,206 - PokerRunner - INFO - Bot action: FOLD, amount: 0
+2025-08-10 01:13:57,208 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:57,208 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:57,208 - PokerRunner - INFO -   Pot 0: 15 chips, eligible players: [3752577440]
+2025-08-10 01:13:57,250 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:57,250 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:57,250 - PokerRunner - INFO -   Pot 0: 15 chips, eligible players: [3752577440]
+2025-08-10 01:13:57,251 - PokerRunner - INFO - Received message type: Round End
+2025-08-10 01:13:57,251 - PokerRunner - INFO - Round ended
+2025-08-10 01:13:57,251 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:57,251 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:57,251 - PokerRunner - INFO -   Pot 0: 15 chips, eligible players: [3752577440]
+2025-08-10 01:13:57,251 - PokerRunner - INFO - Received message type: Round Start
+2025-08-10 01:13:57,251 - PokerRunner - INFO - Round started
+2025-08-10 01:13:57,251 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:57,251 - PokerRunner - INFO - Server: Game #6 over!
+2025-08-10 01:13:57,251 - PokerRunner - INFO - Received message type: Game End
+2025-08-10 01:13:57,251 - PokerRunner - INFO - All final scores: {'3752577440': 5, '3472195111': -5}
+2025-08-10 01:13:57,251 - PokerRunner - INFO - Active players hands: {'3752577440': ['7c', '2d']}
+2025-08-10 01:13:57,252 - PokerRunner - INFO - Data appended to /app/output/game_result.log
+2025-08-10 01:13:57,252 - PokerRunner - INFO - Delta updated: -145 + -5 = -150, money: 9850 -> 9850
+2025-08-10 01:13:57,252 - PokerRunner - INFO - Game #6 ended with score: -5
+2025-08-10 01:13:57,252 - PokerRunner - INFO - Reset for Game #6, current money: 9850, delta: -150
+2025-08-10 01:13:57,718 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:57,719 - PokerRunner - INFO - Server: Game #7 starting!
+2025-08-10 01:13:57,719 - PokerRunner - INFO - Received message type: Connect
+2025-08-10 01:13:57,719 - PokerRunner - INFO - Connected with player ID: 3472195111
+2025-08-10 01:13:57,720 - PokerRunner - INFO - Data written to /app/output/gameid.log
+2025-08-10 01:13:57,720 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:57,721 - PokerRunner - INFO - Server: Welcome to Game #7! Your ID is 3472195111
+2025-08-10 01:13:57,721 - PokerRunner - INFO - Received message type: Game Start
+2025-08-10 01:13:57,721 - PokerRunner - INFO - Game #7 started with 2 cards, blind: 10
+2025-08-10 01:13:57,721 - PokerRunner - INFO - All players in game: [3752577440, 3472195111]
+2025-08-10 01:13:57,721 - PokerRunner - INFO - Small blind player: 3752577440, Big blind player: 3472195111
+2025-08-10 01:13:57,721 - PokerRunner - INFO - This player is the big blind
+2025-08-10 01:13:57,722 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:57,722 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:57,722 - PokerRunner - INFO -   Pot 0: 0 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:57,722 - PokerRunner - INFO - Received message type: Round Start
+2025-08-10 01:13:57,723 - PokerRunner - INFO - Round started
+2025-08-10 01:13:57,723 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:57,723 - PokerRunner - INFO - Server: New round starting!
+2025-08-10 01:13:57,724 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:57,724 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:57,724 - PokerRunner - INFO -   Pot 0: 0 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:57,727 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:57,728 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:57,728 - PokerRunner - INFO -   Pot 0: 5 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:57,728 - PokerRunner - INFO - Received message type: Request Player Action
+2025-08-10 01:13:57,728 - PokerRunner - INFO - Automatically posting big blind: 10
+2025-08-10 01:13:57,729 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:57,730 - PokerRunner - INFO - Side pots active: 2 pot(s)
+2025-08-10 01:13:57,730 - PokerRunner - INFO -   Pot 0: 10 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:57,730 - PokerRunner - INFO -   Pot 1: 5 chips, eligible players: [3472195111]
+2025-08-10 01:13:57,776 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:57,777 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:57,778 - PokerRunner - INFO -   Pot 0: 20 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:57,778 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:57,778 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:57,778 - PokerRunner - INFO -   Pot 0: 20 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:57,779 - PokerRunner - INFO - Received message type: Round End
+2025-08-10 01:13:57,779 - PokerRunner - INFO - Round ended
+2025-08-10 01:13:57,779 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:57,779 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:57,779 - PokerRunner - INFO -   Pot 0: 20 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:57,779 - PokerRunner - INFO - Received message type: Round Start
+2025-08-10 01:13:57,779 - PokerRunner - INFO - Round started
+2025-08-10 01:13:57,779 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:57,780 - PokerRunner - INFO - Server: New round starting!
+2025-08-10 01:13:57,780 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:57,780 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:57,780 - PokerRunner - INFO -   Pot 0: 0 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:57,780 - PokerRunner - INFO - Received message type: Request Player Action
+2025-08-10 01:13:57,780 - PokerRunner - INFO - Bot action: CHECK, amount: 0
+2025-08-10 01:13:57,783 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:57,784 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:57,785 - PokerRunner - INFO -   Pot 0: 0 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:57,827 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:57,828 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:57,828 - PokerRunner - INFO -   Pot 0: 100 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:57,829 - PokerRunner - INFO - Received message type: Request Player Action
+2025-08-10 01:13:57,829 - PokerRunner - INFO - Bot action: FOLD, amount: 0
+2025-08-10 01:13:57,831 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:57,831 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:57,831 - PokerRunner - INFO -   Pot 0: 100 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:57,871 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:57,872 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:57,872 - PokerRunner - INFO -   Pot 0: 100 chips, eligible players: [3752577440]
+2025-08-10 01:13:57,872 - PokerRunner - INFO - Received message type: Round End
+2025-08-10 01:13:57,872 - PokerRunner - INFO - Round ended
+2025-08-10 01:13:57,873 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:57,873 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:57,873 - PokerRunner - INFO -   Pot 0: 100 chips, eligible players: [3752577440]
+2025-08-10 01:13:57,873 - PokerRunner - INFO - Received message type: Round Start
+2025-08-10 01:13:57,873 - PokerRunner - INFO - Round started
+2025-08-10 01:13:57,873 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:57,873 - PokerRunner - INFO - Server: Game #7 over!
+2025-08-10 01:13:57,874 - PokerRunner - INFO - Received message type: Game End
+2025-08-10 01:13:57,874 - PokerRunner - INFO - All final scores: {'3752577440': 10, '3472195111': -10}
+2025-08-10 01:13:57,874 - PokerRunner - INFO - Active players hands: {'3752577440': ['8c', '6s']}
+2025-08-10 01:13:57,874 - PokerRunner - INFO - Data appended to /app/output/game_result.log
+2025-08-10 01:13:57,874 - PokerRunner - INFO - Delta updated: -150 + -10 = -160, money: 9840 -> 9840
+2025-08-10 01:13:57,875 - PokerRunner - INFO - Game #7 ended with score: -10
+2025-08-10 01:13:57,875 - PokerRunner - INFO - Reset for Game #7, current money: 9840, delta: -160
+2025-08-10 01:13:58,343 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:58,343 - PokerRunner - INFO - Server: Game #8 starting!
+2025-08-10 01:13:58,343 - PokerRunner - INFO - Received message type: Connect
+2025-08-10 01:13:58,343 - PokerRunner - INFO - Connected with player ID: 3472195111
+2025-08-10 01:13:58,344 - PokerRunner - INFO - Data written to /app/output/gameid.log
+2025-08-10 01:13:58,344 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:58,344 - PokerRunner - INFO - Server: Welcome to Game #8! Your ID is 3472195111
+2025-08-10 01:13:58,344 - PokerRunner - INFO - Received message type: Game Start
+2025-08-10 01:13:58,344 - PokerRunner - INFO - Game #8 started with 2 cards, blind: 10
+2025-08-10 01:13:58,344 - PokerRunner - INFO - All players in game: [3752577440, 3472195111]
+2025-08-10 01:13:58,344 - PokerRunner - INFO - Small blind player: 3472195111, Big blind player: 3752577440
+2025-08-10 01:13:58,344 - PokerRunner - INFO - This player is the small blind
+2025-08-10 01:13:58,344 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:58,344 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:58,344 - PokerRunner - INFO -   Pot 0: 0 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:58,345 - PokerRunner - INFO - Received message type: Round Start
+2025-08-10 01:13:58,345 - PokerRunner - INFO - Round started
+2025-08-10 01:13:58,345 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:58,345 - PokerRunner - INFO - Server: New round starting!
+2025-08-10 01:13:58,345 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:58,345 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:58,345 - PokerRunner - INFO -   Pot 0: 0 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:58,345 - PokerRunner - INFO - Received message type: Request Player Action
+2025-08-10 01:13:58,345 - PokerRunner - INFO - Automatically posting small blind: 5
+2025-08-10 01:13:58,346 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:58,346 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:58,346 - PokerRunner - INFO -   Pot 0: 5 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:58,387 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:58,387 - PokerRunner - INFO - Side pots active: 2 pot(s)
+2025-08-10 01:13:58,388 - PokerRunner - INFO -   Pot 0: 10 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:58,388 - PokerRunner - INFO -   Pot 1: 5 chips, eligible players: [3752577440]
+2025-08-10 01:13:58,388 - PokerRunner - INFO - Received message type: Request Player Action
+2025-08-10 01:13:58,388 - PokerRunner - INFO - Bot action: FOLD, amount: 0
+2025-08-10 01:13:58,389 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:58,390 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:58,390 - PokerRunner - INFO -   Pot 0: 15 chips, eligible players: [3752577440]
+2025-08-10 01:13:58,431 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:58,432 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:58,432 - PokerRunner - INFO -   Pot 0: 15 chips, eligible players: [3752577440]
+2025-08-10 01:13:58,432 - PokerRunner - INFO - Received message type: Round End
+2025-08-10 01:13:58,432 - PokerRunner - INFO - Round ended
+2025-08-10 01:13:58,432 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:58,433 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:58,433 - PokerRunner - INFO -   Pot 0: 15 chips, eligible players: [3752577440]
+2025-08-10 01:13:58,433 - PokerRunner - INFO - Received message type: Round Start
+2025-08-10 01:13:58,433 - PokerRunner - INFO - Round started
+2025-08-10 01:13:58,433 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:58,433 - PokerRunner - INFO - Server: Game #8 over!
+2025-08-10 01:13:58,433 - PokerRunner - INFO - Received message type: Game End
+2025-08-10 01:13:58,433 - PokerRunner - INFO - All final scores: {'3752577440': 5, '3472195111': -5}
+2025-08-10 01:13:58,433 - PokerRunner - INFO - Active players hands: {'3752577440': ['9d', '8h']}
+2025-08-10 01:13:58,433 - PokerRunner - INFO - Data appended to /app/output/game_result.log
+2025-08-10 01:13:58,433 - PokerRunner - INFO - Delta updated: -160 + -5 = -165, money: 9835 -> 9835
+2025-08-10 01:13:58,433 - PokerRunner - INFO - Game #8 ended with score: -5
+2025-08-10 01:13:58,433 - PokerRunner - INFO - Reset for Game #8, current money: 9835, delta: -165
+2025-08-10 01:13:58,901 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:58,902 - PokerRunner - INFO - Server: Game #9 starting!
+2025-08-10 01:13:58,902 - PokerRunner - INFO - Received message type: Connect
+2025-08-10 01:13:58,903 - PokerRunner - INFO - Connected with player ID: 3472195111
+2025-08-10 01:13:58,903 - PokerRunner - INFO - Data written to /app/output/gameid.log
+2025-08-10 01:13:58,904 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:58,905 - PokerRunner - INFO - Server: Welcome to Game #9! Your ID is 3472195111
+2025-08-10 01:13:58,905 - PokerRunner - INFO - Received message type: Game Start
+2025-08-10 01:13:58,905 - PokerRunner - INFO - Game #9 started with 2 cards, blind: 10
+2025-08-10 01:13:58,905 - PokerRunner - INFO - All players in game: [3752577440, 3472195111]
+2025-08-10 01:13:58,905 - PokerRunner - INFO - Small blind player: 3752577440, Big blind player: 3472195111
+2025-08-10 01:13:58,906 - PokerRunner - INFO - This player is the big blind
+2025-08-10 01:13:58,906 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:58,906 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:58,906 - PokerRunner - INFO -   Pot 0: 0 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:58,907 - PokerRunner - INFO - Received message type: Round Start
+2025-08-10 01:13:58,907 - PokerRunner - INFO - Round started
+2025-08-10 01:13:58,907 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:58,907 - PokerRunner - INFO - Server: New round starting!
+2025-08-10 01:13:58,908 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:58,908 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:58,908 - PokerRunner - INFO -   Pot 0: 0 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:58,910 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:58,911 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:58,911 - PokerRunner - INFO -   Pot 0: 5 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:58,911 - PokerRunner - INFO - Received message type: Request Player Action
+2025-08-10 01:13:58,911 - PokerRunner - INFO - Automatically posting big blind: 10
+2025-08-10 01:13:58,912 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:58,913 - PokerRunner - INFO - Side pots active: 2 pot(s)
+2025-08-10 01:13:58,913 - PokerRunner - INFO -   Pot 0: 10 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:58,913 - PokerRunner - INFO -   Pot 1: 5 chips, eligible players: [3472195111]
+2025-08-10 01:13:58,956 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:58,957 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:58,957 - PokerRunner - INFO -   Pot 0: 20 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:58,957 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:58,957 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:58,957 - PokerRunner - INFO -   Pot 0: 20 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:58,958 - PokerRunner - INFO - Received message type: Round End
+2025-08-10 01:13:58,958 - PokerRunner - INFO - Round ended
+2025-08-10 01:13:58,958 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:58,958 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:58,958 - PokerRunner - INFO -   Pot 0: 20 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:58,958 - PokerRunner - INFO - Received message type: Round Start
+2025-08-10 01:13:58,958 - PokerRunner - INFO - Round started
+2025-08-10 01:13:58,959 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:58,959 - PokerRunner - INFO - Server: New round starting!
+2025-08-10 01:13:58,959 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:58,959 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:58,960 - PokerRunner - INFO -   Pot 0: 0 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:58,960 - PokerRunner - INFO - Received message type: Request Player Action
+2025-08-10 01:13:58,960 - PokerRunner - INFO - Bot action: CHECK, amount: 0
+2025-08-10 01:13:58,962 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:58,962 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:58,962 - PokerRunner - INFO -   Pot 0: 0 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:59,008 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:59,008 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:59,008 - PokerRunner - INFO -   Pot 0: 100 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:59,009 - PokerRunner - INFO - Received message type: Request Player Action
+2025-08-10 01:13:59,009 - PokerRunner - INFO - Bot action: FOLD, amount: 0
+2025-08-10 01:13:59,011 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:59,011 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:59,011 - PokerRunner - INFO -   Pot 0: 100 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:59,052 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:59,052 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:59,053 - PokerRunner - INFO -   Pot 0: 100 chips, eligible players: [3752577440]
+2025-08-10 01:13:59,053 - PokerRunner - INFO - Received message type: Round End
+2025-08-10 01:13:59,053 - PokerRunner - INFO - Round ended
+2025-08-10 01:13:59,054 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:59,054 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:59,054 - PokerRunner - INFO -   Pot 0: 100 chips, eligible players: [3752577440]
+2025-08-10 01:13:59,054 - PokerRunner - INFO - Received message type: Round Start
+2025-08-10 01:13:59,054 - PokerRunner - INFO - Round started
+2025-08-10 01:13:59,054 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:59,055 - PokerRunner - INFO - Server: Game #9 over!
+2025-08-10 01:13:59,055 - PokerRunner - INFO - Received message type: Game End
+2025-08-10 01:13:59,055 - PokerRunner - INFO - All final scores: {'3752577440': 10, '3472195111': -10}
+2025-08-10 01:13:59,055 - PokerRunner - INFO - Active players hands: {'3752577440': ['Jd', '9h']}
+2025-08-10 01:13:59,055 - PokerRunner - INFO - Data appended to /app/output/game_result.log
+2025-08-10 01:13:59,056 - PokerRunner - INFO - Delta updated: -165 + -10 = -175, money: 9825 -> 9825
+2025-08-10 01:13:59,056 - PokerRunner - INFO - Game #9 ended with score: -10
+2025-08-10 01:13:59,056 - PokerRunner - INFO - Reset for Game #9, current money: 9825, delta: -175
+2025-08-10 01:13:59,522 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:59,523 - PokerRunner - INFO - Server: Game #10 starting!
+2025-08-10 01:13:59,523 - PokerRunner - INFO - Received message type: Connect
+2025-08-10 01:13:59,524 - PokerRunner - INFO - Connected with player ID: 3472195111
+2025-08-10 01:13:59,524 - PokerRunner - INFO - Data written to /app/output/gameid.log
+2025-08-10 01:13:59,525 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:59,525 - PokerRunner - INFO - Server: Welcome to Game #10! Your ID is 3472195111
+2025-08-10 01:13:59,525 - PokerRunner - INFO - Received message type: Game Start
+2025-08-10 01:13:59,525 - PokerRunner - INFO - Game #10 started with 2 cards, blind: 10
+2025-08-10 01:13:59,525 - PokerRunner - INFO - All players in game: [3752577440, 3472195111]
+2025-08-10 01:13:59,525 - PokerRunner - INFO - Small blind player: 3472195111, Big blind player: 3752577440
+2025-08-10 01:13:59,525 - PokerRunner - INFO - This player is the small blind
+2025-08-10 01:13:59,525 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:59,526 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:59,526 - PokerRunner - INFO -   Pot 0: 0 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:59,526 - PokerRunner - INFO - Received message type: Round Start
+2025-08-10 01:13:59,526 - PokerRunner - INFO - Round started
+2025-08-10 01:13:59,526 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:59,526 - PokerRunner - INFO - Server: New round starting!
+2025-08-10 01:13:59,527 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:59,527 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:59,527 - PokerRunner - INFO -   Pot 0: 0 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:59,527 - PokerRunner - INFO - Received message type: Request Player Action
+2025-08-10 01:13:59,527 - PokerRunner - INFO - Automatically posting small blind: 5
+2025-08-10 01:13:59,530 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:59,530 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:59,530 - PokerRunner - INFO -   Pot 0: 5 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:59,572 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:59,573 - PokerRunner - INFO - Side pots active: 2 pot(s)
+2025-08-10 01:13:59,573 - PokerRunner - INFO -   Pot 0: 10 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:59,573 - PokerRunner - INFO -   Pot 1: 5 chips, eligible players: [3752577440]
+2025-08-10 01:13:59,573 - PokerRunner - INFO - Received message type: Request Player Action
+2025-08-10 01:13:59,574 - PokerRunner - INFO - Bot action: CALL, amount: 0
+2025-08-10 01:13:59,576 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:59,577 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:59,577 - PokerRunner - INFO -   Pot 0: 20 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:59,581 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:59,581 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:59,581 - PokerRunner - INFO -   Pot 0: 20 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:59,581 - PokerRunner - INFO - Received message type: Round End
+2025-08-10 01:13:59,582 - PokerRunner - INFO - Round ended
+2025-08-10 01:13:59,582 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:59,582 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:59,582 - PokerRunner - INFO -   Pot 0: 20 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:59,582 - PokerRunner - INFO - Received message type: Round Start
+2025-08-10 01:13:59,582 - PokerRunner - INFO - Round started
+2025-08-10 01:13:59,582 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:59,582 - PokerRunner - INFO - Server: New round starting!
+2025-08-10 01:13:59,583 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:59,583 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:59,583 - PokerRunner - INFO -   Pot 0: 0 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:59,583 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:59,584 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:59,584 - PokerRunner - INFO -   Pot 0: 100 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:59,623 - PokerRunner - INFO - Received message type: Request Player Action
+2025-08-10 01:13:59,624 - PokerRunner - INFO - Bot action: CALL, amount: 0
+2025-08-10 01:13:59,627 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:59,627 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:59,628 - PokerRunner - INFO -   Pot 0: 200 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:59,631 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:59,631 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:59,631 - PokerRunner - INFO -   Pot 0: 200 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:59,631 - PokerRunner - INFO - Received message type: Round End
+2025-08-10 01:13:59,632 - PokerRunner - INFO - Round ended
+2025-08-10 01:13:59,632 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:59,632 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:59,632 - PokerRunner - INFO -   Pot 0: 200 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:59,632 - PokerRunner - INFO - Received message type: Round Start
+2025-08-10 01:13:59,632 - PokerRunner - INFO - Round started
+2025-08-10 01:13:59,633 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:59,633 - PokerRunner - INFO - Server: New round starting!
+2025-08-10 01:13:59,633 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:59,633 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:59,633 - PokerRunner - INFO -   Pot 0: 0 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:59,633 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:59,633 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:59,634 - PokerRunner - INFO -   Pot 0: 0 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:59,672 - PokerRunner - INFO - Received message type: Request Player Action
+2025-08-10 01:13:59,673 - PokerRunner - INFO - Bot action: RAISE, amount: 0
+2025-08-10 01:13:59,676 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:59,676 - PokerRunner - INFO - Server: Invalid action: Raise amount + current bet must be higher than the current raise
+2025-08-10 01:13:59,685 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:59,685 - PokerRunner - INFO - Server: Invalid action. Try again. (1/1)
+2025-08-10 01:13:59,685 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:59,685 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:59,685 - PokerRunner - INFO -   Pot 0: 0 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:59,686 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:59,686 - PokerRunner - INFO - Server: Player 3472195111 was automatically folded due to invalid actions
+2025-08-10 01:13:59,686 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:59,686 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:59,686 - PokerRunner - INFO -   Pot 0: 0 chips, eligible players: [3752577440]
+2025-08-10 01:13:59,686 - PokerRunner - INFO - Received message type: Round End
+2025-08-10 01:13:59,686 - PokerRunner - INFO - Round ended
+2025-08-10 01:13:59,686 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:59,687 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:59,687 - PokerRunner - INFO -   Pot 0: 0 chips, eligible players: [3752577440]
+2025-08-10 01:13:59,687 - PokerRunner - INFO - Received message type: Round Start
+2025-08-10 01:13:59,687 - PokerRunner - INFO - Round started
+2025-08-10 01:13:59,687 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:59,687 - PokerRunner - INFO - Server: Game #10 over!
+2025-08-10 01:13:59,687 - PokerRunner - INFO - Received message type: Game End
+2025-08-10 01:13:59,687 - PokerRunner - INFO - All final scores: {'3752577440': 110, '3472195111': -110}
+2025-08-10 01:13:59,687 - PokerRunner - INFO - Active players hands: {'3752577440': ['Qs', '2s']}
+2025-08-10 01:13:59,688 - PokerRunner - INFO - Data appended to /app/output/game_result.log
+2025-08-10 01:13:59,688 - PokerRunner - INFO - Delta updated: -175 + -110 = -285, money: 9715 -> 9715
+2025-08-10 01:13:59,688 - PokerRunner - INFO - Game #10 ended with score: -110
+2025-08-10 01:13:59,688 - PokerRunner - INFO - Reset for Game #10, current money: 9715, delta: -285
+2025-08-10 01:14:00,192 - PokerRunner - INFO - Server closed connection
+2025-08-10 01:14:00,194 - PokerRunner - INFO - Connection closed
+2025-08-10 01:14:00,194 - __main__ - INFO - Continuous simulation completed. Total games played: 10
+2025-08-10 01:14:00,195 - __main__ - INFO - Total score: -285
+2025-08-10 01:14:00,198 - __main__ - INFO - Average score per game: -28.5
+2025-08-10 01:14:00,199 - PokerRunner - INFO - Data appended to /app/output/game_result.log
+
+
+
+CONTAINER LOGS:
+--------------------
+Test Client Logs:
+
+
+
+POKER CLIENT LOGS:
+--------------------
+Poker Client Log:
+2025-08-10 01:13:54,067 - __main__ - INFO - Poker Client starting...
+2025-08-10 01:13:54,069 - __main__ - INFO - Running in continuous simulation mode for 10 games
+2025-08-10 01:13:54,078 - PokerRunner - INFO - Connected to server at game_server_6412:6412
+2025-08-10 01:13:54,081 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:54,081 - PokerRunner - INFO - Server: Game #1 starting!
+2025-08-10 01:13:54,081 - PokerRunner - INFO - Received message type: Connect
+2025-08-10 01:13:54,081 - PokerRunner - INFO - Connected with player ID: 3472195111
+2025-08-10 01:13:54,081 - PokerRunner - INFO - Data written to /app/output/gameid.log
+2025-08-10 01:13:54,082 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:54,082 - PokerRunner - INFO - Server: Welcome to Game #1! Your ID is 3472195111
+2025-08-10 01:13:54,082 - PokerRunner - INFO - Received message type: Game Start
+2025-08-10 01:13:54,082 - PokerRunner - INFO - Game #1 started with 2 cards, blind: 10
+2025-08-10 01:13:54,082 - PokerRunner - INFO - All players in game: [3752577440, 3472195111]
+2025-08-10 01:13:54,082 - PokerRunner - INFO - Small blind player: 3752577440, Big blind player: 3472195111
+2025-08-10 01:13:54,082 - PokerRunner - INFO - This player is the big blind
+2025-08-10 01:13:54,083 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:54,083 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:54,083 - PokerRunner - INFO -   Pot 0: 0 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:54,084 - PokerRunner - INFO - Received message type: Round Start
+2025-08-10 01:13:54,084 - PokerRunner - INFO - Round started
+2025-08-10 01:13:54,084 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:54,084 - PokerRunner - INFO - Server: New round starting!
+2025-08-10 01:13:54,084 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:54,084 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:54,084 - PokerRunner - INFO -   Pot 0: 0 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:54,085 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:54,085 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:54,085 - PokerRunner - INFO -   Pot 0: 5 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:54,085 - PokerRunner - INFO - Received message type: Request Player Action
+2025-08-10 01:13:54,085 - PokerRunner - INFO - Automatically posting big blind: 10
+2025-08-10 01:13:54,086 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:54,086 - PokerRunner - INFO - Side pots active: 2 pot(s)
+2025-08-10 01:13:54,087 - PokerRunner - INFO -   Pot 0: 10 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:54,087 - PokerRunner - INFO -   Pot 1: 5 chips, eligible players: [3472195111]
+2025-08-10 01:13:54,128 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:54,128 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:54,128 - PokerRunner - INFO -   Pot 0: 20 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:54,128 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:54,128 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:54,128 - PokerRunner - INFO -   Pot 0: 20 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:54,128 - PokerRunner - INFO - Received message type: Round End
+2025-08-10 01:13:54,128 - PokerRunner - INFO - Round ended
+2025-08-10 01:13:54,128 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:54,128 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:54,128 - PokerRunner - INFO -   Pot 0: 20 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:54,128 - PokerRunner - INFO - Received message type: Round Start
+2025-08-10 01:13:54,129 - PokerRunner - INFO - Round started
+2025-08-10 01:13:54,129 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:54,129 - PokerRunner - INFO - Server: New round starting!
+2025-08-10 01:13:54,129 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:54,129 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:54,129 - PokerRunner - INFO -   Pot 0: 0 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:54,129 - PokerRunner - INFO - Received message type: Request Player Action
+2025-08-10 01:13:54,129 - PokerRunner - INFO - Bot action: RAISE, amount: 0
+2025-08-10 01:13:54,130 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:54,130 - PokerRunner - INFO - Server: Invalid action: Raise amount + current bet must be higher than the current raise
+2025-08-10 01:13:54,171 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:54,171 - PokerRunner - INFO - Server: Invalid action. Try again. (1/1)
+2025-08-10 01:13:54,171 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:54,172 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:54,172 - PokerRunner - INFO -   Pot 0: 0 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:54,172 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:54,172 - PokerRunner - INFO - Server: Player 3472195111 was automatically folded due to invalid actions
+2025-08-10 01:13:54,172 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:54,173 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:54,173 - PokerRunner - INFO -   Pot 0: 100 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:54,173 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:54,173 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:54,173 - PokerRunner - INFO -   Pot 0: 100 chips, eligible players: [3752577440]
+2025-08-10 01:13:54,173 - PokerRunner - INFO - Received message type: Round End
+2025-08-10 01:13:54,173 - PokerRunner - INFO - Round ended
+2025-08-10 01:13:54,173 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:54,173 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:54,173 - PokerRunner - INFO -   Pot 0: 100 chips, eligible players: [3752577440]
+2025-08-10 01:13:54,173 - PokerRunner - INFO - Received message type: Round Start
+2025-08-10 01:13:54,173 - PokerRunner - INFO - Round started
+2025-08-10 01:13:54,173 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:54,173 - PokerRunner - INFO - Server: Game #1 over!
+2025-08-10 01:13:54,175 - PokerRunner - INFO - Received message type: Game End
+2025-08-10 01:13:54,176 - PokerRunner - INFO - All final scores: {'3752577440': 10, '3472195111': -10}
+2025-08-10 01:13:54,176 - PokerRunner - INFO - Active players hands: {'3752577440': ['7d', '7c']}
+2025-08-10 01:13:54,176 - PokerRunner - INFO - Data appended to /app/output/game_result.log
+2025-08-10 01:13:54,176 - PokerRunner - INFO - Delta updated: 0 + -10 = -10, money: 9990 -> 9990
+2025-08-10 01:13:54,176 - PokerRunner - INFO - Game #1 ended with score: -10
+2025-08-10 01:13:54,176 - PokerRunner - INFO - Reset for Game #1, current money: 9990, delta: -10
+2025-08-10 01:13:54,680 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:54,680 - PokerRunner - INFO - Server: Game #2 starting!
+2025-08-10 01:13:54,680 - PokerRunner - INFO - Received message type: Connect
+2025-08-10 01:13:54,680 - PokerRunner - INFO - Connected with player ID: 3472195111
+2025-08-10 01:13:54,681 - PokerRunner - INFO - Data written to /app/output/gameid.log
+2025-08-10 01:13:54,681 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:54,681 - PokerRunner - INFO - Server: Welcome to Game #2! Your ID is 3472195111
+2025-08-10 01:13:54,681 - PokerRunner - INFO - Received message type: Game Start
+2025-08-10 01:13:54,681 - PokerRunner - INFO - Game #2 started with 2 cards, blind: 10
+2025-08-10 01:13:54,681 - PokerRunner - INFO - All players in game: [3752577440, 3472195111]
+2025-08-10 01:13:54,681 - PokerRunner - INFO - Small blind player: 3472195111, Big blind player: 3752577440
+2025-08-10 01:13:54,681 - PokerRunner - INFO - This player is the small blind
+2025-08-10 01:13:54,681 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:54,681 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:54,681 - PokerRunner - INFO -   Pot 0: 0 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:54,681 - PokerRunner - INFO - Received message type: Round Start
+2025-08-10 01:13:54,681 - PokerRunner - INFO - Round started
+2025-08-10 01:13:54,681 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:54,681 - PokerRunner - INFO - Server: New round starting!
+2025-08-10 01:13:54,682 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:54,682 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:54,682 - PokerRunner - INFO -   Pot 0: 0 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:54,682 - PokerRunner - INFO - Received message type: Request Player Action
+2025-08-10 01:13:54,682 - PokerRunner - INFO - Automatically posting small blind: 5
+2025-08-10 01:13:54,682 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:54,682 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:54,682 - PokerRunner - INFO -   Pot 0: 5 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:54,724 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:54,724 - PokerRunner - INFO - Side pots active: 2 pot(s)
+2025-08-10 01:13:54,724 - PokerRunner - INFO -   Pot 0: 10 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:54,724 - PokerRunner - INFO -   Pot 1: 5 chips, eligible players: [3752577440]
+2025-08-10 01:13:54,724 - PokerRunner - INFO - Received message type: Request Player Action
+2025-08-10 01:13:54,725 - PokerRunner - INFO - Bot action: CALL, amount: 0
+2025-08-10 01:13:54,726 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:54,726 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:54,726 - PokerRunner - INFO -   Pot 0: 20 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:54,728 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:54,728 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:54,728 - PokerRunner - INFO -   Pot 0: 20 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:54,728 - PokerRunner - INFO - Received message type: Round End
+2025-08-10 01:13:54,728 - PokerRunner - INFO - Round ended
+2025-08-10 01:13:54,728 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:54,728 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:54,728 - PokerRunner - INFO -   Pot 0: 20 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:54,728 - PokerRunner - INFO - Received message type: Round Start
+2025-08-10 01:13:54,728 - PokerRunner - INFO - Round started
+2025-08-10 01:13:54,728 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:54,728 - PokerRunner - INFO - Server: New round starting!
+2025-08-10 01:13:54,728 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:54,729 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:54,729 - PokerRunner - INFO -   Pot 0: 0 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:54,729 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:54,729 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:54,729 - PokerRunner - INFO -   Pot 0: 100 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:54,771 - PokerRunner - INFO - Received message type: Request Player Action
+2025-08-10 01:13:54,773 - PokerRunner - INFO - Bot action: CALL, amount: 0
+2025-08-10 01:13:54,775 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:54,776 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:54,776 - PokerRunner - INFO -   Pot 0: 200 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:54,782 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:54,784 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:54,785 - PokerRunner - INFO -   Pot 0: 200 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:54,785 - PokerRunner - INFO - Received message type: Round End
+2025-08-10 01:13:54,785 - PokerRunner - INFO - Round ended
+2025-08-10 01:13:54,785 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:54,785 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:54,786 - PokerRunner - INFO -   Pot 0: 200 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:54,786 - PokerRunner - INFO - Received message type: Round Start
+2025-08-10 01:13:54,786 - PokerRunner - INFO - Round started
+2025-08-10 01:13:54,786 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:54,786 - PokerRunner - INFO - Server: New round starting!
+2025-08-10 01:13:54,787 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:54,787 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:54,787 - PokerRunner - INFO -   Pot 0: 0 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:54,787 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:54,788 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:54,788 - PokerRunner - INFO -   Pot 0: 0 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:54,823 - PokerRunner - INFO - Received message type: Request Player Action
+2025-08-10 01:13:54,824 - PokerRunner - INFO - Bot action: RAISE, amount: 0
+2025-08-10 01:13:54,826 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:54,827 - PokerRunner - INFO - Server: Invalid action: Raise amount + current bet must be higher than the current raise
+2025-08-10 01:13:54,831 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:54,832 - PokerRunner - INFO - Server: Invalid action. Try again. (1/1)
+2025-08-10 01:13:54,832 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:54,832 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:54,833 - PokerRunner - INFO -   Pot 0: 0 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:54,833 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:54,833 - PokerRunner - INFO - Server: Player 3472195111 was automatically folded due to invalid actions
+2025-08-10 01:13:54,834 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:54,834 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:54,834 - PokerRunner - INFO -   Pot 0: 0 chips, eligible players: [3752577440]
+2025-08-10 01:13:54,834 - PokerRunner - INFO - Received message type: Round End
+2025-08-10 01:13:54,834 - PokerRunner - INFO - Round ended
+2025-08-10 01:13:54,834 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:54,834 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:54,835 - PokerRunner - INFO -   Pot 0: 0 chips, eligible players: [3752577440]
+2025-08-10 01:13:54,835 - PokerRunner - INFO - Received message type: Round Start
+2025-08-10 01:13:54,835 - PokerRunner - INFO - Round started
+2025-08-10 01:13:54,835 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:54,835 - PokerRunner - INFO - Server: Game #2 over!
+2025-08-10 01:13:54,835 - PokerRunner - INFO - Received message type: Game End
+2025-08-10 01:13:54,835 - PokerRunner - INFO - All final scores: {'3752577440': 110, '3472195111': -110}
+2025-08-10 01:13:54,835 - PokerRunner - INFO - Active players hands: {'3752577440': ['2h', 'Qd']}
+2025-08-10 01:13:54,835 - PokerRunner - INFO - Data appended to /app/output/game_result.log
+2025-08-10 01:13:54,835 - PokerRunner - INFO - Delta updated: -10 + -110 = -120, money: 9880 -> 9880
+2025-08-10 01:13:54,835 - PokerRunner - INFO - Game #2 ended with score: -110
+2025-08-10 01:13:54,835 - PokerRunner - INFO - Reset for Game #2, current money: 9880, delta: -120
+2025-08-10 01:13:55,343 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:55,344 - PokerRunner - INFO - Server: Game #3 starting!
+2025-08-10 01:13:55,345 - PokerRunner - INFO - Received message type: Connect
+2025-08-10 01:13:55,346 - PokerRunner - INFO - Connected with player ID: 3472195111
+2025-08-10 01:13:55,346 - PokerRunner - INFO - Data written to /app/output/gameid.log
+2025-08-10 01:13:55,347 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:55,347 - PokerRunner - INFO - Server: Welcome to Game #3! Your ID is 3472195111
+2025-08-10 01:13:55,347 - PokerRunner - INFO - Received message type: Game Start
+2025-08-10 01:13:55,347 - PokerRunner - INFO - Game #3 started with 2 cards, blind: 10
+2025-08-10 01:13:55,348 - PokerRunner - INFO - All players in game: [3752577440, 3472195111]
+2025-08-10 01:13:55,348 - PokerRunner - INFO - Small blind player: 3752577440, Big blind player: 3472195111
+2025-08-10 01:13:55,348 - PokerRunner - INFO - This player is the big blind
+2025-08-10 01:13:55,348 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:55,349 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:55,349 - PokerRunner - INFO -   Pot 0: 0 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:55,349 - PokerRunner - INFO - Received message type: Round Start
+2025-08-10 01:13:55,349 - PokerRunner - INFO - Round started
+2025-08-10 01:13:55,349 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:55,350 - PokerRunner - INFO - Server: New round starting!
+2025-08-10 01:13:55,350 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:55,350 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:55,350 - PokerRunner - INFO -   Pot 0: 0 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:55,351 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:55,352 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:55,352 - PokerRunner - INFO -   Pot 0: 5 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:55,352 - PokerRunner - INFO - Received message type: Request Player Action
+2025-08-10 01:13:55,352 - PokerRunner - INFO - Automatically posting big blind: 10
+2025-08-10 01:13:55,354 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:55,354 - PokerRunner - INFO - Side pots active: 2 pot(s)
+2025-08-10 01:13:55,354 - PokerRunner - INFO -   Pot 0: 10 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:55,354 - PokerRunner - INFO -   Pot 1: 5 chips, eligible players: [3472195111]
+2025-08-10 01:13:55,396 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:55,397 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:55,397 - PokerRunner - INFO -   Pot 0: 20 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:55,398 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:55,398 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:55,398 - PokerRunner - INFO -   Pot 0: 20 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:55,398 - PokerRunner - INFO - Received message type: Round End
+2025-08-10 01:13:55,398 - PokerRunner - INFO - Round ended
+2025-08-10 01:13:55,398 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:55,398 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:55,398 - PokerRunner - INFO -   Pot 0: 20 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:55,399 - PokerRunner - INFO - Received message type: Round Start
+2025-08-10 01:13:55,399 - PokerRunner - INFO - Round started
+2025-08-10 01:13:55,399 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:55,399 - PokerRunner - INFO - Server: New round starting!
+2025-08-10 01:13:55,399 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:55,399 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:55,399 - PokerRunner - INFO -   Pot 0: 0 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:55,400 - PokerRunner - INFO - Received message type: Request Player Action
+2025-08-10 01:13:55,400 - PokerRunner - INFO - Bot action: CHECK, amount: 0
+2025-08-10 01:13:55,402 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:55,403 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:55,403 - PokerRunner - INFO -   Pot 0: 0 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:55,447 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:55,447 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:55,448 - PokerRunner - INFO -   Pot 0: 100 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:55,448 - PokerRunner - INFO - Received message type: Request Player Action
+2025-08-10 01:13:55,449 - PokerRunner - INFO - Bot action: FOLD, amount: 0
+2025-08-10 01:13:55,451 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:55,452 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:55,452 - PokerRunner - INFO -   Pot 0: 100 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:55,492 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:55,493 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:55,493 - PokerRunner - INFO -   Pot 0: 100 chips, eligible players: [3752577440]
+2025-08-10 01:13:55,494 - PokerRunner - INFO - Received message type: Round End
+2025-08-10 01:13:55,494 - PokerRunner - INFO - Round ended
+2025-08-10 01:13:55,494 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:55,494 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:55,494 - PokerRunner - INFO -   Pot 0: 100 chips, eligible players: [3752577440]
+2025-08-10 01:13:55,494 - PokerRunner - INFO - Received message type: Round Start
+2025-08-10 01:13:55,495 - PokerRunner - INFO - Round started
+2025-08-10 01:13:55,495 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:55,495 - PokerRunner - INFO - Server: Game #3 over!
+2025-08-10 01:13:55,495 - PokerRunner - INFO - Received message type: Game End
+2025-08-10 01:13:55,495 - PokerRunner - INFO - All final scores: {'3752577440': 10, '3472195111': -10}
+2025-08-10 01:13:55,495 - PokerRunner - INFO - Active players hands: {'3752577440': ['6h', '8s']}
+2025-08-10 01:13:55,496 - PokerRunner - INFO - Data appended to /app/output/game_result.log
+2025-08-10 01:13:55,496 - PokerRunner - INFO - Delta updated: -120 + -10 = -130, money: 9870 -> 9870
+2025-08-10 01:13:55,496 - PokerRunner - INFO - Game #3 ended with score: -10
+2025-08-10 01:13:55,496 - PokerRunner - INFO - Reset for Game #3, current money: 9870, delta: -130
+2025-08-10 01:13:55,964 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:55,965 - PokerRunner - INFO - Server: Game #4 starting!
+2025-08-10 01:13:55,965 - PokerRunner - INFO - Received message type: Connect
+2025-08-10 01:13:55,966 - PokerRunner - INFO - Connected with player ID: 3472195111
+2025-08-10 01:13:55,966 - PokerRunner - INFO - Data written to /app/output/gameid.log
+2025-08-10 01:13:55,967 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:55,967 - PokerRunner - INFO - Server: Welcome to Game #4! Your ID is 3472195111
+2025-08-10 01:13:55,967 - PokerRunner - INFO - Received message type: Game Start
+2025-08-10 01:13:55,967 - PokerRunner - INFO - Game #4 started with 2 cards, blind: 10
+2025-08-10 01:13:55,967 - PokerRunner - INFO - All players in game: [3752577440, 3472195111]
+2025-08-10 01:13:55,967 - PokerRunner - INFO - Small blind player: 3472195111, Big blind player: 3752577440
+2025-08-10 01:13:55,967 - PokerRunner - INFO - This player is the small blind
+2025-08-10 01:13:55,968 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:55,968 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:55,969 - PokerRunner - INFO -   Pot 0: 0 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:55,969 - PokerRunner - INFO - Received message type: Round Start
+2025-08-10 01:13:55,969 - PokerRunner - INFO - Round started
+2025-08-10 01:13:55,969 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:55,970 - PokerRunner - INFO - Server: New round starting!
+2025-08-10 01:13:55,970 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:55,970 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:55,970 - PokerRunner - INFO -   Pot 0: 0 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:55,970 - PokerRunner - INFO - Received message type: Request Player Action
+2025-08-10 01:13:55,971 - PokerRunner - INFO - Automatically posting small blind: 5
+2025-08-10 01:13:55,973 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:55,973 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:55,973 - PokerRunner - INFO -   Pot 0: 5 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:56,015 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:56,016 - PokerRunner - INFO - Side pots active: 2 pot(s)
+2025-08-10 01:13:56,016 - PokerRunner - INFO -   Pot 0: 10 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:56,016 - PokerRunner - INFO -   Pot 1: 5 chips, eligible players: [3752577440]
+2025-08-10 01:13:56,017 - PokerRunner - INFO - Received message type: Request Player Action
+2025-08-10 01:13:56,017 - PokerRunner - INFO - Bot action: FOLD, amount: 0
+2025-08-10 01:13:56,020 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:56,020 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:56,020 - PokerRunner - INFO -   Pot 0: 15 chips, eligible players: [3752577440]
+2025-08-10 01:13:56,061 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:56,062 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:56,062 - PokerRunner - INFO -   Pot 0: 15 chips, eligible players: [3752577440]
+2025-08-10 01:13:56,062 - PokerRunner - INFO - Received message type: Round End
+2025-08-10 01:13:56,062 - PokerRunner - INFO - Round ended
+2025-08-10 01:13:56,062 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:56,062 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:56,062 - PokerRunner - INFO -   Pot 0: 15 chips, eligible players: [3752577440]
+2025-08-10 01:13:56,062 - PokerRunner - INFO - Received message type: Round Start
+2025-08-10 01:13:56,063 - PokerRunner - INFO - Round started
+2025-08-10 01:13:56,063 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:56,063 - PokerRunner - INFO - Server: Game #4 over!
+2025-08-10 01:13:56,063 - PokerRunner - INFO - Received message type: Game End
+2025-08-10 01:13:56,063 - PokerRunner - INFO - All final scores: {'3752577440': 5, '3472195111': -5}
+2025-08-10 01:13:56,063 - PokerRunner - INFO - Active players hands: {'3752577440': ['2s', '4d']}
+2025-08-10 01:13:56,064 - PokerRunner - INFO - Data appended to /app/output/game_result.log
+2025-08-10 01:13:56,064 - PokerRunner - INFO - Delta updated: -130 + -5 = -135, money: 9865 -> 9865
+2025-08-10 01:13:56,064 - PokerRunner - INFO - Game #4 ended with score: -5
+2025-08-10 01:13:56,064 - PokerRunner - INFO - Reset for Game #4, current money: 9865, delta: -135
+2025-08-10 01:13:56,534 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:56,535 - PokerRunner - INFO - Server: Game #5 starting!
+2025-08-10 01:13:56,535 - PokerRunner - INFO - Received message type: Connect
+2025-08-10 01:13:56,535 - PokerRunner - INFO - Connected with player ID: 3472195111
+2025-08-10 01:13:56,536 - PokerRunner - INFO - Data written to /app/output/gameid.log
+2025-08-10 01:13:56,537 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:56,537 - PokerRunner - INFO - Server: Welcome to Game #5! Your ID is 3472195111
+2025-08-10 01:13:56,537 - PokerRunner - INFO - Received message type: Game Start
+2025-08-10 01:13:56,538 - PokerRunner - INFO - Game #5 started with 2 cards, blind: 10
+2025-08-10 01:13:56,538 - PokerRunner - INFO - All players in game: [3752577440, 3472195111]
+2025-08-10 01:13:56,538 - PokerRunner - INFO - Small blind player: 3752577440, Big blind player: 3472195111
+2025-08-10 01:13:56,538 - PokerRunner - INFO - This player is the big blind
+2025-08-10 01:13:56,538 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:56,539 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:56,539 - PokerRunner - INFO -   Pot 0: 0 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:56,539 - PokerRunner - INFO - Received message type: Round Start
+2025-08-10 01:13:56,539 - PokerRunner - INFO - Round started
+2025-08-10 01:13:56,540 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:56,540 - PokerRunner - INFO - Server: New round starting!
+2025-08-10 01:13:56,540 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:56,541 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:56,541 - PokerRunner - INFO -   Pot 0: 0 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:56,544 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:56,544 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:56,545 - PokerRunner - INFO -   Pot 0: 5 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:56,545 - PokerRunner - INFO - Received message type: Request Player Action
+2025-08-10 01:13:56,545 - PokerRunner - INFO - Automatically posting big blind: 10
+2025-08-10 01:13:56,547 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:56,547 - PokerRunner - INFO - Side pots active: 2 pot(s)
+2025-08-10 01:13:56,547 - PokerRunner - INFO -   Pot 0: 10 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:56,547 - PokerRunner - INFO -   Pot 1: 5 chips, eligible players: [3472195111]
+2025-08-10 01:13:56,588 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:56,588 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:56,589 - PokerRunner - INFO -   Pot 0: 20 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:56,589 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:56,589 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:56,590 - PokerRunner - INFO -   Pot 0: 20 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:56,590 - PokerRunner - INFO - Received message type: Round End
+2025-08-10 01:13:56,590 - PokerRunner - INFO - Round ended
+2025-08-10 01:13:56,590 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:56,590 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:56,590 - PokerRunner - INFO -   Pot 0: 20 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:56,590 - PokerRunner - INFO - Received message type: Round Start
+2025-08-10 01:13:56,590 - PokerRunner - INFO - Round started
+2025-08-10 01:13:56,590 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:56,590 - PokerRunner - INFO - Server: New round starting!
+2025-08-10 01:13:56,591 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:56,591 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:56,591 - PokerRunner - INFO -   Pot 0: 0 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:56,591 - PokerRunner - INFO - Received message type: Request Player Action
+2025-08-10 01:13:56,592 - PokerRunner - INFO - Bot action: RAISE, amount: 0
+2025-08-10 01:13:56,593 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:56,593 - PokerRunner - INFO - Server: Invalid action: Raise amount + current bet must be higher than the current raise
+2025-08-10 01:13:56,634 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:56,635 - PokerRunner - INFO - Server: Invalid action. Try again. (1/1)
+2025-08-10 01:13:56,635 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:56,635 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:56,636 - PokerRunner - INFO -   Pot 0: 0 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:56,636 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:56,636 - PokerRunner - INFO - Server: Player 3472195111 was automatically folded due to invalid actions
+2025-08-10 01:13:56,637 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:56,638 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:56,638 - PokerRunner - INFO -   Pot 0: 100 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:56,638 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:56,638 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:56,639 - PokerRunner - INFO -   Pot 0: 100 chips, eligible players: [3752577440]
+2025-08-10 01:13:56,639 - PokerRunner - INFO - Received message type: Round End
+2025-08-10 01:13:56,639 - PokerRunner - INFO - Round ended
+2025-08-10 01:13:56,639 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:56,639 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:56,639 - PokerRunner - INFO -   Pot 0: 100 chips, eligible players: [3752577440]
+2025-08-10 01:13:56,640 - PokerRunner - INFO - Received message type: Round Start
+2025-08-10 01:13:56,640 - PokerRunner - INFO - Round started
+2025-08-10 01:13:56,640 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:56,640 - PokerRunner - INFO - Server: Game #5 over!
+2025-08-10 01:13:56,643 - PokerRunner - INFO - Received message type: Game End
+2025-08-10 01:13:56,644 - PokerRunner - INFO - All final scores: {'3752577440': 10, '3472195111': -10}
+2025-08-10 01:13:56,644 - PokerRunner - INFO - Active players hands: {'3752577440': ['3c', '3d']}
+2025-08-10 01:13:56,645 - PokerRunner - INFO - Data appended to /app/output/game_result.log
+2025-08-10 01:13:56,645 - PokerRunner - INFO - Delta updated: -135 + -10 = -145, money: 9855 -> 9855
+2025-08-10 01:13:56,645 - PokerRunner - INFO - Game #5 ended with score: -10
+2025-08-10 01:13:56,645 - PokerRunner - INFO - Reset for Game #5, current money: 9855, delta: -145
+2025-08-10 01:13:57,152 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:57,153 - PokerRunner - INFO - Server: Game #6 starting!
+2025-08-10 01:13:57,153 - PokerRunner - INFO - Received message type: Connect
+2025-08-10 01:13:57,153 - PokerRunner - INFO - Connected with player ID: 3472195111
+2025-08-10 01:13:57,154 - PokerRunner - INFO - Data written to /app/output/gameid.log
+2025-08-10 01:13:57,155 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:57,155 - PokerRunner - INFO - Server: Welcome to Game #6! Your ID is 3472195111
+2025-08-10 01:13:57,155 - PokerRunner - INFO - Received message type: Game Start
+2025-08-10 01:13:57,155 - PokerRunner - INFO - Game #6 started with 2 cards, blind: 10
+2025-08-10 01:13:57,155 - PokerRunner - INFO - All players in game: [3752577440, 3472195111]
+2025-08-10 01:13:57,156 - PokerRunner - INFO - Small blind player: 3472195111, Big blind player: 3752577440
+2025-08-10 01:13:57,156 - PokerRunner - INFO - This player is the small blind
+2025-08-10 01:13:57,156 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:57,156 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:57,156 - PokerRunner - INFO -   Pot 0: 0 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:57,157 - PokerRunner - INFO - Received message type: Round Start
+2025-08-10 01:13:57,157 - PokerRunner - INFO - Round started
+2025-08-10 01:13:57,157 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:57,157 - PokerRunner - INFO - Server: New round starting!
+2025-08-10 01:13:57,158 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:57,158 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:57,158 - PokerRunner - INFO -   Pot 0: 0 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:57,159 - PokerRunner - INFO - Received message type: Request Player Action
+2025-08-10 01:13:57,159 - PokerRunner - INFO - Automatically posting small blind: 5
+2025-08-10 01:13:57,161 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:57,161 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:57,162 - PokerRunner - INFO -   Pot 0: 5 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:57,204 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:57,205 - PokerRunner - INFO - Side pots active: 2 pot(s)
+2025-08-10 01:13:57,205 - PokerRunner - INFO -   Pot 0: 10 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:57,205 - PokerRunner - INFO -   Pot 1: 5 chips, eligible players: [3752577440]
+2025-08-10 01:13:57,205 - PokerRunner - INFO - Received message type: Request Player Action
+2025-08-10 01:13:57,206 - PokerRunner - INFO - Bot action: FOLD, amount: 0
+2025-08-10 01:13:57,208 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:57,208 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:57,208 - PokerRunner - INFO -   Pot 0: 15 chips, eligible players: [3752577440]
+2025-08-10 01:13:57,250 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:57,250 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:57,250 - PokerRunner - INFO -   Pot 0: 15 chips, eligible players: [3752577440]
+2025-08-10 01:13:57,251 - PokerRunner - INFO - Received message type: Round End
+2025-08-10 01:13:57,251 - PokerRunner - INFO - Round ended
+2025-08-10 01:13:57,251 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:57,251 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:57,251 - PokerRunner - INFO -   Pot 0: 15 chips, eligible players: [3752577440]
+2025-08-10 01:13:57,251 - PokerRunner - INFO - Received message type: Round Start
+2025-08-10 01:13:57,251 - PokerRunner - INFO - Round started
+2025-08-10 01:13:57,251 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:57,251 - PokerRunner - INFO - Server: Game #6 over!
+2025-08-10 01:13:57,251 - PokerRunner - INFO - Received message type: Game End
+2025-08-10 01:13:57,251 - PokerRunner - INFO - All final scores: {'3752577440': 5, '3472195111': -5}
+2025-08-10 01:13:57,251 - PokerRunner - INFO - Active players hands: {'3752577440': ['7c', '2d']}
+2025-08-10 01:13:57,252 - PokerRunner - INFO - Data appended to /app/output/game_result.log
+2025-08-10 01:13:57,252 - PokerRunner - INFO - Delta updated: -145 + -5 = -150, money: 9850 -> 9850
+2025-08-10 01:13:57,252 - PokerRunner - INFO - Game #6 ended with score: -5
+2025-08-10 01:13:57,252 - PokerRunner - INFO - Reset for Game #6, current money: 9850, delta: -150
+2025-08-10 01:13:57,718 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:57,719 - PokerRunner - INFO - Server: Game #7 starting!
+2025-08-10 01:13:57,719 - PokerRunner - INFO - Received message type: Connect
+2025-08-10 01:13:57,719 - PokerRunner - INFO - Connected with player ID: 3472195111
+2025-08-10 01:13:57,720 - PokerRunner - INFO - Data written to /app/output/gameid.log
+2025-08-10 01:13:57,720 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:57,721 - PokerRunner - INFO - Server: Welcome to Game #7! Your ID is 3472195111
+2025-08-10 01:13:57,721 - PokerRunner - INFO - Received message type: Game Start
+2025-08-10 01:13:57,721 - PokerRunner - INFO - Game #7 started with 2 cards, blind: 10
+2025-08-10 01:13:57,721 - PokerRunner - INFO - All players in game: [3752577440, 3472195111]
+2025-08-10 01:13:57,721 - PokerRunner - INFO - Small blind player: 3752577440, Big blind player: 3472195111
+2025-08-10 01:13:57,721 - PokerRunner - INFO - This player is the big blind
+2025-08-10 01:13:57,722 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:57,722 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:57,722 - PokerRunner - INFO -   Pot 0: 0 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:57,722 - PokerRunner - INFO - Received message type: Round Start
+2025-08-10 01:13:57,723 - PokerRunner - INFO - Round started
+2025-08-10 01:13:57,723 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:57,723 - PokerRunner - INFO - Server: New round starting!
+2025-08-10 01:13:57,724 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:57,724 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:57,724 - PokerRunner - INFO -   Pot 0: 0 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:57,727 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:57,728 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:57,728 - PokerRunner - INFO -   Pot 0: 5 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:57,728 - PokerRunner - INFO - Received message type: Request Player Action
+2025-08-10 01:13:57,728 - PokerRunner - INFO - Automatically posting big blind: 10
+2025-08-10 01:13:57,729 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:57,730 - PokerRunner - INFO - Side pots active: 2 pot(s)
+2025-08-10 01:13:57,730 - PokerRunner - INFO -   Pot 0: 10 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:57,730 - PokerRunner - INFO -   Pot 1: 5 chips, eligible players: [3472195111]
+2025-08-10 01:13:57,776 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:57,777 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:57,778 - PokerRunner - INFO -   Pot 0: 20 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:57,778 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:57,778 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:57,778 - PokerRunner - INFO -   Pot 0: 20 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:57,779 - PokerRunner - INFO - Received message type: Round End
+2025-08-10 01:13:57,779 - PokerRunner - INFO - Round ended
+2025-08-10 01:13:57,779 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:57,779 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:57,779 - PokerRunner - INFO -   Pot 0: 20 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:57,779 - PokerRunner - INFO - Received message type: Round Start
+2025-08-10 01:13:57,779 - PokerRunner - INFO - Round started
+2025-08-10 01:13:57,779 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:57,780 - PokerRunner - INFO - Server: New round starting!
+2025-08-10 01:13:57,780 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:57,780 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:57,780 - PokerRunner - INFO -   Pot 0: 0 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:57,780 - PokerRunner - INFO - Received message type: Request Player Action
+2025-08-10 01:13:57,780 - PokerRunner - INFO - Bot action: CHECK, amount: 0
+2025-08-10 01:13:57,783 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:57,784 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:57,785 - PokerRunner - INFO -   Pot 0: 0 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:57,827 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:57,828 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:57,828 - PokerRunner - INFO -   Pot 0: 100 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:57,829 - PokerRunner - INFO - Received message type: Request Player Action
+2025-08-10 01:13:57,829 - PokerRunner - INFO - Bot action: FOLD, amount: 0
+2025-08-10 01:13:57,831 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:57,831 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:57,831 - PokerRunner - INFO -   Pot 0: 100 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:57,871 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:57,872 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:57,872 - PokerRunner - INFO -   Pot 0: 100 chips, eligible players: [3752577440]
+2025-08-10 01:13:57,872 - PokerRunner - INFO - Received message type: Round End
+2025-08-10 01:13:57,872 - PokerRunner - INFO - Round ended
+2025-08-10 01:13:57,873 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:57,873 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:57,873 - PokerRunner - INFO -   Pot 0: 100 chips, eligible players: [3752577440]
+2025-08-10 01:13:57,873 - PokerRunner - INFO - Received message type: Round Start
+2025-08-10 01:13:57,873 - PokerRunner - INFO - Round started
+2025-08-10 01:13:57,873 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:57,873 - PokerRunner - INFO - Server: Game #7 over!
+2025-08-10 01:13:57,874 - PokerRunner - INFO - Received message type: Game End
+2025-08-10 01:13:57,874 - PokerRunner - INFO - All final scores: {'3752577440': 10, '3472195111': -10}
+2025-08-10 01:13:57,874 - PokerRunner - INFO - Active players hands: {'3752577440': ['8c', '6s']}
+2025-08-10 01:13:57,874 - PokerRunner - INFO - Data appended to /app/output/game_result.log
+2025-08-10 01:13:57,874 - PokerRunner - INFO - Delta updated: -150 + -10 = -160, money: 9840 -> 9840
+2025-08-10 01:13:57,875 - PokerRunner - INFO - Game #7 ended with score: -10
+2025-08-10 01:13:57,875 - PokerRunner - INFO - Reset for Game #7, current money: 9840, delta: -160
+2025-08-10 01:13:58,343 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:58,343 - PokerRunner - INFO - Server: Game #8 starting!
+2025-08-10 01:13:58,343 - PokerRunner - INFO - Received message type: Connect
+2025-08-10 01:13:58,343 - PokerRunner - INFO - Connected with player ID: 3472195111
+2025-08-10 01:13:58,344 - PokerRunner - INFO - Data written to /app/output/gameid.log
+2025-08-10 01:13:58,344 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:58,344 - PokerRunner - INFO - Server: Welcome to Game #8! Your ID is 3472195111
+2025-08-10 01:13:58,344 - PokerRunner - INFO - Received message type: Game Start
+2025-08-10 01:13:58,344 - PokerRunner - INFO - Game #8 started with 2 cards, blind: 10
+2025-08-10 01:13:58,344 - PokerRunner - INFO - All players in game: [3752577440, 3472195111]
+2025-08-10 01:13:58,344 - PokerRunner - INFO - Small blind player: 3472195111, Big blind player: 3752577440
+2025-08-10 01:13:58,344 - PokerRunner - INFO - This player is the small blind
+2025-08-10 01:13:58,344 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:58,344 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:58,344 - PokerRunner - INFO -   Pot 0: 0 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:58,345 - PokerRunner - INFO - Received message type: Round Start
+2025-08-10 01:13:58,345 - PokerRunner - INFO - Round started
+2025-08-10 01:13:58,345 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:58,345 - PokerRunner - INFO - Server: New round starting!
+2025-08-10 01:13:58,345 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:58,345 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:58,345 - PokerRunner - INFO -   Pot 0: 0 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:58,345 - PokerRunner - INFO - Received message type: Request Player Action
+2025-08-10 01:13:58,345 - PokerRunner - INFO - Automatically posting small blind: 5
+2025-08-10 01:13:58,346 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:58,346 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:58,346 - PokerRunner - INFO -   Pot 0: 5 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:58,387 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:58,387 - PokerRunner - INFO - Side pots active: 2 pot(s)
+2025-08-10 01:13:58,388 - PokerRunner - INFO -   Pot 0: 10 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:58,388 - PokerRunner - INFO -   Pot 1: 5 chips, eligible players: [3752577440]
+2025-08-10 01:13:58,388 - PokerRunner - INFO - Received message type: Request Player Action
+2025-08-10 01:13:58,388 - PokerRunner - INFO - Bot action: FOLD, amount: 0
+2025-08-10 01:13:58,389 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:58,390 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:58,390 - PokerRunner - INFO -   Pot 0: 15 chips, eligible players: [3752577440]
+2025-08-10 01:13:58,431 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:58,432 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:58,432 - PokerRunner - INFO -   Pot 0: 15 chips, eligible players: [3752577440]
+2025-08-10 01:13:58,432 - PokerRunner - INFO - Received message type: Round End
+2025-08-10 01:13:58,432 - PokerRunner - INFO - Round ended
+2025-08-10 01:13:58,432 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:58,433 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:58,433 - PokerRunner - INFO -   Pot 0: 15 chips, eligible players: [3752577440]
+2025-08-10 01:13:58,433 - PokerRunner - INFO - Received message type: Round Start
+2025-08-10 01:13:58,433 - PokerRunner - INFO - Round started
+2025-08-10 01:13:58,433 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:58,433 - PokerRunner - INFO - Server: Game #8 over!
+2025-08-10 01:13:58,433 - PokerRunner - INFO - Received message type: Game End
+2025-08-10 01:13:58,433 - PokerRunner - INFO - All final scores: {'3752577440': 5, '3472195111': -5}
+2025-08-10 01:13:58,433 - PokerRunner - INFO - Active players hands: {'3752577440': ['9d', '8h']}
+2025-08-10 01:13:58,433 - PokerRunner - INFO - Data appended to /app/output/game_result.log
+2025-08-10 01:13:58,433 - PokerRunner - INFO - Delta updated: -160 + -5 = -165, money: 9835 -> 9835
+2025-08-10 01:13:58,433 - PokerRunner - INFO - Game #8 ended with score: -5
+2025-08-10 01:13:58,433 - PokerRunner - INFO - Reset for Game #8, current money: 9835, delta: -165
+2025-08-10 01:13:58,901 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:58,902 - PokerRunner - INFO - Server: Game #9 starting!
+2025-08-10 01:13:58,902 - PokerRunner - INFO - Received message type: Connect
+2025-08-10 01:13:58,903 - PokerRunner - INFO - Connected with player ID: 3472195111
+2025-08-10 01:13:58,903 - PokerRunner - INFO - Data written to /app/output/gameid.log
+2025-08-10 01:13:58,904 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:58,905 - PokerRunner - INFO - Server: Welcome to Game #9! Your ID is 3472195111
+2025-08-10 01:13:58,905 - PokerRunner - INFO - Received message type: Game Start
+2025-08-10 01:13:58,905 - PokerRunner - INFO - Game #9 started with 2 cards, blind: 10
+2025-08-10 01:13:58,905 - PokerRunner - INFO - All players in game: [3752577440, 3472195111]
+2025-08-10 01:13:58,905 - PokerRunner - INFO - Small blind player: 3752577440, Big blind player: 3472195111
+2025-08-10 01:13:58,906 - PokerRunner - INFO - This player is the big blind
+2025-08-10 01:13:58,906 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:58,906 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:58,906 - PokerRunner - INFO -   Pot 0: 0 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:58,907 - PokerRunner - INFO - Received message type: Round Start
+2025-08-10 01:13:58,907 - PokerRunner - INFO - Round started
+2025-08-10 01:13:58,907 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:58,907 - PokerRunner - INFO - Server: New round starting!
+2025-08-10 01:13:58,908 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:58,908 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:58,908 - PokerRunner - INFO -   Pot 0: 0 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:58,910 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:58,911 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:58,911 - PokerRunner - INFO -   Pot 0: 5 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:58,911 - PokerRunner - INFO - Received message type: Request Player Action
+2025-08-10 01:13:58,911 - PokerRunner - INFO - Automatically posting big blind: 10
+2025-08-10 01:13:58,912 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:58,913 - PokerRunner - INFO - Side pots active: 2 pot(s)
+2025-08-10 01:13:58,913 - PokerRunner - INFO -   Pot 0: 10 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:58,913 - PokerRunner - INFO -   Pot 1: 5 chips, eligible players: [3472195111]
+2025-08-10 01:13:58,956 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:58,957 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:58,957 - PokerRunner - INFO -   Pot 0: 20 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:58,957 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:58,957 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:58,957 - PokerRunner - INFO -   Pot 0: 20 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:58,958 - PokerRunner - INFO - Received message type: Round End
+2025-08-10 01:13:58,958 - PokerRunner - INFO - Round ended
+2025-08-10 01:13:58,958 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:58,958 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:58,958 - PokerRunner - INFO -   Pot 0: 20 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:58,958 - PokerRunner - INFO - Received message type: Round Start
+2025-08-10 01:13:58,958 - PokerRunner - INFO - Round started
+2025-08-10 01:13:58,959 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:58,959 - PokerRunner - INFO - Server: New round starting!
+2025-08-10 01:13:58,959 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:58,959 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:58,960 - PokerRunner - INFO -   Pot 0: 0 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:58,960 - PokerRunner - INFO - Received message type: Request Player Action
+2025-08-10 01:13:58,960 - PokerRunner - INFO - Bot action: CHECK, amount: 0
+2025-08-10 01:13:58,962 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:58,962 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:58,962 - PokerRunner - INFO -   Pot 0: 0 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:59,008 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:59,008 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:59,008 - PokerRunner - INFO -   Pot 0: 100 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:59,009 - PokerRunner - INFO - Received message type: Request Player Action
+2025-08-10 01:13:59,009 - PokerRunner - INFO - Bot action: FOLD, amount: 0
+2025-08-10 01:13:59,011 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:59,011 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:59,011 - PokerRunner - INFO -   Pot 0: 100 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:59,052 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:59,052 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:59,053 - PokerRunner - INFO -   Pot 0: 100 chips, eligible players: [3752577440]
+2025-08-10 01:13:59,053 - PokerRunner - INFO - Received message type: Round End
+2025-08-10 01:13:59,053 - PokerRunner - INFO - Round ended
+2025-08-10 01:13:59,054 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:59,054 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:59,054 - PokerRunner - INFO -   Pot 0: 100 chips, eligible players: [3752577440]
+2025-08-10 01:13:59,054 - PokerRunner - INFO - Received message type: Round Start
+2025-08-10 01:13:59,054 - PokerRunner - INFO - Round started
+2025-08-10 01:13:59,054 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:59,055 - PokerRunner - INFO - Server: Game #9 over!
+2025-08-10 01:13:59,055 - PokerRunner - INFO - Received message type: Game End
+2025-08-10 01:13:59,055 - PokerRunner - INFO - All final scores: {'3752577440': 10, '3472195111': -10}
+2025-08-10 01:13:59,055 - PokerRunner - INFO - Active players hands: {'3752577440': ['Jd', '9h']}
+2025-08-10 01:13:59,055 - PokerRunner - INFO - Data appended to /app/output/game_result.log
+2025-08-10 01:13:59,056 - PokerRunner - INFO - Delta updated: -165 + -10 = -175, money: 9825 -> 9825
+2025-08-10 01:13:59,056 - PokerRunner - INFO - Game #9 ended with score: -10
+2025-08-10 01:13:59,056 - PokerRunner - INFO - Reset for Game #9, current money: 9825, delta: -175
+2025-08-10 01:13:59,522 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:59,523 - PokerRunner - INFO - Server: Game #10 starting!
+2025-08-10 01:13:59,523 - PokerRunner - INFO - Received message type: Connect
+2025-08-10 01:13:59,524 - PokerRunner - INFO - Connected with player ID: 3472195111
+2025-08-10 01:13:59,524 - PokerRunner - INFO - Data written to /app/output/gameid.log
+2025-08-10 01:13:59,525 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:59,525 - PokerRunner - INFO - Server: Welcome to Game #10! Your ID is 3472195111
+2025-08-10 01:13:59,525 - PokerRunner - INFO - Received message type: Game Start
+2025-08-10 01:13:59,525 - PokerRunner - INFO - Game #10 started with 2 cards, blind: 10
+2025-08-10 01:13:59,525 - PokerRunner - INFO - All players in game: [3752577440, 3472195111]
+2025-08-10 01:13:59,525 - PokerRunner - INFO - Small blind player: 3472195111, Big blind player: 3752577440
+2025-08-10 01:13:59,525 - PokerRunner - INFO - This player is the small blind
+2025-08-10 01:13:59,525 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:59,526 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:59,526 - PokerRunner - INFO -   Pot 0: 0 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:59,526 - PokerRunner - INFO - Received message type: Round Start
+2025-08-10 01:13:59,526 - PokerRunner - INFO - Round started
+2025-08-10 01:13:59,526 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:59,526 - PokerRunner - INFO - Server: New round starting!
+2025-08-10 01:13:59,527 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:59,527 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:59,527 - PokerRunner - INFO -   Pot 0: 0 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:59,527 - PokerRunner - INFO - Received message type: Request Player Action
+2025-08-10 01:13:59,527 - PokerRunner - INFO - Automatically posting small blind: 5
+2025-08-10 01:13:59,530 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:59,530 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:59,530 - PokerRunner - INFO -   Pot 0: 5 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:59,572 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:59,573 - PokerRunner - INFO - Side pots active: 2 pot(s)
+2025-08-10 01:13:59,573 - PokerRunner - INFO -   Pot 0: 10 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:59,573 - PokerRunner - INFO -   Pot 1: 5 chips, eligible players: [3752577440]
+2025-08-10 01:13:59,573 - PokerRunner - INFO - Received message type: Request Player Action
+2025-08-10 01:13:59,574 - PokerRunner - INFO - Bot action: CALL, amount: 0
+2025-08-10 01:13:59,576 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:59,577 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:59,577 - PokerRunner - INFO -   Pot 0: 20 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:59,581 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:59,581 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:59,581 - PokerRunner - INFO -   Pot 0: 20 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:59,581 - PokerRunner - INFO - Received message type: Round End
+2025-08-10 01:13:59,582 - PokerRunner - INFO - Round ended
+2025-08-10 01:13:59,582 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:59,582 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:59,582 - PokerRunner - INFO -   Pot 0: 20 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:59,582 - PokerRunner - INFO - Received message type: Round Start
+2025-08-10 01:13:59,582 - PokerRunner - INFO - Round started
+2025-08-10 01:13:59,582 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:59,582 - PokerRunner - INFO - Server: New round starting!
+2025-08-10 01:13:59,583 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:59,583 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:59,583 - PokerRunner - INFO -   Pot 0: 0 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:59,583 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:59,584 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:59,584 - PokerRunner - INFO -   Pot 0: 100 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:59,623 - PokerRunner - INFO - Received message type: Request Player Action
+2025-08-10 01:13:59,624 - PokerRunner - INFO - Bot action: CALL, amount: 0
+2025-08-10 01:13:59,627 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:59,627 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:59,628 - PokerRunner - INFO -   Pot 0: 200 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:59,631 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:59,631 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:59,631 - PokerRunner - INFO -   Pot 0: 200 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:59,631 - PokerRunner - INFO - Received message type: Round End
+2025-08-10 01:13:59,632 - PokerRunner - INFO - Round ended
+2025-08-10 01:13:59,632 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:59,632 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:59,632 - PokerRunner - INFO -   Pot 0: 200 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:59,632 - PokerRunner - INFO - Received message type: Round Start
+2025-08-10 01:13:59,632 - PokerRunner - INFO - Round started
+2025-08-10 01:13:59,633 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:59,633 - PokerRunner - INFO - Server: New round starting!
+2025-08-10 01:13:59,633 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:59,633 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:59,633 - PokerRunner - INFO -   Pot 0: 0 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:59,633 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:59,633 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:59,634 - PokerRunner - INFO -   Pot 0: 0 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:59,672 - PokerRunner - INFO - Received message type: Request Player Action
+2025-08-10 01:13:59,673 - PokerRunner - INFO - Bot action: RAISE, amount: 0
+2025-08-10 01:13:59,676 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:59,676 - PokerRunner - INFO - Server: Invalid action: Raise amount + current bet must be higher than the current raise
+2025-08-10 01:13:59,685 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:59,685 - PokerRunner - INFO - Server: Invalid action. Try again. (1/1)
+2025-08-10 01:13:59,685 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:59,685 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:59,685 - PokerRunner - INFO -   Pot 0: 0 chips, eligible players: [3752577440, 3472195111]
+2025-08-10 01:13:59,686 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:59,686 - PokerRunner - INFO - Server: Player 3472195111 was automatically folded due to invalid actions
+2025-08-10 01:13:59,686 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:59,686 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:59,686 - PokerRunner - INFO -   Pot 0: 0 chips, eligible players: [3752577440]
+2025-08-10 01:13:59,686 - PokerRunner - INFO - Received message type: Round End
+2025-08-10 01:13:59,686 - PokerRunner - INFO - Round ended
+2025-08-10 01:13:59,686 - PokerRunner - INFO - Received message type: Game State
+2025-08-10 01:13:59,687 - PokerRunner - INFO - Side pots active: 1 pot(s)
+2025-08-10 01:13:59,687 - PokerRunner - INFO -   Pot 0: 0 chips, eligible players: [3752577440]
+2025-08-10 01:13:59,687 - PokerRunner - INFO - Received message type: Round Start
+2025-08-10 01:13:59,687 - PokerRunner - INFO - Round started
+2025-08-10 01:13:59,687 - PokerRunner - INFO - Received message type: Message
+2025-08-10 01:13:59,687 - PokerRunner - INFO - Server: Game #10 over!
+2025-08-10 01:13:59,687 - PokerRunner - INFO - Received message type: Game End
+2025-08-10 01:13:59,687 - PokerRunner - INFO - All final scores: {'3752577440': 110, '3472195111': -110}
+2025-08-10 01:13:59,687 - PokerRunner - INFO - Active players hands: {'3752577440': ['Qs', '2s']}
+2025-08-10 01:13:59,688 - PokerRunner - INFO - Data appended to /app/output/game_result.log
+2025-08-10 01:13:59,688 - PokerRunner - INFO - Delta updated: -175 + -110 = -285, money: 9715 -> 9715
+2025-08-10 01:13:59,688 - PokerRunner - INFO - Game #10 ended with score: -110
+2025-08-10 01:13:59,688 - PokerRunner - INFO - Reset for Game #10, current money: 9715, delta: -285
+2025-08-10 01:14:00,192 - PokerRunner - INFO - Server closed connection
+2025-08-10 01:14:00,194 - PokerRunner - INFO - Connection closed
+2025-08-10 01:14:00,194 - __main__ - INFO - Continuous simulation completed. Total games played: 10
+2025-08-10 01:14:00,195 - __main__ - INFO - Total score: -285
+2025-08-10 01:14:00,198 - __main__ - INFO - Average score per game: -28.5
+2025-08-10 01:14:00,199 - PokerRunner - INFO - Data appended to /app/output/game_result.log
+
+

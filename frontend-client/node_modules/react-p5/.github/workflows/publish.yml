@@ -1,0 +1,46 @@
+name: Publish Packages
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [14.x]
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Setup git user
+        run: |
+          git config --global user.email "actions@gihub.com"
+          git config --global user.name "gh-actions"
+      - name: Install dependencies
+        run: |
+          npm i
+      - name: Build
+        run: |
+          npm run build
+      - name: Test
+        run: |
+          npm run test
+      - name: Bump package version
+        run: |
+          npm version patch -m "chore: Upgrade to %s"
+          git push
+      - name: Prepare .npmrc file to publish packages to NPM registry
+        uses: actions/setup-node@v2
+        with:
+          registry-url: "https://registry.npmjs.org"
+      - name: Publish
+        run: |
+          npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

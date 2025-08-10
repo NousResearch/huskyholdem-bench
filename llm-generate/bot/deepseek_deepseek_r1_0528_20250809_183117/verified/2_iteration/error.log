@@ -1,0 +1,5 @@
+[2025-08-09 18:39:41] Code validation failed: Python syntax error:   File "player.py", line 35
+    side_pots: Optional[List[Dict[str, Any]] = None
+                       ^
+SyntaxError: '[' was never closed
+

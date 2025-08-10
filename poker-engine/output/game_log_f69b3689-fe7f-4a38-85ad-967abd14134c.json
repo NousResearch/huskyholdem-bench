@@ -1,0 +1,57 @@
+{
+  "gameId": "f69b3689-fe7f-4a38-85ad-967abd14134c",
+  "rounds": {},
+  "playerNames": {
+    "0": "player1",
+    "1": "player2",
+    "2": "player3",
+    "3": "player4"
+  },
+  "blinds": {
+    "small": 5,
+    "big": 10
+  },
+  "finalBoard": [],
+  "sidePots": [
+    {
+      "amount": 220,
+      "eligible_players": [
+        3
+      ]
+    }
+  ],
+  "playerHands": {
+    "0": [
+      "Ts",
+      "Qs"
+    ],
+    "1": [
+      "8d",
+      "As"
+    ],
+    "2": [
+      "6h",
+      "9c"
+    ],
+    "3": [
+      "4h",
+      "5d"
+    ]
+  },
+  "playerMoney": {
+    "finalMoney": {},
+    "finalDelta": {},
+    "gameScores": {
+      "1": -20,
+      "2": -50,
+      "3": -50,
+      "4": 120
+    },
+    "thisGameDelta": {
+      "1": -20,
+      "2": -50,
+      "3": -50,
+      "4": 120
+    }
+  }
+}

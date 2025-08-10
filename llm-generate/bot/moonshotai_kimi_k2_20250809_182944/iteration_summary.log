@@ -1,0 +1,21 @@
+Iterative Generation Summary - 2025-08-09 18:36:57
+============================================================
+
+Model: moonshotai/kimi-k2
+Total Iterations: 5
+Bot Directory: bot/moonshotai_kimi_k2_20250809_182944
+
+ITERATION RESULTS:
+--------------------
+Iteration 1: FAILED
+  Error: Critical errors in game testing
+Iteration 2: FAILED
+  Error: Error processing prompt: API request failed: 400 - {"error":{"message":"This endpoint's maximum context length is 131072 tokens. However, you requested about 176680 tokens (48680 of text input, 128000 in the output). Please reduce the length of either one, or use the \"middle-out\" transform to compress your prompt automatically.","code":400,"metadata":{"provider_name":null}}}
+Iteration 3: SUCCESS
+Iteration 4: FAILED
+  Error: Error processing prompt: API request failed: 400 - {"error":{"message":"This endpoint's maximum context length is 131072 tokens. However, you requested about 134105 tokens (6105 of text input, 128000 in the output). Please reduce the length of either one, or use the \"middle-out\" transform to compress your prompt automatically.","code":400,"metadata":{"provider_name":null}}}
+Iteration 5: SUCCESS
+
+SUMMARY:
+- Successful iterations: 2/5
+- Success rate: 40.0%
