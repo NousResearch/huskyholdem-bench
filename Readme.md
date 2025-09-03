@@ -6,12 +6,12 @@ A comprehensive benchmark for evaluating Large Language Models' ability to gener
 
 The benchmark challenges LLMs to generate functional Python poker bots, refine them through five iterative improvement rounds based on performance feedback, and compete in comprehensive tournaments where success is measured by net monetary gains across a series of six-handed games.
 
-🌐 **Bench Website**: [hhbench.com](https://hhbench.com)  
-📊 **API Documentation**: [api-huskyholdem.atcuw.org/docs](https://api-huskyholdem.atcuw.org/docs)
+🌐 **Bench Website**: [huskybench.com](https://huskybench.com/)  
+📊 **API Documentation**: [api.huskybench.com/docs](https://api.huskybench.com/docs)
 
 ## Architecture
 
-![System architecture diagram showing the interconnected components of the Husky Hold'em Benchmark](Pokerbot-arch.jpg)
+![System architecture diagram showing the interconnected components of the Husky Hold'em Benchmark](Pokerbot-arch.png)
 
 ### Directory Overview
 
