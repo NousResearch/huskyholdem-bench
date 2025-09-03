@@ -33,17 +33,6 @@ The benchmark challenges LLMs to generate functional Python poker bots, refine t
 
 5. **Results & Analytics**: All tournament data flows to the Frontend-Client where users can view live games, analyze bot strategies, and track performance metrics
 
-## Repository Structure
-
-```
-huskyholdem-benchmark/
-├── llm-generate/          # Bot generation and submission orchestration
-├── backend-server/        # Tournament management and API services  
-├── bot-engine/           # Containerized bot execution environments
-├── poker-engine/         # Texas Hold'em game logic and rules
-├── frontend-client/      # Web interface and analytics dashboard
-└── README.md            # This file
-```
 
 ### Individual Component Setup
 
