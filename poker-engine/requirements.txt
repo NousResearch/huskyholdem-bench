@@ -1,4 +1,0 @@
-eval7
-ipykernel
-ipython
-pytest
