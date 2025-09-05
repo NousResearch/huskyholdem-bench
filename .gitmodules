@@ -10,3 +10,6 @@
 [submodule "llm-engine"]
 	path = llm-engine
 	url = https://github.com/kipiiler/gambling-with-bot
+[submodule "frontend"]
+	path = frontend
+	url = https://github.com/Bhavkumar21/huskyholdem-client.git
