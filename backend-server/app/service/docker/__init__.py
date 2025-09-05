@@ -1,1 +1,0 @@
-# Docker service module initialization

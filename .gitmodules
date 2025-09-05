@@ -1,0 +1,12 @@
+[submodule "poker-engine"]
+	path = poker-engine
+	url = https://github.com/kipiiler/pokerden-engine
+[submodule "poker-client"]
+	path = poker-client
+	url = https://github.com/kipiiler/poker-client
+[submodule "server"]
+	path = server
+	url = https://github.com/kipiiler/the-betting-edge
+[submodule "llm-engine"]
+	path = llm-engine
+	url = https://github.com/kipiiler/gambling-with-bot

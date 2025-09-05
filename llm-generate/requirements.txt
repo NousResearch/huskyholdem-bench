@@ -1,6 +1,0 @@
-openai>=1.0.0
-python-dotenv>=1.0.0
-requests>=2.31.0
-docker>=6.0.0
-matplotlib>=3.5.0
-numpy>=1.21.0 
